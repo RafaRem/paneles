@@ -1,0 +1,145 @@
+#nav{
+    background-color: rgb(218, 221, 215) !important;
+}
+
+.nav-item:hover{
+    color: black !important;
+    font-weight: bold !important;
+    border-bottom: 3px solid #3C5A4F ;
+}
+
+a{
+    padding-top: 4px !important;
+    font-size: 14px;
+}
+
+nav div ul li a{
+    width: auto  !important;
+}
+
+nav div ul li a:hover{
+    width: auto  !important;
+    color:rgb(0, 0, 0) !important;
+}
+
+.nav-item-2:hover{
+    background: #802C45;
+    border-radius: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 33px;
+}
+.nav-item-3:hover{
+    background: #562033;
+    border-radius: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 33px;
+}
+.nav-item-4:hover{
+    background: #AB905F;
+    border-radius: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 33px;
+}
+.nav-item-5:hover{
+    background: #502F2C;
+    border-radius: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 33px;
+}
+nav div ul li:active{
+    color: rgb(250, 248, 248);
+    border-radius: 15px;
+}
+
+footer{
+    background-color: rgb(94, 126, 106) !important;
+    color: white;
+    padding: 20px;
+}
+
+h1 {
+font-size: 3em;
+font-weight: 200;
+margin: 0.5em 0 0.2em 0;
+}
+
+
+
+.thumbnail {
+max-width: 75%;
+}
+
+.italic { font-style: italic; }
+.small { font-size: 0.8em; }
+
+/** LIGHTBOX MARKUP **/
+
+.lightbox {
+    /** Default lightbox to hidden */
+    display: none;
+
+    /** Position and style */
+    position: fixed;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+}
+
+.lightbox img {
+    /** Pad the lightbox image */
+    max-width: 80%;
+    max-height: 70%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+
+}
+
+.lightbox:target {
+    /** Remove default browser outline */
+    outline: none;
+
+    /** Unhide lightbox **/
+    display: block;
+}
+.titulo{
+    background-color: brown;
+    color: white;
+}
+.btn3 {
+    background-color: transparent;
+    border-color: #ccc;
+}
+.contenedor img{
+    height: 100%;
+    width: 100%;
+}
+
+.item {
+    display: block;
+    width: 100%;
+    height: 600px;
+}
+.item .view img{
+        height: 100%;
+        width: 100%;
+}
+.contenedor-card{
+    height: 380px;
+    
+}
+.contenedor-card img{
+    height: 200px;
+    width: 100%;
+}
+
+.btn_next{
+    background-color: #802C45;
+}

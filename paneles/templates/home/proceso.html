@@ -1,0 +1,96 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block extracss %}
+<style>
+  * {
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+  a{
+    text-decoration: none !important;
+  }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+  .img_content {
+    margin: 10px;
+    
+    line-height: 115px;
+    text-align: center;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+}
+
+.resaltar:hover{
+  border-bottom: 3px solid rgba(3, 250, 36, 0.904);
+  transition: border-color 1s ease;
+  
+}
+
+</style>
+{% endblock extracss %}
+
+{% block content%}
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+    <h1>proceso</h1>
+  
+</div>
+
+{% endblock content %}
+{% block extrascripts %}
+
+    <script>
+      
+      $(document).ready(function () {
+        tel_mostrar = true
+        email_mostrar = true
+
+        $(".telefonos").hide()
+        $(".correos").hide()
+
+        $(".whatsapp").click(function() {
+          if (tel_mostrar==true){
+            $(".telefonos").show()
+            tel_mostrar=false
+          }else{
+            $(".telefonos").hide()
+            tel_mostrar=true
+          }
+          });
+
+       
+       
+        $(".email").click(function() {
+          if (email_mostrar==true){
+            $(".correos").show()
+            email_mostrar=false
+          }else{
+            $(".correos").hide()
+            email_mostrar=true
+          }
+          });
+        })
+      
+
+        
+    </script>
+{% endblock %}
