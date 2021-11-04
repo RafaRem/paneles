@@ -50,12 +50,20 @@ class InicioView(View):
         solicitud.servicios.add(servicio2)
         solicitud.servicios.add(servicio3)
         
-        return  render(request, "home/inicio.html")
+        url = reverse('imprimir')
+        return redirect(url+"/"+str(solicitud.pk))
 
 class ContratacionView(View):
-    def get(self,request):
-        
-        return  render(request,  "home/proceso.html")
+    def get(self,request, ids=""):
+        if ids != "0":
+            solicitud = Solicitud.objects.get(pk=ids)
+            servicios = solicitud.servicios.all()
+            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios})
+        else: 
+            servicios = ServiciosSolicitud.objects.all()
+            direcciones = Direccion.objects.all()
+            return  render(request,  "home/inicio.html",{'servicios':servicios,
+            'direcciones':direcciones} )
     def post(self,request):
             return  render(request,  "home/proceso.html")
 

@@ -19,6 +19,6 @@ from .views import *
 
 urlpatterns = [
     path('', InicioView.as_view(), name="inicio"),
-    path('contratacion', ContratacionView.as_view(), name="contratacion"),
+    path('imprecion/solicitud/<str:ids>', ContratacionView.as_view(), name="imprimir"),
     path('beneficios', BeneficiosView.as_view(), name="beneficios"),
 ]

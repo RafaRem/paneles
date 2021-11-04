@@ -29,16 +29,10 @@
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item mr-3 resaltar">
-          <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'inicio' %}">Inicio <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item mr-3 resaltar">
-          <a class="nav-link mr-3" href= {% url "contratacion" %} >Proceso de Contratación</a>
-        </li>
-        <li class="nav-item mr-3 resaltar">
-          <a class="nav-link" href= {% url "beneficios" %}>Beneficios</a>
-        </li>
-        <li class="nav-item mr-3 resaltar">
-          <a class="nav-link" href="#contactos">Contactos</a>
+          <a class="nav-link mr-3" href= {% url "imprimir" ids="0" %} >Imprimir Solicitud</a>
         </li>
       </ul>
     </div>

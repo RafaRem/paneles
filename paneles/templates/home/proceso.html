@@ -52,41 +52,45 @@
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
   <div class="mt-3 ml-3 mr-3" id="contento">
-    <h2 class="text-center">Feria del Bienestar</h2>
+    <h1 class="text-center">Feria del Bienestar</h1>
     <div>
       <p class="text-center">
         <h3>Datos Generales</h3>
       </p>
       
      
-      <p>Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.materno}}</p>
-      <p>CURP: {{solicitud.curp}}</p>
-      <p>Discapacidad: {{solicitud.discapacidad}}</p>
-      <p>Estado Civil: {{solicitud.estcivil}}</p>
-      <p>Domicilio: {{solicitud.domicilio}}</p>
-      <p>Telefono: {{solicitud.telefono}}</p>
-      <p>Correo: {{solicitud.correo}}</p>
+      Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.materno}} <br>
+      CURP: {{solicitud.curp}} <br>
+      Discapacidad: {{solicitud.discapacidad}} <br>
+      Estado Civil: {{solicitud.estcivil}} <br>
+      Domicilio: {{solicitud.domicilio}} <br>
+      Telefono: {{solicitud.telefono}} <br>
+      Correo: {{solicitud.correo}} <br>
     </div>
-
-    <div class="container" style="border: solid 2px black;">
+    {% for servicio in servicios %}
+    <div class="container mt-5" style="border: solid 2px black;">
+      
       <div class="row">
         <div class="col-md-8">
-          <h3>Serivicio 1</h3>
-          <p>Dirección: </p>
-          <p>Servicio: </p>
+          <h3>Servicio 1</h3>
+          <p>Dirección: {{servicio.direccion}}</p>
+          <p>Servicio: {{servicio.nombre}} </p>
         </div>
       </div>
-      
-
     </div>
+    {% endfor %}
+</div>
+<button id="btn_pdf" type="button" class="btn btn-primary mt-5">Imprimir <i class="fas fa-file-download"></i></button>
+<div id="carga">
 
 </div>
-  
+
 </div>
 
 {% endblock content %}
 {% block extrascripts %}
-
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js" integrity="sha256-c30AriwlYd8As+X/SAMm9dKVZ0OSS6V/Ub/krEBQyMk=" crossorigin="anonymous"></script>
     <script>
       
       $(document).ready(function () {
@@ -119,6 +123,45 @@
           });
         })
       
+        $('#btn_pdf').click((event)=>{
+            
+          $.when( effect() ).done(function() {
+              $("#btn_pdf").prop('disabled',false)
+             
+          });
+
+
+      });
+
+         
+      var effect = function() {
+        $("#btn_pdf").prop('disabled',true)
+        $("#contento").printThis({
+        debug: false,               // show the iframe for debugging
+        importCSS: true,            // import parent page css
+        importStyle: true,         // import style tags
+        printContainer: true,       // print outer container/$.selector
+        loadCSS: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",                // path to additional css file - use an array [] for multiple
+        pageTitle: "",              // add title to print page
+        removeInline: false,        // remove inline styles from print elements
+        removeInlineSelector: "*",  // custom selectors to filter inline styles. removeInline must be true
+        printDelay: 333,            // variable print delay
+        header: null,               // prefix to html
+        footer: false,               // postfix to html
+        base: false,                // preserve the BASE tag or accept a string for the URL
+        formValues: false,           // preserve input/form values
+        canvas: false,              // copy canvas content
+        doctypeString: '...',       // enter a different doctype for older markup
+        removeScripts: false,       // remove script tags from print content
+        copyTagClasses: false,      // copy classes from the html & body tag
+        beforePrintEvent: $('#contento').show(),     // function for printEvent in iframe
+        beforePrint: null,          // function called before iframe is filled
+        afterPrint: null            // function called before iframe is removed
+    });
+
+    return $( "#carga" ).fadeIn( 1000 ).delay( 1200 ).fadeOut();
+
+};
 
         
     </script>
