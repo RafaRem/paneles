@@ -49,94 +49,280 @@ li:hover{
 {% endblock extracss %}
 
 {% block content%}
+<form action="" method="post" id="id_form_actividad">
+  {% csrf_token %}
+  <div class="container " style="margin-top: 7%;"> 
+        
+    <div class="row ">
+    
+      <p>Nombre</p>  
+      <input onkeyup="mayus(this);" name="nombre" placeholder="Nombre(s)"
+      oninput="this.className = ''">
+      <p>Apellido Paterno</p>
+      <input onkeyup="mayus(this);" name="paterno" placeholder="Apellido paterno" 
+      oninput="this.className = ''">
+      <p>Apellido Materno</p>
+      <input onkeyup="mayus(this);" name="materno" placeholder="Apellido materno" 
+      oninput="this.className = ''">
+      <p>CURP</p>
+      <input id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
+      oninput="this.className = ''">
+      <p>Estado Civil</p>
+      <select name="estcivil" class="select form-control" required="" id="est_civil"> 
+        <option value="x" selected="">---------</option> 
+        <option value="s" >Soltero</option> 
+        <option value="c" >Casado</option> 
+        <option value="d" >Divorciado</option> 
+        <option value="v" >Viudo</option> 
+      </select> 
+      <p>Persona con discapacidad</p>
+      <select name="discapacidad" class="select form-control" required="" id="discapacidad"> 
+        <option value="n" selected="">No</option> 
+        <option value="o" >Oído</option> 
+        <option value="m" >Motriz</option> 
+        <option value="v" >Visual</option> 
+        <option value="x" >Otro</option> 
+      </select> 
+      <p>Domicilio</p>
+      <input onkeyup="mayus(this);" name="domicilio" placeholder="Domicilio" 
+      oninput="this.className = ''">
+      <p>Correo</p>
+      <input id="email" name="email" placeholder="Correo Electrónico" 
+      oninput="this.className = ''">
+      <p>Teléfono</p>
+      <input id="telefono" name="telefono" minlength="10"  maxlength="10" placeholder="Teléfono"
+      oninput="this.className = ''">
 
-
-
-<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-  <div class="col-md-5 p-lg-5 mx-auto my-5">
-    <h1 class="display-4 font-weight-normal">Bienvenido</h1>
-    <p class="lead font-weight-normal">un lema</p>
-    <a class="btn btn-outline-secondary" href="#">Conocenos</a>
+    
+  </div>
   </div>
 
-</div>
-<!-- indicar que el contenido de el texto es seguro {{servicio.descripcion| safe}}-->
-
-<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-  {% for item in servicios %}
-  <div class="div-gasadi mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden">
-    <div class="my-3 py-3">
-      <h2 class="display-5">{{item.titulo}}</h2>
-      <p class="lead">{{item.subtitulo}}</p>
+  <div class="text-center mt-5">
+    <h3 >Servicios </h3>
+    <div class="container">
+      <h5>Servicio 1</h5>
+      <select name="direccion" class="select form-control" required="" id="direccion"> 
+        <option value="x" selected="">---------</option> 
+        {% for direccion in direcciones %}
+        <option value="{{direccion.id}}">{{direccion}}</option> 
+        {% endfor %}
+      </select> 
+      <p>Seleccione un servicio</p>
+      <select name="servicio" class="select form-control" required="" id="servicio"> 
+        <option value="x" selected="">---------</option> 
+        {% for servicio in servicios %}
+          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
+        {% endfor %}
+      </select> 
     </div>
-    <div class="bg-light shadow-sm mx-auto img_content" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0; background-image: url({{item.imagen.url}}); ">
+    
 
+    <div class="container">
+      <h5>Servicio 2</h5>
+      <select name="direccion2" class="select form-control" required="" id="direccion2"> 
+        <option value="x" selected="">---------</option> 
+        {% for direccion in direcciones %}
+        <option value="{{direccion.id}}">{{direccion}}</option> 
+        {% endfor %}
+      </select> 
+      <p>Seleccione un servicio</p>
+      <select name="servicio2" class="select form-control" required="" id="servicio2"> 
+        <option value="x" selected="">---------</option> 
+        {% for servicio in servicios %}
+          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
+        {% endfor %} 
+      </select> 
+    </div>
+
+
+    <div class="container">
+      <h5>Servicio 3</h5>
+      <select name="direccion3" class="select form-control" required="" id="direccion3"> 
+        <option value="x" selected="">---------</option> 
+        {% for direccion in direcciones %}
+        <option value="{{direccion.id}}">{{direccion}}</option> 
+        {% endfor %}
+        
+      </select> 
+      <p>Seleccione un servicio</p>
+      <select name="servicio3" class="select form-control" required="" id="servicio3"> 
+        <option value="x" selected="">---------</option> 
+        {% for servicio in servicios %}
+          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
+        {% endfor %}
+      </select> 
     </div>
   </div>
-  {% endfor %}
-  <!--
-  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 p-3">
-      <h2 class="display-5">Another headline</h2>
-      <p class="lead">And an even wittier subheading.</p>
-    </div>
-    <div class="bg-dark shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-  -->
-</div>
 
-<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
-  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 p-3">
-      <h2 class="display-5">Another headline</h2>
-      <p class="lead">And an even wittier subheading.</p>
-    </div>
-    <div class="bg-white shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
+  <div class="d-flex justify-content-center mt-5">
+    <button class="btn btn-primary color-boton" id="id_btn_segunda_parte" type="submit">
+      Registrar &nbsp;<i class="fas fa-check"></i>
+    </button>
   </div>
-  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
-    <div class="my-3 py-3">
-      <h2 class="display-5">Another headline</h2>
-      <p class="lead">And an even wittier subheading.</p>
-    </div>
-    <div class="bg-white shadow-sm mx-auto" style="width: 80%; height: 300px; border-radius: 21px 21px 0 0;"></div>
-  </div>
-
-  
-</div>
-
+</form>
 
 {% endblock content %}
 {% block extrascripts %}
-
+<script src="{%static 'js/gijgo.min.js'%}" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script>
-      
+      function mayus(e) {
+        e.value = e.value.toUpperCase();
+      }
+
       $(document).ready(function () {
-        tel_mostrar = true
-        email_mostrar = true
 
-        $(".telefonos").hide()
-        $(".correos").hide()
-
-        $(".whatsapp").click(function() {
-          if (tel_mostrar==true){
-            $(".telefonos").show()
-            tel_mostrar=false
-          }else{
-            $(".telefonos").hide()
-            tel_mostrar=true
-          }
+        $('#direccion').change((event) => {
+          const dependencia_id = event.target.value;
+          let programasOperativosItems = document.querySelectorAll(
+              'select[name=servicio] >  option'
+          )
+          programasOperativosItems.forEach((po) => {
+              if (dependencia_id === '0') {
+                  po.hidden = false;
+              } else{
+                  dependencia_item = po.getAttribute('direccion');
+                  po.hidden = dependencia_id === dependencia_item ?
+                              false:
+                              true;
+              }
           });
 
-       
-       
-        $(".email").click(function() {
-          if (email_mostrar==true){
-            $(".correos").show()
-            email_mostrar=false
-          }else{
-            $(".correos").hide()
-            email_mostrar=true
+
+      })
+
+      $('#direccion2').change((event) => {
+        const dependencia_id = event.target.value;
+        let programasOperativosItems = document.querySelectorAll(
+            'select[name=servicio2] >  option'
+        )
+        programasOperativosItems.forEach((po) => {
+            if (dependencia_id === '0') {
+                po.hidden = false;
+            } else{
+                dependencia_item = po.getAttribute('direccion');
+                po.hidden = dependencia_id === dependencia_item ?
+                            false:
+                            true;
+            }
+        });
+
+
+    })
+
+    $('#direccion3').change((event) => {
+      const dependencia_id = event.target.value;
+      let programasOperativosItems = document.querySelectorAll(
+          'select[name=servicio3] >  option'
+      )
+      programasOperativosItems.forEach((po) => {
+          if (dependencia_id === '0') {
+              po.hidden = false;
+          } else{
+              dependencia_item = po.getAttribute('direccion');
+              po.hidden = dependencia_id === dependencia_item ?
+                          false:
+                          true;
           }
+      });
+
+
+  })
+
+        
+        $('#id_fecha').datepicker({
+            uiLibrary: 'bootstrap4',
+            format: "yyyy-mm-dd",
+        });
+        $('#id_fecha').attr('readonly',true)
+        
+       
+      
+        $("#telefono").on('blur',function(){ 
+          pass = document.getElementById('telefono').value;
+          console.log(pass)
+          if(pass.match(/^[0-9]{10}/)){
+            
+          }else{
+              Swal.fire({
+                type: 'error',
+                customClass:{
+                    confirmButton: 'color-boton',
+                    cancelButton: 'color-boton',
+                  },
+                title: `El número de teléfono debe contener 10 dígitos`,
+              })
+          }
+      }); 
+
+
+        $("#email").on('blur',function(){ 
+         
+          pass = document.getElementById('email').value;
+          console.log(pass)
+          if(pass.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)){
+            
+          }else{
+              Swal.fire({
+                type: 'error',
+                customClass:{
+                    confirmButton: 'color-boton',
+                    cancelButton: 'color-boton',
+                  },
+                title: `Ingresa un correo eléctronico válido`,
+              })
+          }
+      }); 
+      
+    /*la validación de la composición de la curp esta en el codigo,
+      aqui solo se valida si cumple con 18 caracteres y este compuesta por
+      la estructura de una CURP, se realiza validación para saber si es 
+      mujer
+      
+      */
+      
+
+        $("#curp").on('blur',function(){ 
+          pass = document.getElementById('curp').value;
+          console.log(pass)
+            
+              if(pass.match(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/)){
+                if(pass.substring(10, 11)== "H"){
+                
+                }else{
+                  
+                  Swal.fire({
+                    type: 'warning',
+                    customClass:{
+                        confirmButton: 'color-boton',
+                        cancelButton: 'color-boton',
+                      },
+                    customClass: 'swal-wide',
+                    title: `Por el momento no puede llevarse a cabo su registro, por favor contáctese a la Junta de Reclutamiento Municipal de Ahome al teléfono: (668) 818 1172,
+                    Correo: juntadereclutamientoahome@gmail.com
+                    Horarios de atención de lunes a viernes de 8:00 am a 4:00 pm, sábados de 9:00 am a 1:00 pm.`,
+                  })
+                
+              }
+                
+              }else{
+                
+                Swal.fire({
+                  type: 'error',
+                  customClass:{
+                      confirmButton: 'color-boton',
+                      cancelButton: 'color-boton',
+                    },
+                  title: `Tu clave CURP debe contener 18 caracteres como en el siguiente formato de ejemplo: "AAAA000000AAAAAA00" `,
+                })
+              }
+            
+          
+        }); 
+     
+        $('#id').click(function() {
+            alert( "Handler for .click() called." );
           });
         })
       

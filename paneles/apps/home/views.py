@@ -23,9 +23,33 @@ def email(request):
 
 class InicioView(View):
     def get(self,request):
-        servicios = Servicios.objects.all()
-        return  render(request,  "home/inicio.html",{'servicios':servicios} )
+        servicios = ServiciosSolicitud.objects.all()
+        direcciones = Direccion.objects.all()
+        return  render(request,  "home/inicio.html",{'servicios':servicios,
+        'direcciones':direcciones} )
     def post(self,request):
+        print("post")
+        solicitud = Solicitud()
+        solicitud.nombre = request.POST.get('nombre')
+        solicitud.appaterno = request.POST.get('paterno')
+        solicitud.apmaterno = request.POST.get('materno')
+        solicitud.curp = request.POST.get('curp')
+        solicitud.estcivil = request.POST.get('estcivil')
+        solicitud.discapacidad = request.POST.get('discapacidad')
+        solicitud.domicilio = request.POST.get('domicilio')
+        solicitud.correo = request.POST.get('email')
+        solicitud.telefono = request.POST.get('telefono')
+        solicitud.save()
+        #Servicios
+        print(request.POST.get('servicio'))
+        servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
+        servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
+        servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
+        print(servicio1)
+        solicitud.servicios.add(servicio1)
+        solicitud.servicios.add(servicio2)
+        solicitud.servicios.add(servicio3)
+        
         return  render(request, "home/inicio.html")
 
 class ContratacionView(View):
