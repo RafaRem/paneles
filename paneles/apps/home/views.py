@@ -42,13 +42,15 @@ class InicioView(View):
         solicitud.save()
         #Servicios
         print(request.POST.get('servicio'))
-        servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
-        servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
-        servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
-        print(servicio1)
-        solicitud.servicios.add(servicio1)
-        solicitud.servicios.add(servicio2)
-        solicitud.servicios.add(servicio3)
+        if request.POST.get('servicio') != "x":
+            servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
+            solicitud.servicios.add(servicio1)  
+        if request.POST.get('servicio2') != "x":
+            servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
+            solicitud.servicios.add(servicio2)
+        if request.POST.get('servicio3') != "x":
+            servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
+            solicitud.servicios.add(servicio3)
         
         url = reverse('imprimir', kwargs={'ids':solicitud.pk})
         print(url)
@@ -64,11 +66,13 @@ class ContratacionView(View):
            return  render(request,  "home/proceso.html",{'id':ids})
     def post(self,request, ids=""):
         curp = request.POST.get('curp')
+        print(curp)
         solicitud = Solicitud.objects.filter(curp=curp)
+        print(solicitud)
         if len(solicitud)>0:
             solicitud = solicitud[0]
             servicios = solicitud.servicios.all()
-            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': ids})   
+            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': solicitud.pk})   
         else: 
            mensaje = True 
            return  render(request,  "home/proceso.html",{'id':"0", 'mns':mensaje})
