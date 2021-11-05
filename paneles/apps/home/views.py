@@ -61,7 +61,9 @@ class ContratacionView(View):
         if ids != "0":
             solicitud = Solicitud.objects.get(pk=ids)
             servicios = solicitud.servicios.all()
-            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': ids})
+            folio = str(solicitud.pk).zfill(4)
+            fecha = solicitud.created.date()
+            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': ids, 'folio': folio, 'fecha': fecha})
         else: 
            return  render(request,  "home/proceso.html",{'id':ids})
     def post(self,request, ids=""):
@@ -72,7 +74,9 @@ class ContratacionView(View):
         if len(solicitud)>0:
             solicitud = solicitud[0]
             servicios = solicitud.servicios.all()
-            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': solicitud.pk})   
+            folio = "FB-"+str(solicitud.pk).zfill(6)
+            fecha = solicitud.created.date()
+            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': solicitud.pk, 'folio': folio, 'fecha': fecha})   
         else: 
            mensaje = True 
            return  render(request,  "home/proceso.html",{'id':"0", 'mns':mensaje})

@@ -93,72 +93,80 @@
   </div> 
   
   {% else %}
-  <div class="mt-3 ml-3 mr-3" id="contento">
-    <h1 class="text-center">Feria del Bienestar</h1>
-    <div>
-      <p class="text-center">
-        <h3>Datos Generales</h3>
-      </p>
-      
-     <div class="row">
-      <div class="col-md-8">
-        Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}} <br>
-        CURP: {{solicitud.curp}} <br>
-        {% if solicitud.sexo == 'H' %}
-          Sexo: Hombre <br>
-        {% elif solicitud.sexo == 'M' %}
-          Sexo: Mujer <br>
-        {% endif %}
-        
-        Discapacidad: 
-        {% if solicitud.discapacidad == 'n' %}
-          No
-        {% elif solicitud.discapacidad == 'o' %} 
-          Auditiva
-        {% elif solicitud.discapacidad == 'm' %} 
-          Motriz
-        {% elif solicitud.discapacidad == 'v' %} 
-          Vista
-        {% elif solicitud.discapacidad == 'x' %} 
-          Otro
-        {% endif %}  <br>
-        
-        Estado Civil: 
-        {% if solicitud.estcivil == 's' %}
-          Soltero
-        {% elif solicitud.estcivil == 'c' %} 
-          Casado
-        {% elif solicitud.estcivil == 'd' %} 
-          Divorsiado
-        {% elif solicitud.estcivil == 'v' %} 
-          Viudo
-        {% endif %}  <br>
-        Domicilio: {{solicitud.domicilio}} <br>
-        Telefono: {{solicitud.telefono}} <br>
-        Correo: {{solicitud.correo}} <br>
-      </div>
-      <div class="col-md-4">
-        {% if solicitud.discapacidad != 'n' %}
-          <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
-        {% endif %}
-      </div>
-
-     </div>
-      
+  <div id="contento" calss="text-center" style="padding: 10px;">
+    <div class="row">
+      <div class="col-4"><img class="" src="{%static 'images/Ayuntamiento.jpg' %}" alt="Logo" width="auto" height="110px"></div>
+      <div class="col-4" align="center">  <img class="" src="{%static 'images/bienestarlogo.png' %}" alt="Logo" width="300px" height="auto"></div>
+      <div class="col-4 " align="right"><img class="" src="{%static 'images/tAhome.png' %}" alt="Logo" width="auto" height="110px"></div>
+    </div>  
+    <div class="mb-5 text-center" align="center" >
+     <b ><h3>Feria del Bienestar</h3></b> 
     </div>
-    {% for servicio in servicios %}
-    <div class="container mt-5" style="border: solid 2px black; margin-top: 6rem !important; height: 220px">
-      
-      <div class="row">
-        <div class="col-md-8">
-          <b> <h3> Servicio {{ forloop.counter }} </h3></b>
-          <p style="font-size: 25px !important;">Dirección: {{servicio.direccion}}</p>
-          <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
+      <div class="row ml-2 ">
+        <div class="col-6">
+          Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}} <br>
+          CURP: {{solicitud.curp}} <br>
+          {% if solicitud.sexo == 'H' %}
+            Sexo: Hombre <br>
+          {% elif solicitud.sexo == 'M' %}
+            Sexo: Mujer <br>
+          {% endif %}
+          
+          Discapacidad: 
+          {% if solicitud.discapacidad == 'n' %}
+            No
+          {% elif solicitud.discapacidad == 'o' %} 
+            Auditiva
+          {% elif solicitud.discapacidad == 'm' %} 
+            Motriz
+          {% elif solicitud.discapacidad == 'v' %} 
+            Vista
+          {% elif solicitud.discapacidad == 'x' %} 
+            Otro
+          {% endif %}  <br>
+          
+          Estado Civil: 
+          {% if solicitud.estcivil == 's' %}
+            Soltero
+          {% elif solicitud.estcivil == 'c' %} 
+            Casado
+          {% elif solicitud.estcivil == 'd' %} 
+            Divorsiado
+          {% elif solicitud.estcivil == 'v' %} 
+            Viudo
+          {% endif %}  <br>
+          Domicilio: {{solicitud.domicilio}} <br>
+          Telefono: {{solicitud.telefono}} <br>
+          Correo: {{solicitud.correo}} <br>
+        </div>
+        <div class="col-6" align="right">
+          
+            Folio: {{folio}} <br>
+            Fecha: {{fecha}}
         </div>
       </div>
-    </div>
-    {% endfor %}
+      <div class="mensaje ml-3 mt-3">
+       
+          {% if solicitud.discapacidad != 'n' %}
+            <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
+          {% endif %}
+        </div>
+      <div class="mensaje mt-2">
+        {% for servicio in servicios %}
+        <div class="container mt-5" style="border: solid 2px black; margin-bottom: 3rem !important; height: 220px">
+          
+          <div class="row">
+            <div class="col-md-8">
+              <b> <h3> Servicio {{ forloop.counter }} </h3></b>
+              <p style="font-size: 25px !important;">Dirección: {{servicio.direccion}}</p>
+              <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
   </div>
+
   <button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir servicios <i class="fas fa-file-download"></i></button>
   
 
