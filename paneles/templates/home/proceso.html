@@ -118,6 +118,12 @@
         Telefono: {{solicitud.telefono}} <br>
         Correo: {{solicitud.correo}} <br>
       </div>
+      <div class="col-md-4">
+        {% if solicitud.discapacidad != 'n' %}
+          <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
+        {% endif %}
+      </div>
+
      </div>
       
     </div>
