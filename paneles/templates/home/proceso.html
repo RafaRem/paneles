@@ -45,6 +45,15 @@
   
 }
 
+.color-boton{
+  background-color: #9A0E44 !important;
+  color: white;
+}
+
+.color-boton:hover{
+  background: #c0527c !important;
+  color: white;
+}
 </style>
 {% endblock extracss %}
 
@@ -71,7 +80,7 @@
           oninput="this.className = ''">
         </div>
         <div class="d-flex justify-content-center mt-5">
-          <button class="btn btn-primary color-boton" id="id_btn_segunda_parte" type="submit">
+          <button class="btn  color-boton" id="id_btn_segunda_parte" type="submit">
             Buscar &nbsp;<i class="fas fa-search"></i>
           </button>
         </div>
@@ -140,7 +149,7 @@
     </div>
     {% endfor %}
   </div>
-  <button id="btn_pdf" type="button" class="btn btn-primary mt-5">Imprimir <i class="fas fa-file-download"></i></button>
+  <button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir <i class="fas fa-file-download"></i></button>
   {% endif %}
   
  

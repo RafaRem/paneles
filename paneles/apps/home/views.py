@@ -79,6 +79,22 @@ class ContratacionView(View):
 
 class BeneficiosView(View):
     def get(self,request):
-        return  render(request,  "home/beneficios.html")
+        direcciones =Direccion.objects.all()
+        total =0
+        arraytotal = []
+        
+        for direccion in direcciones:
+            servicios = ServiciosSolicitud.objects.filter(direccion= direccion)
+            array = []
+            for servicio in servicios:
+                query = Solicitud.objects.filter(servicios__id =servicio.pk) 
+                array.append({
+                    'cantidad': len(query),
+                    'servicio': servicio
+                })
+                total += len(query)
+            arraytotal.append({'direccion':direccion,
+            'servicios':array})
+        return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
