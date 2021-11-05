@@ -51,6 +51,35 @@
 {% block content%}
 
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
+  {% if id == "0" %}
+  <div class="mt-3 ml-3 mr-3" id="contento">
+    <form action="" method="post" id="id_form_actividad">
+      {% csrf_token %}
+      <div class="container " style="margin-top: 7%;"> 
+        {% if mns %}
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+          <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+          <div>
+            No se encontro salicitud con la CURP que busca
+          </div>
+        </div>
+        {% endif %} 
+        <div class="row ">
+        
+          CURP <br>  
+          <input class="form-control mb-3" onkeyup="mayus(this);" name="CURP" placeholder="CURP del Solicitante"
+          oninput="this.className = ''">
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+          <button class="btn btn-primary color-boton" id="id_btn_segunda_parte" type="submit">
+            Buscar &nbsp;<i class="fas fa-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div> 
+  
+  {% else %}
   <div class="mt-3 ml-3 mr-3" id="contento">
     <h1 class="text-center">Feria del Bienestar</h1>
     <div>
@@ -58,14 +87,45 @@
         <h3>Datos Generales</h3>
       </p>
       
-     
-      Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.materno}} <br>
-      CURP: {{solicitud.curp}} <br>
-      Discapacidad: {{solicitud.discapacidad}} <br>
-      Estado Civil: {{solicitud.estcivil}} <br>
-      Domicilio: {{solicitud.domicilio}} <br>
-      Telefono: {{solicitud.telefono}} <br>
-      Correo: {{solicitud.correo}} <br>
+     <div class="row">
+      <div class="col-md-6">
+        Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.materno}} <br>
+        CURP: {{solicitud.curp}} <br>
+        Discapacidad: 
+        {% if solicitud.discapacidad == 'n' %}
+          No
+        {% elif solicitud.discapacidad == 'o' %} 
+          Oido
+        {% elif solicitud.discapacidad == 'm' %} 
+          Motriz
+        {% elif solicitud.discapacidad == 'v' %} 
+          Vista
+        {% elif solicitud.discapacidad == 'x' %} 
+          Otro
+        {% endif %}  <br>
+        
+        Estado Civil: 
+        {% if solicitud.estcivil == 's' %}
+          Soltero
+        {% elif solicitud.estcivil == 'c' %} 
+          Casado
+        {% elif solicitud.estcivil == 'd' %} 
+          Divorsiado
+        {% elif solicitud.estcivil == 'v' %} 
+          Viudo
+        {% endif %}  <br>
+        Domicilio: {{solicitud.domicilio}} <br>
+        Telefono: {{solicitud.telefono}} <br>
+        Correo: {{solicitud.correo}} <br>
+      </div>
+      <div class="col-md-4">
+        {% if solicitud.discapacidad != 'n' %}
+        <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
+        {% endif %}
+        
+      </div>
+     </div>
+      
     </div>
     {% for servicio in servicios %}
     <div class="container mt-5" style="border: solid 2px black;">
@@ -79,8 +139,12 @@
       </div>
     </div>
     {% endfor %}
-</div>
-<button id="btn_pdf" type="button" class="btn btn-primary mt-5">Imprimir <i class="fas fa-file-download"></i></button>
+  </div>
+  <button id="btn_pdf" type="button" class="btn btn-primary mt-5">Imprimir <i class="fas fa-file-download"></i></button>
+  {% endif %}
+  
+ 
+
 <div id="carga">
 
 </div>
@@ -92,7 +156,10 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js" integrity="sha256-c30AriwlYd8As+X/SAMm9dKVZ0OSS6V/Ub/krEBQyMk=" crossorigin="anonymous"></script>
     <script>
-      
+      function mayus(e) {
+        e.value = e.value.toUpperCase();
+      }
+
       $(document).ready(function () {
         tel_mostrar = true
         email_mostrar = true
