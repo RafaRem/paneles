@@ -86,6 +86,7 @@ class BeneficiosView(View):
         for direccion in direcciones:
             servicios = ServiciosSolicitud.objects.filter(direccion= direccion)
             array = []
+            total =0
             for servicio in servicios:
                 query = Solicitud.objects.filter(servicios__id =servicio.pk) 
                 array.append({
@@ -94,7 +95,8 @@ class BeneficiosView(View):
                 })
                 total += len(query)
             arraytotal.append({'direccion':direccion,
-            'servicios':array})
+            'servicios':array,
+            'total': total})
         return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
