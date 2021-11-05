@@ -57,16 +57,16 @@ li:hover{
     
       Nombre <br>  
       <input class="form-control mb-3" onkeyup="mayus(this);" name="nombre" placeholder="Nombre(s)"
-      oninput="this.className = ''">
+      oninput="this.className = ''" required="">
       Apellido Paterno <br>
       <input class="form-control mb-3" onkeyup="mayus(this);" name="paterno" placeholder="Apellido paterno" 
-      oninput="this.className = ''">
+      oninput="this.className = ''" required="">
       Apellido Materno <br>
       <input class="form-control mb-3" onkeyup="mayus(this);" name="materno" placeholder="Apellido materno" 
-      oninput="this.className = ''">
+      oninput="this.className = ''" required="">
       CURP <br>
       <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
-      oninput="this.className = ''">
+      oninput="this.className = ''" required="">
       Estado Civil <br>
       <select name="estcivil" class="select form-control mb-3" required="" id="est_civil"> 
         <option value="x" selected="">---------</option> 
@@ -85,7 +85,7 @@ li:hover{
       </select> 
       Domicilio <br>
       <input class="form-control mb-3" onkeyup="mayus(this);" name="domicilio" placeholder="Domicilio" 
-      oninput="this.className = ''">
+      oninput="this.className = ''" required>
       Correo
       <input class="form-control mb-3" id="email" name="email" placeholder="Correo Electrónico" 
       oninput="this.className = ''">
@@ -101,15 +101,15 @@ li:hover{
     <h3 >Servicios </h3>
     <div class="container" style="border: solid 2px black ; padding: 15px;">
       <h5>Servicio 1</h5>
-      <select name="direccion" class="select form-control" required="" id="direccion"> 
-        <option value="x" selected="">---------</option> 
+      <select name="direccion" class="select form-control"  id="direccion" required> 
+        <option value="" selected="">---------</option> 
         {% for direccion in direcciones %}
         <option value="{{direccion.id}}">{{direccion}}</option> 
         {% endfor %}
       </select> 
       <p>Seleccione un servicio</p>
-      <select name="servicio" class="select form-control" required="" id="servicio"> 
-        <option value="x" selected="">---------</option> 
+      <select name="servicio" class="select form-control"  id="servicio" required> 
+        <option value="" selected="">---------</option> 
         {% for servicio in servicios %}
           <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
         {% endfor %}
@@ -118,7 +118,7 @@ li:hover{
     
     <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
       <h5>Servicio 2</h5>
-      <select name="direccion2" class="select form-control" required="" id="direccion2"> 
+      <select name="direccion2" class="select form-control" id="direccion2"> 
         <option value="x" selected="">---------</option> 
         {% for direccion in direcciones %}
         <option value="{{direccion.id}}">{{direccion}}</option> 
@@ -126,7 +126,7 @@ li:hover{
         
       </select> 
       <p>Seleccione un servicio</p>
-      <select name="servicio2" class="select form-control" required="" id="servicio2"> 
+      <select name="servicio2" class="select form-control" id="servicio2"> 
         <option value="x" selected="">---------</option> 
         {% for servicio in servicios %}
           <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
@@ -137,7 +137,7 @@ li:hover{
 
     <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
       <h5>Servicio 3</h5>
-      <select name="direccion3" class="select form-control" required="" id="direccion3"> 
+      <select name="direccion3" class="select form-control"  id="direccion3"> 
         <option value="x" selected="">---------</option> 
         {% for direccion in direcciones %}
         <option value="{{direccion.id}}">{{direccion}}</option> 
@@ -145,7 +145,7 @@ li:hover{
         
       </select> 
       <p>Seleccione un servicio</p>
-      <select name="servicio3" class="select form-control" required="" id="servicio3"> 
+      <select name="servicio3" class="select form-control"  id="servicio3"> 
         <option value="x" selected="">---------</option> 
         {% for servicio in servicios %}
           <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
