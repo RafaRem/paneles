@@ -28,12 +28,12 @@ class InicioView(View):
         return  render(request,  "home/inicio.html",{'servicios':servicios,
         'direcciones':direcciones} )
     def post(self,request):
-        print("post")
         solicitud = Solicitud()
         solicitud.nombre = request.POST.get('nombre')
         solicitud.appaterno = request.POST.get('paterno')
         solicitud.apmaterno = request.POST.get('materno')
         solicitud.curp = request.POST.get('curp')
+        solicitud.sexo = request.POST.get('curp')[10:11]
         solicitud.estcivil = request.POST.get('estcivil')
         solicitud.discapacidad = request.POST.get('discapacidad')
         solicitud.domicilio = request.POST.get('domicilio')
@@ -41,7 +41,7 @@ class InicioView(View):
         solicitud.telefono = request.POST.get('telefono')
         solicitud.save()
         #Servicios
-        print(request.POST.get('servicio'))
+        
         if request.POST.get('servicio') != "x":
             servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
             solicitud.servicios.add(servicio1)  
@@ -82,21 +82,30 @@ class BeneficiosView(View):
         direcciones =Direccion.objects.all()
         total =0
         arraytotal = []
-        
+        mujeres = 0
+        hombres = 0
         for direccion in direcciones:
             servicios = ServiciosSolicitud.objects.filter(direccion= direccion)
             array = []
             total =0
             for servicio in servicios:
                 query = Solicitud.objects.filter(servicios__id =servicio.pk) 
+                
                 array.append({
                     'cantidad': len(query),
                     'servicio': servicio
                 })
                 total += len(query)
+            
             arraytotal.append({'direccion':direccion,
             'servicios':array,
-            'total': total})
-        return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal})
+            'total': total })
+            solicitudes_total = Solicitud.objects.all()
+            hombres = Solicitud.objects.filter(sexo='H')
+            mujeres = Solicitud.objects.filter(sexo='M')
+        return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
+        'total_solicitudes': len(solicitudes_total),
+        'hombres': len(hombres),
+        'mujeres': len(mujeres)})
     def post(self,request):
         return  render(request,  "home/beneficios.html")

@@ -74,9 +74,11 @@ li:hover{
       Apellido Materno <br>
       <input class="form-control mb-3" onkeyup="mayus(this);" name="materno" placeholder="Apellido materno" 
       oninput="this.className = ''" required="">
-      CURP <br>
+      CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
       <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
       oninput="this.className = ''" required="">
+     <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
+      
       Estado Civil <br>
       <select name="estcivil" class="select form-control mb-3" required="" id="est_civil"> 
         <option value="x" selected="">---------</option> 

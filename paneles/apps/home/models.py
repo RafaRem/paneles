@@ -3,7 +3,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 class Direccion(models.Model):
     nombre = models.CharField(  max_length=200, verbose_name="nombre")
-    estatus = models.BooleanField(verbose_name=("Estatus"))
+    estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)    
     class Meta:
@@ -16,7 +16,7 @@ class Direccion(models.Model):
 class ServiciosSolicitud(models.Model):
     nombre = models.CharField(  max_length=200, verbose_name="nombre")
     direccion = models.ForeignKey(Direccion, on_delete=models.PROTECT)
-    estatus = models.BooleanField(verbose_name=("Estatus"))
+    estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)    
     class Meta:
@@ -36,6 +36,7 @@ class Solicitud(models.Model):
     domicilio = models.CharField(  max_length=50, verbose_name="domicilio")
     correo = models.CharField(  max_length=50, verbose_name="correo")
     telefono = models.CharField(  max_length=50, verbose_name="teléfono")
+    sexo = models.CharField(  max_length=50, verbose_name="sexo", null=True)
     servicios = models.ManyToManyField(ServiciosSolicitud, blank=True)
     estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
     created = models.DateTimeField(auto_now_add=True)

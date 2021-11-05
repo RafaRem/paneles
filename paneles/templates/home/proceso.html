@@ -84,6 +84,10 @@
             Buscar &nbsp;<i class="fas fa-search"></i>
           </button>
         </div>
+        <div class="d-flex justify-content-center mt-5">
+            <a href="https://www.gob.mx/curp/" target="_blank">Obtener CURP</a>
+        </div>
+       
       </div>
     </form>
   </div> 
@@ -98,7 +102,7 @@
       
      <div class="row">
       <div class="col-md-8">
-        Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.materno}} <br>
+        Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}} <br>
         CURP: {{solicitud.curp}} <br>
         Discapacidad: 
         {% if solicitud.discapacidad == 'n' %}
@@ -137,13 +141,13 @@
       
     </div>
     {% for servicio in servicios %}
-    <div class="container mt-5" style="border: solid 2px black;">
+    <div class="container mt-5" style="border: solid 2px black; margin-top: 6rem !important; height: 220px">
       
       <div class="row">
         <div class="col-md-8">
-          <h3>Servicio {{ forloop.counter }}</h3>
-          <p>Dirección: {{servicio.direccion}}</p>
-          <p>Servicio: {{servicio.nombre}} </p>
+          <b> <h3> Servicio {{ forloop.counter }} </h3></b>
+          <p style="font-size: 25px !important;">Dirección: {{servicio.direccion}}</p>
+          <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
         </div>
       </div>
     </div>
