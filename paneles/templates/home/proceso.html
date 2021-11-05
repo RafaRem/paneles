@@ -104,11 +104,17 @@
       <div class="col-md-8">
         Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}} <br>
         CURP: {{solicitud.curp}} <br>
+        {% if solicitud.sexo == 'H' %}
+          Sexo: Hombre <br>
+        {% elif solicitud.sexo == 'M' %}
+          Sexo: Mujer <br>
+        {% endif %}
+        
         Discapacidad: 
         {% if solicitud.discapacidad == 'n' %}
           No
         {% elif solicitud.discapacidad == 'o' %} 
-          Oido
+          Auditiva
         {% elif solicitud.discapacidad == 'm' %} 
           Motriz
         {% elif solicitud.discapacidad == 'v' %} 
