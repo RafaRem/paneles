@@ -88,7 +88,7 @@
       </p>
       
      <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-8">
         Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.materno}} <br>
         CURP: {{solicitud.curp}} <br>
         Discapacidad: 
@@ -117,12 +117,6 @@
         Domicilio: {{solicitud.domicilio}} <br>
         Telefono: {{solicitud.telefono}} <br>
         Correo: {{solicitud.correo}} <br>
-      </div>
-      <div class="col-md-4">
-        {% if solicitud.discapacidad != 'n' %}
-        <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
-        {% endif %}
-        
       </div>
      </div>
       
