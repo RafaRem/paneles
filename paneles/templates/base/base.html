@@ -22,7 +22,7 @@
 
 <header class="fixed-top">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{% url 'inicio' %}"> <img class="navbar-brand mr-5" src="{%static 'images/tAhome.png' %}" alt="Logo" width="65px" height="auto"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -49,37 +49,14 @@
     
     {% endblock %}
     
-    <footer class="container py-5">
+    <footer class="container py-5" style="height: 50px !important">
         <div class="row">
           <div class="col-12 col-md">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mb-2" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"/><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"/></svg>
-            <small class="d-block mb-3 text-muted">&copy; 2017-2020</small>
+           
           </div>
           <div id="contactos" class="col-6 col-md">
-            <h5>Contactos</h5>
-            <ul class="list-unstyled text-small">
-              <li><a class="text-muted resaltar" href="#"><i class="fab fa-facebook"> </i>Facebook</a></li>
-              <li><a class=" whatsapp text-muted resaltar" href="#telefonos"><i class=" fab fa-whatsapp"></i> Whatsap</a></li>
-              
-              <ul class="ml-5 telefonos list-unstyled text-small" id="telefonos" >
-                <li>6681241183 </li>
-              </ul>
-              
-              <li><a class="email text-muted resaltar" href="#correos"><i class="fas fa-at"></i> Correo</a></li>
-              <ul class="ml-5 correos list-unstyled text-small" id="correos" >
-                <li>gasadi.losmochis@hotmail.com</li>
-              </ul>
-            </ul>
-          </div>
-          <div class="col-6 col-md">
-            <h5>Localizaión</h5>
-            <ul class="list-unstyled text-small">
-              <li><i class="fas fa-map-marked-alt"></i> 
-                <a class="text-muted resaltar" target="_blank"
-                href="https://www.google.com/maps/place/Saro+Impresi%C3%B3n+%26+Publicidad/@25.8015501,-109.0162002,18.78z/data=!4m5!3m4!1s0x86ba260bdb5bdb61:0xe0cf53d7b2480018!8m2!3d25.8016274!4d-109.0162805">
-                Ubicación</a></li>
-            </ul>
-          </div>
+           
+          
         </div>
     </footer>
 {% endblock %}
