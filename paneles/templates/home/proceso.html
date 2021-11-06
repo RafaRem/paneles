@@ -154,9 +154,9 @@
             <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
           {% endif %}
         </div>
-      <div class="mensaje mt-2">
+      <div class="mensaje mt-5">
         {% for servicio in servicios %}
-        <div class="container mt-5" style="border: solid 2px black; margin-bottom: 3rem !important; height: 220px">
+        <div class="container mt-5" style="border: solid 2px black; margin-bottom: 3rem !important; height: 200px">
           
           <div class="row">
             <div class="col-md-8">
@@ -168,6 +168,9 @@
         </div>
         {% endfor %}
       </div>
+      <br>
+      <br>
+      <div class="" id="terminos" align="center" > <label for="" style="border-top:solid 2px black;">Acepto términos y condiciones</label> </div>
   </div>
 
   <button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir servicios <i class="fas fa-file-download"></i></button>
@@ -196,7 +199,7 @@
         tel_mostrar = true
         email_mostrar = true
 
-        $(".telefonos").hide()
+        $("#terminos").hide()
         $(".correos").hide()
 
         $(".whatsapp").click(function() {
@@ -223,10 +226,10 @@
         })
       
         $('#btn_pdf').click((event)=>{
-            
+          $("#terminos").show()
           $.when( effect() ).done(function() {
               $("#btn_pdf").prop('disabled',false)
-             
+              $("#terminos").hide()
           });
 
 
