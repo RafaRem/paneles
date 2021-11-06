@@ -257,41 +257,10 @@ li:hover{
         
        
       
-        $("#telefono").on('blur',function(){ 
-          pass = document.getElementById('telefono').value;
-          console.log(pass)
-          if(pass.match(/^[0-9]{10}/)){
-            
-          }else{
-              Swal.fire({
-                type: 'error',
-                customClass:{
-                    confirmButton: 'color-boton',
-                    cancelButton: 'color-boton',
-                  },
-                title: `El número de teléfono debe contener 10 dígitos`,
-              })
-          }
-      }); 
+        
 
 
-        $("#email").on('blur',function(){ 
-         
-          pass = document.getElementById('email').value;
-          console.log(pass)
-          if(pass.match(/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/)){
-            
-          }else{
-              Swal.fire({
-                type: 'error',
-                customClass:{
-                    confirmButton: 'color-boton',
-                    cancelButton: 'color-boton',
-                  },
-                title: `Ingresa un correo eléctronico válido`,
-              })
-          }
-      }); 
+       
       
     /*la validación de la composición de la curp esta en el codigo,
       aqui solo se valida si cumple con 18 caracteres y este compuesta por
