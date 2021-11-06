@@ -255,12 +255,6 @@ li:hover{
         });
         $('#id_fecha').attr('readonly',true)
         
-       
-      
-        
-
-
-       
       
     /*la validación de la composición de la curp esta en el codigo,
       aqui solo se valida si cumple con 18 caracteres y este compuesta por
@@ -270,43 +264,7 @@ li:hover{
       */
       
 
-        $("#curp").on('blur',function(){ 
-          pass = document.getElementById('curp').value;
-          console.log(pass)
-            
-              if(pass.match(/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/)){
-                if(pass.substring(10, 11)== "H"){
-                
-                }else{
-                  
-                  Swal.fire({
-                    type: 'warning',
-                    customClass:{
-                        confirmButton: 'color-boton',
-                        cancelButton: 'color-boton',
-                      },
-                    customClass: 'swal-wide',
-                    title: `Por el momento no puede llevarse a cabo su registro, por favor contáctese a la Junta de Reclutamiento Municipal de Ahome al teléfono: (668) 818 1172,
-                    Correo: juntadereclutamientoahome@gmail.com
-                    Horarios de atención de lunes a viernes de 8:00 am a 4:00 pm, sábados de 9:00 am a 1:00 pm.`,
-                  })
-                
-              }
-                
-              }else{
-                
-                Swal.fire({
-                  type: 'error',
-                  customClass:{
-                      confirmButton: 'color-boton',
-                      cancelButton: 'color-boton',
-                    },
-                  title: `Tu clave CURP debe contener 18 caracteres como en el siguiente formato de ejemplo: "AAAA000000AAAAAA00" `,
-                })
-              }
-            
-          
-        }); 
+        
      
         $('#id').click(function() {
             alert( "Handler for .click() called." );
