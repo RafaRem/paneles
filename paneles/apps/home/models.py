@@ -40,15 +40,15 @@ class PoblacionObjetivo(models.Model):
 
 
 class Solicitud(models.Model):
-    nombre = models.CharField(  max_length=50, verbose_name="nombre")
-    appaterno = models.CharField(  max_length=30, verbose_name="apellido paterno")
-    apmaterno = models.CharField(  max_length=30, verbose_name="apellido materno")
+    nombre = models.CharField(  max_length=100, verbose_name="nombre")
+    appaterno = models.CharField(  max_length=100, verbose_name="apellido paterno")
+    apmaterno = models.CharField(  max_length=100, verbose_name="apellido materno")
     curp = models.CharField(  max_length=50, verbose_name="CURP")
     estcivil = models.CharField(  max_length=50, verbose_name="estcivil")
     discapacidad = models.CharField(  max_length=50, verbose_name="discapacidad")
     domicilio = models.CharField(  max_length=50, verbose_name="domicilio")
-    correo = models.CharField(  max_length=50, verbose_name="correo")
-    telefono = models.CharField(  max_length=50, verbose_name="teléfono")
+    correo = models.CharField(  max_length=200, verbose_name="correo")
+    telefono = models.CharField(  max_length=200, verbose_name="teléfono")
     sexo = models.CharField(  max_length=50, verbose_name="sexo", null=True)
     servicios = models.ManyToManyField(ServiciosSolicitud, blank=True)
     poblacion = models.ForeignKey(PoblacionObjetivo, on_delete=models.PROTECT, null=True)
