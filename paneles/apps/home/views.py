@@ -40,7 +40,9 @@ class InicioView(View):
         solicitud.domicilio = request.POST.get('domicilio')
         solicitud.correo = request.POST.get('email')
         solicitud.telefono = request.POST.get('telefono')
-        solicitud.poblacion = request.POST.get('poblacion')
+        if request.POST.get('poblacion') != 0:
+            poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
+            solicitud.poblacion = poblacionO
         solicitud.save()
         #Servicios
         
