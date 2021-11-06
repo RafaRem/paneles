@@ -115,3 +115,33 @@ class BeneficiosView(View):
         'mujeres': len(mujeres)})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
+
+
+class EditView(View):
+    def get(self,request,idsolicitud=""):
+        if idsolicitud == "0":
+            url = reverse('imprimir', kwargs={'ids':"0"})
+            print(url)
+            return redirect(url)
+        solicitud = Solicitud.objects.get(pk=idsolicitud)
+        poblaciones = PoblacionObjetivo.objects.all()
+        return  render(request,  "home/editar.html",{'solicitud':solicitud, 'poblaciones': poblaciones} )
+    def post(self,request,idsolicitud=""):
+        solicitud = Solicitud.objects.get(pk=idsolicitud)
+        solicitud.nombre = request.POST.get('nombre')
+        solicitud.appaterno = request.POST.get('paterno')
+        solicitud.apmaterno = request.POST.get('materno')
+        solicitud.curp = request.POST.get('curp')
+        solicitud.estcivil = request.POST.get('estcivil')
+        solicitud.discapacidad = request.POST.get('discapacidad')
+        solicitud.domicilio = request.POST.get('domicilio')
+        solicitud.correo = request.POST.get('email')
+        solicitud.telefono = request.POST.get('telefono')
+        if request.POST.get('poblacion') != 0:
+            poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
+            solicitud.poblacion = poblacionO
+        solicitud.save()
+        #Servicios
+        url = reverse('imprimir', kwargs={'ids':solicitud.pk})
+        print(url)
+        return redirect(url)

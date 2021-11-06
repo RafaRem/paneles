@@ -21,4 +21,5 @@ urlpatterns = [
     path('', InicioView.as_view(), name="inicio"),
     path('imprecion/solicitud/<str:ids>', ContratacionView.as_view(), name="imprimir"),
     path('estadisticas/servicios', BeneficiosView.as_view(), name="beneficios"),
+    path('editar/<str:idsolicitud>', EditView.as_view(), name="editar"),
 ]

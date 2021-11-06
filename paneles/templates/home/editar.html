@@ -63,118 +63,63 @@ li:hover{
   {% csrf_token %}
   <div class="container " style="margin-top: 7%;"> 
         
-    <div class="row mt-5">
-      CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
-      <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
-      oninput="this.className = ''" required="">
-     <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
+    <div class="row ">
+    
       Nombre <br>  
       <input class="form-control mb-3" onkeyup="mayus(this);" name="nombre" placeholder="Nombre(s)"
-      oninput="this.className = ''" required="">
+      oninput="this.className = ''" required="" value="{{solicitud.nombre}}">
       Apellido Paterno <br>
       <input class="form-control mb-3" onkeyup="mayus(this);" name="paterno" placeholder="Apellido paterno" 
-      oninput="this.className = ''" required="">
+      oninput="this.className = ''" required=""  value="{{solicitud.appaterno}}">
       Apellido Materno <br>
       <input class="form-control mb-3" onkeyup="mayus(this);" name="materno" placeholder="Apellido materno" 
-      oninput="this.className = ''" required="">
+      oninput="this.className = ''" required=""  value="{{solicitud.apmaterno}}">
+      CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
+      <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
+      oninput="this.className = ''" required=""  value="{{solicitud.curp}}">
+     <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
       
-     Población Objetivo <br>
-     <select name="poblacion" class="select form-control mb-3" required="" id="poblacion"> 
-       <option value="" selected="">---------</option> 
+     Población Objetivo 
+     <select name="poblacion" class="select form-control mb-3"   required="" id="poblacion"> 
+       <option value="0" {% if solicitud.poblacion == None %}selected=""{% endif %}>---------</option> 
        {% for poblacion in poblaciones %}
-        <option value="{{poblacion.pk}}" >{{poblacion.nombre}}</option>
+        <option value="{{poblacion.pk}}" {% if solicitud.poblacion == poblacion %}selected=""{% endif %}>{{poblacion.nombre}}</option>
        {% endfor %}
      </select> 
-      Estado Civil <br>
-      <select name="estcivil" class="select form-control mb-3" required="" id="est_civil"> 
-        <option value="x" selected="">---------</option> 
-        <option value="s" >Soltero</option> 
-        <option value="c" >Casado</option> 
-        <option value="d" >Divorciado</option> 
-        <option value="v" >Viudo</option> 
+      Estado Civil<br>
+      <select name="estcivil" selected="{{solicitud.estcivil}}" class="select form-control mb-3" required="" id="est_civil"> 
+        <option value="x" {% if solicitud.estcivil == "x" %}selected=""{% endif %}>---------</option> 
+        <option value="s"  {% if solicitud.estcivil == "s" %}selected=""{% endif %} >Soltero</option> 
+        <option value="c"  {% if solicitud.estcivil == "c" %}selected=""{% endif %}>Casado</option> 
+        <option value="d"  {% if solicitud.estcivil == "d" %}selected=""{% endif %}>Divorciado</option> 
+        <option value="v"  {% if solicitud.estcivil == "v" %}selected=""{% endif %}>Viudo</option> 
       </select> 
-      Persona con discapacidad <br>
-      <select name="discapacidad" class="select form-control mb-3" required="" id="discapacidad"> 
-        <option value="n" selected="">No</option> 
-        <option value="o" >Auditiva</option> 
-        <option value="m" >Motriz</option> 
-        <option value="v" >Visual</option> 
-        <option value="x" >Otro</option> 
+      Persona con discapacidad<br>
+      <select name="discapacidad" selected="{{solicitud.discapacidad}}"  class="select form-control mb-3" required="" id="discapacidad"> 
+        <option value="n"{% if solicitud.discapacidad == "n" %}selected=""{% endif %} >No</option> 
+        <option value="o" {% if solicitud.discapacidad == "o" %}selected=""{% endif %} >Auditiva</option> 
+        <option value="m" {% if solicitud.discapacidad == "m" %}selected=""{% endif %}>Motriz</option> 
+        <option value="v" {% if solicitud.discapacidad == "v" %}selected=""{% endif %}>Visual</option> 
+        <option value="x" {% if solicitud.discapacidad == "x" %}selected=""{% endif %}>Otro</option> 
       </select> 
       Domicilio <br>
-      <input class="form-control mb-3" onkeyup="mayus(this);" name="domicilio" placeholder="Domicilio" 
+      <input class="form-control mb-3" value="{{solicitud.domicilio}}" onkeyup="mayus(this);" name="domicilio" placeholder="Domicilio" 
       oninput="this.className = ''" required>
       Correo
-      <input class="form-control mb-3" id="email" name="email" placeholder="Correo Electrónico" 
+      <input class="form-control mb-3" value="{{solicitud.correo}}" id="email" name="email" placeholder="Correo Electrónico" 
       oninput="this.className = ''">
       Teléfono <br>
-      <input class="form-control mb-3" id="telefono" name="telefono" minlength="10"  maxlength="10" placeholder="Teléfono"
+      <input class="form-control mb-3" value="{{solicitud.telefono}}" id="telefono" name="telefono" minlength="10"  maxlength="10" placeholder="Teléfono"
       oninput="this.className = ''">
 
     
   </div>
   </div>
 
-  <div class="text-center mt-5">
-    <h3 >Servicios </h3>
-    <div class="container" style="border: solid 2px black ; padding: 15px;">
-      <h5>Servicio 1</h5>
-      <select name="direccion" class="select form-control"  id="direccion" required> 
-        <option value="" selected="">---------</option> 
-        {% for direccion in direcciones %}
-        <option value="{{direccion.id}}">{{direccion}}</option> 
-        {% endfor %}
-      </select> 
-      <p>Seleccione un servicio</p>
-      <select name="servicio" class="select form-control"  id="servicio" required> 
-        <option value="" selected="">---------</option> 
-        {% for servicio in servicios %}
-          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
-        {% endfor %}
-      </select> 
-    </div>
-    
-    <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
-      <h5>Servicio 2</h5>
-      <select name="direccion2" class="select form-control" id="direccion2"> 
-        <option value="x" selected="">---------</option> 
-        {% for direccion in direcciones %}
-        <option value="{{direccion.id}}">{{direccion}}</option> 
-        {% endfor %}
-        
-      </select> 
-      <p>Seleccione un servicio</p>
-      <select name="servicio2" class="select form-control" id="servicio2"> 
-        <option value="x" selected="">---------</option> 
-        {% for servicio in servicios %}
-          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
-        {% endfor %}
-      </select> 
-    </div>
-
-
-    <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
-      <h5>Servicio 3</h5>
-      <select name="direccion3" class="select form-control"  id="direccion3"> 
-        <option value="x" selected="">---------</option> 
-        {% for direccion in direcciones %}
-        <option value="{{direccion.id}}">{{direccion}}</option> 
-        {% endfor %}
-        
-      </select> 
-      <p>Seleccione un servicio</p>
-      <select name="servicio3" class="select form-control"  id="servicio3"> 
-        <option value="x" selected="">---------</option> 
-        {% for servicio in servicios %}
-          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
-        {% endfor %}
-      </select> 
-    </div>
-  </div>
 
   <div class="d-flex justify-content-center mt-5">
     <button class="btn color-boton" id="id_btn_segunda_parte" type="submit">
-      Registrar &nbsp;<i class="fas fa-check"></i>
+      Guardar cambios &nbsp;<i class="fas fa-check"></i>
     </button>
   </div>
 </form>
