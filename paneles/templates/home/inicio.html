@@ -79,6 +79,13 @@ li:hover{
       oninput="this.className = ''" required="">
      <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
       
+     Población Objetivo <br>
+     <select name="poblacion" class="select form-control mb-3" required="" id="poblacion"> 
+       <option value="" selected="">---------</option> 
+       {% for poblacion in poblaciones %}
+        <option value="{{poblacion.pk}}" >{{poblacion.nombre}}</option>
+       {% endfor %}
+     </select> 
       Estado Civil <br>
       <select name="estcivil" class="select form-control mb-3" required="" id="est_civil"> 
         <option value="x" selected="">---------</option> 

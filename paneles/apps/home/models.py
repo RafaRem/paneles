@@ -26,6 +26,19 @@ class ServiciosSolicitud(models.Model):
     def __str__(self):
         return self.nombre
 
+class PoblacionObjetivo(models.Model):
+    nombre = models.CharField(  max_length=200, verbose_name="nombre")
+    estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)    
+    class Meta:
+        verbose_name = "Población Objetivo"
+        verbose_name_plural = "Poblaciones objetivo"
+
+    def __str__(self):
+        return self.nombre
+
+
 class Solicitud(models.Model):
     nombre = models.CharField(  max_length=50, verbose_name="nombre")
     appaterno = models.CharField(  max_length=30, verbose_name="apellido paterno")
@@ -38,6 +51,7 @@ class Solicitud(models.Model):
     telefono = models.CharField(  max_length=50, verbose_name="teléfono")
     sexo = models.CharField(  max_length=50, verbose_name="sexo", null=True)
     servicios = models.ManyToManyField(ServiciosSolicitud, blank=True)
+    poblacion = models.ForeignKey(PoblacionObjetivo, on_delete=models.PROTECT, null=True)
     estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)    

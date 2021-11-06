@@ -25,8 +25,9 @@ class InicioView(View):
     def get(self,request):
         servicios = ServiciosSolicitud.objects.all()
         direcciones = Direccion.objects.all()
+        poblaciones = PoblacionObjetivo.objects.all()
         return  render(request,  "home/inicio.html",{'servicios':servicios,
-        'direcciones':direcciones} )
+        'direcciones':direcciones, 'poblaciones': poblaciones} )
     def post(self,request):
         solicitud = Solicitud()
         solicitud.nombre = request.POST.get('nombre')
@@ -39,6 +40,7 @@ class InicioView(View):
         solicitud.domicilio = request.POST.get('domicilio')
         solicitud.correo = request.POST.get('email')
         solicitud.telefono = request.POST.get('telefono')
+        solicitud.poblacion = request.POST.get('poblacion')
         solicitud.save()
         #Servicios
         

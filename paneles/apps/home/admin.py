@@ -23,3 +23,10 @@ class SolicitudAdmin(admin.ModelAdmin):
     filter_horizontal = ('servicios',)
 
 admin.site.register(Solicitud,SolicitudAdmin)
+
+class PoblacionAdmin(admin.ModelAdmin):
+    list_display=['id','nombre']
+    list_display_links=['id','nombre']
+    search_fields=['nombre']
+
+admin.site.register(PoblacionObjetivo,PoblacionAdmin)
