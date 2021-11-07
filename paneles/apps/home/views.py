@@ -27,7 +27,7 @@ class InicioView(View):
         direcciones = Direccion.objects.all()
         poblaciones = PoblacionObjetivo.objects.all()
         return  render(request,  "home/inicio.html",{'servicios':servicios,
-        'direcciones':direcciones, 'poblaciones': poblaciones} )
+        'direcciones':direcciones, 'poblaciones': poblaciones, 'carga': False} )
     def post(self,request):
         solicitud = Solicitud()
         solicitud.nombre = request.POST.get('nombre')
