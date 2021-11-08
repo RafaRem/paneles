@@ -61,10 +61,15 @@ li:hover{
   </div>
   <div class=" container mt-3" style="font-weight: bold;">
     <h4>Población Objetivo</h4>
+    <div class="row container">
+      
     {% for pob in poblacion %}
-      <b> {{pob.poblacion}}</b> <b style="color: #691C32;">{{pob.cantidad}}</b>&nbsp; &nbsp; <i class="fas fa-circle" style="color: #691C32;"></i> &nbsp; &nbsp;
+    <div class="col-md-4 mb-1" style="font-weight: bold; border: solid 1px; border-bottom:solid 4px #691C32">
+      <b> {{pob.poblacion}}: </b> <b style="color: #691C32;">{{pob.cantidad}}</b>
+      
+    </div>
     {% endfor %}
-     
+  </div>
   </div>
   <div class="container text-center">
 
