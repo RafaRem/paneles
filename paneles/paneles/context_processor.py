@@ -6,6 +6,6 @@ def add_variable_context(request):
    
     
     return{
-        '
+        
         'settings': settings
     }
