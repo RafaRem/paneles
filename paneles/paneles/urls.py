@@ -21,11 +21,11 @@ from django.conf import settings
 from apps.home import urls
 
 from django.contrib.auth.decorators import login_required
-
+from apps.home.views import InicioView 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', include('apps.home.urls') ),
-   
+    url(r'.*/$',InicioView.as_view() )
 
 ]
 

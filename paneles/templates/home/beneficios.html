@@ -59,6 +59,13 @@ li:hover{
     <i class="fas fa-male"></i> <b> Total de Hombres:</b> <b style="color: #691C32;">{{hombres}}</b> <br>
     <i class="fas fa-female"></i><b> Total de Mujeres:</b> <b style="color: #691C32;">{{mujeres}}</b>
   </div>
+  <div class=" container mt-3" style="font-weight: bold;">
+    <h4>Población Objetivo</h4>
+    {% for pob in poblacion %}
+      <b> {{pob.poblacion}}</b> <b style="color: #691C32;">{{pob.cantidad}}</b>&nbsp; &nbsp; <i class="fas fa-circle" style="color: #691C32;"></i> &nbsp; &nbsp;
+    {% endfor %}
+     
+  </div>
   <div class="container text-center">
 
   

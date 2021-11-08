@@ -20,7 +20,7 @@ def email(request):
     send_mail( subject, message, email_from, recipient_list )
     return True
 
-
+#Registro del formulario
 class InicioView(View):
     def get(self,request):
         servicios = ServiciosSolicitud.objects.all()
@@ -60,6 +60,7 @@ class InicioView(View):
         print(url)
         return redirect(url)
 
+#Reimpreción de solicitudes 
 class ContratacionView(View):
     def get(self,request, ids=""):
         if ids != "0":
@@ -85,9 +86,23 @@ class ContratacionView(View):
            mensaje = True 
            return  render(request,  "home/proceso.html",{'id':"0", 'mns':mensaje})
 
+#Apartedo de estadistica
 class BeneficiosView(View):
+    def ObtenerEstadisticaPoblacion(self):
+        poblacion = []
+        poblacionObjetivo = PoblacionObjetivo.objects.all()
+        for pob in poblacionObjetivo:
+            cantidad = Solicitud.objects.filter(poblacion=pob)
+            poblacion.append({
+               'poblacion': pob,
+               'cantidad': len(cantidad) 
+            })
+        return poblacion
+
+
     def get(self,request):
         direcciones =Direccion.objects.all()
+        poblacionObjetivo = self.ObtenerEstadisticaPoblacion()
         total =0
         arraytotal = []
         mujeres = 0
@@ -114,11 +129,12 @@ class BeneficiosView(View):
         return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
         'total_solicitudes': len(solicitudes_total),
         'hombres': len(hombres),
-        'mujeres': len(mujeres)})
+        'mujeres': len(mujeres),
+        'poblacion': poblacionObjetivo})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
 
-
+#Editar datos generales del solicitante
 class EditView(View):
     def get(self,request,idsolicitud=""):
         if idsolicitud == "0":
