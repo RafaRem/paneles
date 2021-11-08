@@ -67,7 +67,7 @@ class ContratacionView(View):
             servicios = solicitud.servicios.all()
             folio = str(solicitud.pk).zfill(4)
             fecha = solicitud.created.date()
-            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': ids, 'folio': folio, 'fecha': fecha})
+            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': ids, 'folio': folio, 'fecha': fecha, 'carga': False})
         else: 
            return  render(request,  "home/proceso.html",{'id':ids})
     def post(self,request, ids=""):
@@ -80,7 +80,7 @@ class ContratacionView(View):
             servicios = solicitud.servicios.all()
             folio = "FB-"+str(solicitud.pk).zfill(6)
             fecha = solicitud.created.date()
-            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': solicitud.pk, 'folio': folio, 'fecha': fecha})   
+            return  render(request,  "home/proceso.html",{'solicitud':solicitud,'servicios': servicios, 'id': solicitud.pk, 'folio': folio, 'fecha': fecha, 'carga': False})   
         else: 
            mensaje = True 
            return  render(request,  "home/proceso.html",{'id':"0", 'mns':mensaje})
