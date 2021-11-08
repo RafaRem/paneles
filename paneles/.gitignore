@@ -1,0 +1,22 @@
+*.pyc
+__pycache__
+myvenv
+.vscode/
+db.sqlite3
+.env
+*.jpg
+*.jpeg
+*.png
+*.gif
+media/*
+!static/images/*
+/static/
+.DS_Store
+local_settings.py
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+/cache/
+# Folder config file
+Desktop.ini
+
