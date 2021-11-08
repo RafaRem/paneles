@@ -38,6 +38,18 @@ class PoblacionObjetivo(models.Model):
     def __str__(self):
         return self.nombre
 
+class Zona(models.Model):
+    nombre = models.CharField(  max_length=200, verbose_name="nombre")
+    estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)    
+    class Meta:
+        verbose_name = "Lugar de atención"
+        verbose_name_plural = "Lugares de atención"
+
+    def __str__(self):
+        return self.nombre
+
 
 class Solicitud(models.Model):
     nombre = models.CharField(  max_length=100, verbose_name="nombre")
@@ -52,6 +64,8 @@ class Solicitud(models.Model):
     sexo = models.CharField(  max_length=50, verbose_name="sexo", null=True)
     servicios = models.ManyToManyField(ServiciosSolicitud, blank=True)
     poblacion = models.ForeignKey(PoblacionObjetivo, on_delete=models.PROTECT, null=True)
+    zona = models.ForeignKey(Zona, on_delete=models.PROTECT, null=True)
+    detalles = models.TextField(verbose_name="Detalles", null=True)
     estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)    
@@ -61,3 +75,16 @@ class Solicitud(models.Model):
 
     def __str__(self):
         return self.nombre
+
+class Configuracion(models.Model):
+    carga = models.BooleanField(verbose_name=("Carga de solicitudes"), default=True)
+    zona = models.ForeignKey(Zona, on_delete=models.PROTECT, null=True, blank=True)
+    fecha = models.DateField(verbose_name="Fecha proxima atención", null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)    
+    class Meta:
+        verbose_name = "Configuración"
+        verbose_name_plural = "Configuraciones"
+
+    def __str__(self):
+        return str(self.id)

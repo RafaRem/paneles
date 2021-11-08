@@ -25,7 +25,7 @@ SECRET_KEY = 'zuqcp1&t9=@p5vc)9)_(=f63*r490b(bn-*bh)vj7anw_@_2-4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.9.35', '187.141.164.105', 'bienestar.ahome.gob.mx']
 
 
 # Application definition
@@ -66,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'paneles.context_processor.add_variable_context'
             ],
         },
     },

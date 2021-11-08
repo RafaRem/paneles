@@ -71,7 +71,7 @@ li:hover{
         <div class="col-4 " align="right"><img class="" src="{%static 'images/tAhome.png' %}" alt="Logo" width="auto" height="110px"></div>
       </div> 
     </div>
-    {% if carga %}
+    {% if configuracion.carga %}
       <div class="row mt-5">
 
         CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
@@ -188,7 +188,7 @@ li:hover{
       </button>
     </div>  
     {% else %}
-      <div class="text-center"><p style="font-size:40px;"> El registro se abrirá el próximo <b style="font-size:40px;">Sábado 13 de Noviembre</b>,  te esperamos en <b style="font-size:40px;">Lázaro Cárdenas</b>,  estaremos muy contentos en atenderte con nuestro  <br><b style="font-size:40px;">ESPÍRITU DE TRABAJO.</b>  </p> </div>
+      <div class="text-center"><p style="font-size:40px;"> El registro se abrirá el próximo <b style="font-size:40px;">Sábado {{configuracion.fecha}}</b>,  te esperamos en <b style="font-size:40px;">{{configuracion.zona}}</b>,  estaremos muy contentos en atenderte con nuestro  <br><b style="font-size:40px;">ESPÍRITU DE TRABAJO.</b>  </p> </div>
     {% endif %}        
     
 </form>

@@ -30,3 +30,17 @@ class PoblacionAdmin(admin.ModelAdmin):
     search_fields=['nombre']
 
 admin.site.register(PoblacionObjetivo,PoblacionAdmin)
+
+class ConfiguracionAdmin(admin.ModelAdmin):
+    list_display=['id']
+    list_display_links=['id']
+    search_fields=['id']
+
+admin.site.register(Configuracion,ConfiguracionAdmin)
+
+class ZonaAdmin(admin.ModelAdmin):
+    list_display=['id','nombre']
+    list_display_links=['id','nombre']
+    search_fields=['nombre']
+
+admin.site.register(Zona, ZonaAdmin)
