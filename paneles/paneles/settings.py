@@ -25,7 +25,7 @@ SECRET_KEY = 'zuqcp1&t9=@p5vc)9)_(=f63*r490b(bn-*bh)vj7anw_@_2-4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.9.35', '187.141.164.105', 'bienestar.ahome.gob.mx']
+ALLOWED_HOSTS = ['127.0.0.1','192.168.9.35', '187.141.164.105', 'bienestar.ahome.gob.mx']
 
 
 # Application definition
