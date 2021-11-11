@@ -14,7 +14,12 @@
 {% block extracss %}
 
 {% endblock extracss %}
-
+<style>
+  footer{
+    margin-top:auto; 
+  
+  }
+</style>
 {% block supercontent %}
 
 <header class="fixed-top">
@@ -29,20 +34,20 @@
   -webkit-box-shadow: 0 5px 4px #888888;
   -moz-box-shadow: 0 5px 4px #888888;
   box-shadow: 0 5px 4px #888888;" >
-    <a class="navbar-brand" href="{% url 'inicio' %}"> <img class="navbar-brand mr-5" src="{%static 'images/tAhome.png' %}" alt="Logo" width="65px" height="auto"></a>
+    <a class="navbar-brand" href="{% url 'inicio' %}"> <img class="navbar-brand mr-5" src="{%static 'images/tAhome.png' %}" alt="Logo" width="80px" height="auto"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item mr-3 resaltar">
-          <a class="nav-link" href="{% url 'inicio' %}">Registro <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{% url 'inicio' %}" style="font-weight: bold; color:black">Registro <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item mr-3 resaltar">
-          <a class="nav-link mr-3"  href= {% url "imprimir" ids="0" %} >Imprimir Solicitud</a>
+          <a class="nav-link mr-3"  href= {% url "imprimir" ids="0" %} style="font-weight: bold; color:black">Imprimir Solicitud</a>
         </li>
         <li class="nav-item mr-3 resaltar">
-          <a class="nav-link mr-3" href= {% url "beneficios" %} >Estadisticas</a>
+          <a class="nav-link mr-3" href= {% url "beneficios" %} style="font-weight: bold; color:black">Estadísticas</a>
         </li>
       </ul>
     </div>
@@ -52,7 +57,7 @@
 </header>
     {# Important content stuff here #}
     
-    <div class="container-fluid" style=" margin-bottom: 100px;">
+    <div class="container-fluid" style=" margin-bottom: 130px;">
 
     </div>
     {% block content %}
@@ -61,23 +66,23 @@
     
     <footer class="page-footer blue mt-3" style="background-color:#691C32 !important; color: white; "> <!--#3C5A4F !important; color: white; ">-->
       <!-- Copyright -->
-      <div class="footer-copyright  py-3">
+
+      <div class="container-fluid footer-copyright  py-3" style="background-color: #691C32; margin-bottom:0%">
         <div class="row ml-2">
           <div class="col-6" >
-              <p style="font-size: 17px;  margin:0%">Ubicacón</p>
-              <p style="font-size: 17px; margin:0%">Teléfono</p>
-              <p style="font-size: 17px;  margin:0%;">Correo eléctronico</p>
-              
-              <a style="font-size: 17px;  margin:0%; color:white" href="https://www.google.com/maps/d/u/0/viewer?mid=1OCLa-aikXOhydyFpFfnbT3IukIWxSFJ5&ll=25.77979047604683%2C-108.9894228429151&z=14" target="_blank">Localiza tu dependencia</a>
-            </p>
-          </div>
-          <div class="col-6">
-
-          </div>
+            <p style="font-size: 17px; margin:0% ">Ubicacón</p>
+            <p style="font-size: 17px; margin:0%">Teléfono</p>
+            <p style="font-size: 17px; margin:0%">Correo eléctronico</p>
+            
+            <a style="font-size: 17px;   color:white" href="https://www.google.com/maps/d/u/0/viewer?mid=1OCLa-aikXOhydyFpFfnbT3IukIWxSFJ5&ll=25.77979047604683%2C-108.9894228429151&z=14" target="_blank">Localiza tu dependencia</a>
+          </p>
         </div>
-        
-       
+        <div class="col-6">
+
+        </div>
+        </div>
       </div>
+      
       <div class="container-fluid" style="background-color: #4e1526; margin-bottom:0%">
         <div class="row ml-2">
           <div class="col-6">
