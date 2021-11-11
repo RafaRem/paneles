@@ -71,11 +71,12 @@ li:hover{
 {% endblock extracss %}
 
 {% block content%}
-<form action="" method="post" id="id_form_actividad">
-  {% csrf_token %}
-  <div class="container  contenedor" style="margin-top: 7%;"> 
+
+  <div class="container  contenedor mb-5" style="margin-top: 7%;"> 
     
     {% if configuracion.carga %}
+    <form action="" method="post" id="id_form_actividad">
+      {% csrf_token %}
       <div class="row mt-5">
 
         CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
@@ -135,12 +136,8 @@ li:hover{
         oninput="this.className = ''">
         Observación <br>
         <textarea class="form-control mb-3" name="observacion" id="observacion" cols="auto" rows="3"></textarea>
-
-        
-      
     </div>
-    </div>
-
+    
     <div class="text-center mt-5">
       <h3 >Servicios </h3>
       <div class="container" style="border: solid 2px black ; padding: 15px;">
@@ -202,12 +199,19 @@ li:hover{
       <button class="btn color-boton" id="id_btn_segunda_parte" type="submit">
         Registrar &nbsp;<i class="fas fa-check"></i>
       </button>
-    </div>  
+    </div> 
+ 
+  </form> 
+
     {% else %}
-      <div class="text-justify"><p style="font-size:40px;"> El registro se abrirá el próximo <b style="font-size:40px;">Sábado {{configuracion.fecha}}</b>,  te esperamos en <b style="font-size:40px;">{{configuracion.zona}}</b>,  estaremos muy contentos en atenderte con nuestro  <b style="font-size:40px;">ESPÍRITU DE TRABAJO.</b>  </p> </div>
-    {% endif %}        
     
-</form>
+      <div class="text-justify mb-5">
+        <p style="font-size:40px;"> El registro se abrirá el próximo <b style="font-size:40px;">Sábado {{configuracion.fecha}}</b>,  te esperamos en <b style="font-size:40px;">{{configuracion.zona}}</b>,  estaremos muy contentos en atenderte con nuestro  <b style="font-size:40px;">ESPÍRITU DE TRABAJO.</b>  </p> 
+      </div>
+    
+    {% endif %}        
+  </div>
+
 
 {% endblock content %}
 {% block extrascripts %}
