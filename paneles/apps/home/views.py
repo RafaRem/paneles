@@ -5,7 +5,7 @@ import datetime
 from datetime import date
 from django.urls import reverse
 from .models import *
-
+from django.db.models import Q
 #import Email
 from django.core.mail import send_mail 
 from django.conf import settings
@@ -22,6 +22,9 @@ def email(request):
 
 #Registro del formulario
 class InicioView(View):
+   
+
+
     def get(self,request):
         servicios = ServiciosSolicitud.objects.all()
         direcciones = Direccion.objects.all()
@@ -29,36 +32,55 @@ class InicioView(View):
         return  render(request,  "home/inicio.html",{'servicios':servicios,
         'direcciones':direcciones, 'poblaciones': poblaciones, 'carga': True} )
     def post(self,request):
-        solicitud = Solicitud()
-        solicitud.nombre = request.POST.get('nombre')
-        solicitud.appaterno = request.POST.get('paterno')
-        solicitud.apmaterno = request.POST.get('materno')
-        solicitud.curp = request.POST.get('curp')
-        solicitud.sexo = request.POST.get('curp')[10:11]
-        solicitud.estcivil = request.POST.get('estcivil')
-        solicitud.discapacidad = request.POST.get('discapacidad')
-        solicitud.domicilio = request.POST.get('domicilio')
-        solicitud.correo = request.POST.get('email')
-        solicitud.telefono = request.POST.get('telefono')
-        if request.POST.get('poblacion') != 0:
-            poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
-            solicitud.poblacion = poblacionO
-        solicitud.save()
-        #Servicios
+        verificacion = Solicitud.objects.filter(curp =request.POST.get('curp'), estatus=True) 
         
-        if request.POST.get('servicio') != "x":
-            servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
-            solicitud.servicios.add(servicio1)  
-        if request.POST.get('servicio2') != "x":
-            servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
-            solicitud.servicios.add(servicio2)
-        if request.POST.get('servicio3') != "x":
-            servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
-            solicitud.servicios.add(servicio3)
-        
-        url = reverse('imprimir', kwargs={'ids':solicitud.pk})
-        print(url)
-        return redirect(url)
+        if len(verificacion) == 0:
+            solicitud = Solicitud()
+            solicitud.nombre = request.POST.get('nombre')
+            solicitud.appaterno = request.POST.get('paterno')
+            solicitud.apmaterno = request.POST.get('materno')
+            solicitud.curp = request.POST.get('curp')
+            solicitud.sexo = request.POST.get('curp')[10:11]
+            solicitud.estcivil = request.POST.get('estcivil')
+            solicitud.discapacidad = request.POST.get('discapacidad')
+            solicitud.domicilio = request.POST.get('domicilio')
+            solicitud.calle = request.POST.get('calle')
+            solicitud.exterior = request.POST.get('exterior')
+            solicitud.codigo = request.POST.get('cp')
+            solicitud.correo = request.POST.get('email')
+            solicitud.telefono = request.POST.get('telefono')
+            solicitud.detalles = request.POST.get('observacion')
+            if request.POST.get('poblacion') != 0:
+                poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
+                solicitud.poblacion = poblacionO
+            solicitud.save()
+            #Servicios
+            
+            if request.POST.get('servicio') != "x":
+                servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
+                solicitud.servicios.add(servicio1)  
+            if request.POST.get('servicio2') != "x":
+                servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
+                solicitud.servicios.add(servicio2)
+            if request.POST.get('servicio3') != "x":
+                servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
+                solicitud.servicios.add(servicio3)
+            '''
+            familiar = FamiliaresView.ValidarFamiliar(paterno=request.POST.get('paterno'),sexo=request.POST.get('curp')[10:11],materno=request.POST.get('materno'),calle=request.POST.get('calle'),codigo=request.POST.get('cp'),exterior=request.POST.get('externo') )
+            print("familiar", len(familiar))
+            if len(familiar) > 0:
+                url = reverse('familia', kwargs={'ids':solicitud.pk})
+                print(url)
+                return redirect(url)
+            else:'''
+            url = reverse('imprimir', kwargs={'ids':solicitud.pk})
+            print(url)
+            return redirect(url)
+        else:
+            idVerificacion = verificacion[0]
+            url = reverse('duplicidad', kwargs={'ids':idVerificacion.pk})
+            print(url)
+            return redirect(url)
 
 #Reimpreción de solicitudes 
 class ContratacionView(View):
@@ -73,8 +95,7 @@ class ContratacionView(View):
            return  render(request,  "home/proceso.html",{'id':ids})
     def post(self,request, ids=""):
         curp = request.POST.get('curp')
-        print(curp)
-        solicitud = Solicitud.objects.filter(curp=curp)
+        solicitud = Solicitud.objects.filter(curp=curp, estatus=True)
         print(solicitud)
         if len(solicitud)>0:
             solicitud = solicitud[0]
@@ -92,17 +113,17 @@ class BeneficiosView(View):
         poblacion = []
         poblacionObjetivo = PoblacionObjetivo.objects.all()
         for pob in poblacionObjetivo:
-            cantidad = Solicitud.objects.filter(poblacion=pob)
+            cantidad = Solicitud.objects.filter(poblacion=pob, estatus=True)
             poblacion.append({
                'poblacion': pob,
                'cantidad': len(cantidad) 
             })
         return poblacion
 
-
     def get(self,request):
         direcciones =Direccion.objects.all()
         poblacionObjetivo = self.ObtenerEstadisticaPoblacion()
+        discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True)
         total =0
         arraytotal = []
         mujeres = 0
@@ -112,7 +133,7 @@ class BeneficiosView(View):
             array = []
             total =0
             for servicio in servicios:
-                query = Solicitud.objects.filter(servicios__id =servicio.pk) 
+                query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True) 
                 
                 array.append({
                     'cantidad': len(query),
@@ -123,14 +144,15 @@ class BeneficiosView(View):
             arraytotal.append({'direccion':direccion,
             'servicios':array,
             'total': total })
-            solicitudes_total = Solicitud.objects.all()
-            hombres = Solicitud.objects.filter(sexo='H')
-            mujeres = Solicitud.objects.filter(sexo='M')
+            solicitudes_total = Solicitud.objects.filter(estatus=True)
+            hombres = Solicitud.objects.filter(sexo='H',estatus=True)
+            mujeres = Solicitud.objects.filter(sexo='M',estatus=True)
         return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
         'total_solicitudes': len(solicitudes_total),
         'hombres': len(hombres),
         'mujeres': len(mujeres),
-        'poblacion': poblacionObjetivo})
+        'poblacion': poblacionObjetivo,
+        'discapacidades':len(discapacidades)})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
 
@@ -163,3 +185,48 @@ class EditView(View):
         url = reverse('imprimir', kwargs={'ids':solicitud.pk})
         print(url)
         return redirect(url)
+
+class DuplicidadView(View):
+    def get(self,request,ids=""):
+        solicitud = Solicitud.objects.get(pk=ids)
+        return  render(request,  "home/duplicidad.html",{'solicitud':solicitud} )
+    def post(self,request,ids=""):
+        solicitud = Solicitud.objects.get(pk=ids)
+        return  render(request,  "home/duplicidad.html",{'solicitud':solicitud} )
+
+class FamiliaresView(View):
+    def ValidarFamiliar(self,paterno, materno,sexo, calle, codigo, exterior):
+        familiares =[]
+        vcalle = False
+        vcodigo = False
+        vexterno = False
+        vapellido = False
+        solicitudes = Solicitud.objects.filter(estatus=True)
+        for solicitud in solicitudes:
+            verificacion = 0
+            if solicitud.exterior == exterior:
+                vexterno= True
+                verificacion += 1
+            if solicitud.calle == calle:
+                vcalle= True
+                verificacion += 1
+            if solicitud.codigo == codigo:
+                vcodigo=True
+                verificacion += 1
+            if solicitud.appaterno == paterno:
+                vapellido = True
+                verificacion += 1
+            print(verificacion)
+            if verificacion >= 3:
+                familiares.append({'solicitud':solicitud,'apellido':vapellido, 'codigo':vcodigo, 'calle':vcalle, 'exterior':vexterno})
+        
+        return familiares
+
+
+    def get(self,request,ids=""):
+        solicitud = Solicitud.objects.get(pk=ids)
+        familiar = self.ValidarFamiliar(paterno=solicitud.appaterno,sexo=solicitud.sexo,materno=solicitud.apmaterno,calle=solicitud.calle,codigo=solicitud.codigo,exterior=solicitud.exterior )
+        return  render(request,  "home/familiares.html",{'solicitud':solicitud,'familiares':familiar} )
+    def post(self,request,ids=""):
+        solicitud = Solicitud.objects.get(pk=ids)
+        return  render(request,  "home/duplicidad.html",{'solicitud':solicitud} )

@@ -1,0 +1,141 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block extracss %}
+<style>
+  * {
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+  a{
+    text-decoration: none !important;
+  }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .contenedor{ 
+        
+        margin-top: 250px !important;
+    }
+
+  }
+
+  @media (max-width: 768px) {
+    .contenedor{ 
+        
+        margin-top: 250px !important;
+    }
+
+  }
+
+  .img_content {
+    margin: 10px;
+    
+    line-height: 115px;
+    text-align: center;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+}
+
+li:hover{
+  border-bottom: 3px solid #691C32;
+  transition: border-color 1s ease;
+  
+}
+
+.color-boton{
+  background-color: #9A0E44 !important;
+  color: white;
+}
+
+.color-boton:hover{
+  background: #c0527c !important;
+  color: white;
+}
+
+</style>
+{% endblock extracss %}
+
+{% block content%}
+
+<div class="container contenedor text-justify" style="margin-top: 7%; width:90%">   
+  <div class="table-responsive">
+    <table id="id_tabla_actividades" class="table">
+        <thead class="color-boton" style="background-color: #691C32; color:white; font-weight:bold">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido paterno</th>
+                <th>Calle</th>
+                <th>Número exterior</th>
+                <th>Código postal</th>
+            </tr>
+        </thead>
+        <tbody class="bg-transparent">
+            {% for familiar in familiares %}
+                <tr>
+                    <td scope="row" style="font-weight:bold">{{familiar.solicitud.nombre}} {{familiar.solicitud.appaterno}} {{familiar.solicitud.apmaterno}}</td>
+                    <td  class="text-center">
+                      {% if familiar.apellido %}
+                        <i style="color: rgb(47, 255, 47);" class="fas fa-check-circle"></i>
+                      {% else %}
+                        <i style="color: rgb(255, 47, 47);" class="fas fa-times-circle"></i>
+                      {% endif %}</td>
+                    <td  class="text-center">
+                      {% if familiar.calle %}
+                        <i style="color: rgb(47, 255, 47);" class="fas fa-check-circle"></i>
+                      {% else %}
+                        <i style="color: rgb(255, 47, 47);" class="fas fa-times-circle"></i>
+                      {% endif %}</td>
+                    <td  class="text-center">
+                      {% if familiar.exterior %}
+                        <i style="color: rgb(47, 255, 47);" class="fas fa-check-circle"></i>
+                      {% else %}
+                        <i style="color: rgb(255, 47, 47);" class="fas fa-times-circle"></i>
+                      {% endif %}
+                    </td>
+                    <td class="text-center">
+                      {% if familiar.codigo %}
+                        <i style="color: rgb(47, 255, 47);" class="fas fa-check-circle"></i>
+                      {% else %}
+                        <i style="color: rgb(255, 47, 47);" class="fas fa-times-circle"></i>
+                      {% endif %}
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+   
+</div>
+
+{% endblock content %}
+{% block extrascripts %}
+<script src="{%static 'js/gijgo.min.js'%}" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script>
+      function mayus(e) {
+        e.value = e.value.toUpperCase();
+      }
+
+      $(document).ready(function () {
+
+      
+
+         })
+    </script>
+{% endblock %}

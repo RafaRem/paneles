@@ -58,7 +58,10 @@ class Solicitud(models.Model):
     curp = models.CharField(  max_length=50, verbose_name="CURP")
     estcivil = models.CharField(  max_length=50, verbose_name="estcivil")
     discapacidad = models.CharField(  max_length=50, verbose_name="discapacidad")
-    domicilio = models.CharField(  max_length=50, verbose_name="domicilio")
+    domicilio = models.CharField(  max_length=100, verbose_name="domicilio")
+    calle = models.CharField(  max_length=50, verbose_name="calle", null=True)
+    exterior = models.CharField(  max_length=50, verbose_name="exterior", null=True)
+    codigo = models.CharField(  max_length=50, verbose_name="código postal", null=True)
     correo = models.CharField(  max_length=200, verbose_name="correo")
     telefono = models.CharField(  max_length=200, verbose_name="teléfono")
     sexo = models.CharField(  max_length=50, verbose_name="sexo", null=True)
@@ -88,3 +91,4 @@ class Configuracion(models.Model):
 
     def __str__(self):
         return str(self.id)
+

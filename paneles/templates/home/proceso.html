@@ -39,8 +39,8 @@
 
 }
 
-.resaltar:hover{
-  border-bottom: 3px solid rgba(3, 250, 36, 0.904);
+li:hover{
+  border-bottom: 3px solid #691C32;
   transition: border-color 1s ease;
   
 }
@@ -62,7 +62,7 @@
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
   {% if id != "0" %}
     {% if configuracion.carga %}
-      <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'editar' idsolicitud=id%}">Editar</a></div>
+      <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'editar' idsolicitud=id%}">Editar <i class="fas fa-edit"></i></a></div>
     {% endif %}
   {% endif %}
   {% if id == "0" %}
@@ -74,7 +74,7 @@
         <div class="alert alert-warning d-flex align-items-center" role="alert">
           <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
           <div>
-            No se encontro salicitud con la CURP que busca
+            No se encontró solicitud con la CURP que busca.
           </div>
         </div>
         {% endif %} 
@@ -99,13 +99,14 @@
   
   {% else %}
   <div id="contento" calss="text-center" style="padding: 10px;">
-    <div class="row">
+    <div class="row" id="encabezado" >
       <div class="col-4"><img class="" src="{%static 'images/Ayuntamiento.jpg' %}" alt="Logo" width="auto" height="110px"></div>
       <div class="col-4" align="center">  <img class="" src="{%static 'images/bienestarlogo.png' %}" alt="Logo" width="300px" height="auto"></div>
       <div class="col-4 " align="right"><img class="" src="{%static 'images/tAhome.png' %}" alt="Logo" width="auto" height="110px"></div>
     </div>  
     <div class="mb-5 text-center" align="center" >
      <b ><h3>Feria del Bienestar</h3></b> 
+     <b><label>{{configuracion.zona}}</label></b>
     </div>
       <div class="row ml-2 ">
         <div class="col-6">
@@ -147,15 +148,20 @@
         <div class="col-6" align="right">
           
             Folio: {{folio}} <br>
-            Fecha: {{fecha}}
+            Fecha: {{fecha}} <br>
+            {% if solicitud.discapacidad != 'n' %}
+              <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
+            {% endif %}
         </div>
       </div>
-      <div class="mensaje ml-3 mt-3">
-       
-          {% if solicitud.discapacidad != 'n' %}
-            <img src="{%static 'images/discapacidades.png' %}" width="250px" height="auto" alt="">
-          {% endif %}
+
+      <hr>
+      <div class="row ml-2 ">
+        <div class="col">
+          <label for="" style="font-weight: bold;">Observación</label>
+          <p>{{solicitud.detalles}}</p>
         </div>
+      </div>      
       <div class="mensaje mt-5">
         {% for servicio in servicios %}
         <div class="container mt-5" style="border: solid 2px black; margin-bottom: 3rem !important; height: 200px">
@@ -202,6 +208,7 @@
         email_mostrar = true
 
         $("#terminos").hide()
+        $("#encabezado").hide()
         $(".correos").hide()
 
         $(".whatsapp").click(function() {
@@ -229,9 +236,11 @@
       
         $('#btn_pdf').click((event)=>{
           $("#terminos").show()
+          $("#encabezado").show()
           $.when( effect() ).done(function() {
               $("#btn_pdf").prop('disabled',false)
               $("#terminos").hide()
+              $("#encabezado").hide()
           });
 
 
