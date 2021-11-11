@@ -19,6 +19,9 @@
     margin-top:auto; 
   
   }
+  @media (max-width: 768px) {
+  .tex-p{font-size: 17px;}
+}
 </style>
 {% block supercontent %}
 
@@ -70,9 +73,9 @@
       <div class="container-fluid footer-copyright  py-3" style="background-color: #691C32; margin-bottom:0%">
         <div class="row ml-2">
           <div class="col-6" >
-            <p style="font-size: 17px; margin:0% ">Ubicacón</p>
-            <p style="font-size: 17px; margin:0%">Teléfono</p>
-            <p style="font-size: 17px; margin:0%">Correo eléctronico</p>
+            <p class="tex-p" style="font-size: 17px; margin:0% ">Ubicacón</p>
+            <p class="tex-p" style="font-size: 17px; margin:0%">Teléfono</p>
+            <p class="tex-p" style="font-size: 17px; margin:0%">Correo eléctronico</p>
             
             <a style="font-size: 17px;   color:white" href="https://www.google.com/maps/d/u/0/viewer?mid=1OCLa-aikXOhydyFpFfnbT3IukIWxSFJ5&ll=25.77979047604683%2C-108.9894228429151&z=14" target="_blank">Localiza tu dependencia</a>
           </p>
@@ -89,7 +92,7 @@
             <img src="{%static 'images/escudo negativo.png' %}" height="120px" width="auto" alt=""> 
           </div>
           <div class="col-6" style="text-align: right">
-            <p style="font-size: 17px;" >
+            <p class="tex-p" style="font-size: 17px;" >
               Copyright © 2021-2024 <br>
               
               H. Ayuntamiento de Ahome. <br>

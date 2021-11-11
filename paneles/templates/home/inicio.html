@@ -88,28 +88,28 @@ li:hover{
     <form action="" method="post" id="id_form_actividad">
       {% csrf_token %}
       <div class="row mt-5">
-        <div>
+        <div class="container">
           CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
           <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
           oninput="this.className = ''" required="" pattern="^([A-Z&]|[a-z&]{1})([AEIOU]|[aeiou]{1})([A-Z&]|[a-z&]{1})([A-Z&]|[a-z&]{1})([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([HM]|[hm]{1})([AS|as|BC|bc|BS|bs|CC|cc|CS|cs|CH|ch|CL|cl|CM|cm|DF|df|DG|dg|GT|gt|GR|gr|HG|hg|JC|jc|MC|mc|MN|mn|MS|ms|NT|nt|NL|nl|OC|oc|PL|pl|QT|qt|QR|qr|SP|sp|SL|sl|SR|sr|TC|tc|TS|ts|TL|tl|VZ|vz|YN|yn|ZS|zs|NE|ne]{2})([^A|a|E|e|I|i|O|o|U|u]{1})([^A|a|E|e|I|i|O|o|U|u]{1})([^A|a|E|e|I|i|O|o|U|u]{1})([0-9]{2})$">
           <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
         </div>
-      <div>
+        <div class="container">
         Nombre <br>  
         <input class="form-control mb-3" onkeyup="mayus(this);" name="nombre" placeholder="Nombre(s)"
         oninput="this.className = ''" required="">
       </div>
-      <div>
+      <div class="container">
         Apellido paterno <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="paterno" placeholder="Apellido paterno" 
         oninput="this.className = ''" required="">
       </div>
-      <div>
+      <div class="container">
         Apellido materno <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="materno" placeholder="Apellido materno" 
         oninput="this.className = ''" required="">
       </div>
-      <div>
+      <div class="container">
       Población objetivo <br>
       <select name="poblacion" class="select form-control mb-3" required="" id="poblacion"> 
         <option value="" selected="">---------</option> 
@@ -118,7 +118,7 @@ li:hover{
         {% endfor %}
       </select> 
     </div>
-      <div>
+    <div class="container">
         Estado civil <br>
         <select name="estcivil" class="select form-control mb-3" required="" id="est_civil"> 
           <option value="x" selected="">---------</option> 
@@ -128,7 +128,7 @@ li:hover{
           <option value="v" >Viudo</option> 
         </select> 
       </div>
-      <div>
+      <div class="container">
         Persona con discapacidad <br>
         <select name="discapacidad" class="select form-control mb-3" required="" id="discapacidad"> 
           <option value="n" selected="">No</option> 
@@ -138,37 +138,37 @@ li:hover{
           <option value="x" >Otro</option> 
         </select> 
       </div>
-      <div>
+      <div class="container">
         Calle <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="calle" placeholder="Calle" 
         oninput="this.className = ''" required>
       </div>
-      <div>
+      <div class="container">
         Número exterior <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="exterior" placeholder="Número Exterio o Poste" 
         oninput="this.className = ''" required>
       </div>
-      <div>
+      <div class="container">
         Localidad / Colonia <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="domicilio" placeholder="Localidad / Colonia" 
         oninput="this.className = ''" required>
       </div>
-      <div>
+      <div class="container">
         Código postal <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="cp" placeholder="Código Postal" 
         oninput="this.className = ''" required>
       </div>
-      <div>
+      <div class="container">
         Correo electrónico
         <input class="form-control mb-3" id="email" name="email" placeholder="Correo Electrónico" 
         oninput="this.className = ''">
       </div>
-      <div>
+      <div class="container">
         Teléfono <br>
         <input class="form-control mb-3" id="telefono" name="telefono" minlength="10"  maxlength="10" placeholder="Teléfono"
         oninput="this.className = ''">
       </div>
-      <div>
+      <div class="container">
         Observación <br>
         <textarea class="form-control mb-3" name="observacion" id="observacion" cols="auto" rows="3"></textarea>
       </div>    
