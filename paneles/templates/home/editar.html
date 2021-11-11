@@ -78,7 +78,6 @@ li:hover{
       <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
       oninput="this.className = ''" required=""  value="{{solicitud.curp}}">
      <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
-      
      Población Objetivo 
      <select name="poblacion" class="select form-control mb-3"   required="" id="poblacion"> 
        <option value="0" {% if solicitud.poblacion == None %}selected=""{% endif %}>---------</option> 
@@ -102,15 +101,26 @@ li:hover{
         <option value="v" {% if solicitud.discapacidad == "v" %}selected=""{% endif %}>Visual</option> 
         <option value="x" {% if solicitud.discapacidad == "x" %}selected=""{% endif %}>Otro</option> 
       </select> 
-      Domicilio <br>
-      <input class="form-control mb-3" value="{{solicitud.domicilio}}" onkeyup="mayus(this);" name="domicilio" placeholder="Domicilio" 
+      Localidad / Colonia <br>
+      <input class="form-control mb-3" value="{{solicitud.domicilio}}" onkeyup="mayus(this);" name="domicilio" placeholder="Localidad / Colonia" 
       oninput="this.className = ''" required>
-      Correo
+      Calle <br>
+      <input class="form-control mb-3" value="{{solicitud.calle}}" onkeyup="mayus(this);" name="calle" placeholder="Calle" 
+      oninput="this.className = ''" required>
+      Número exterior <br>
+      <input class="form-control mb-3" value="{{solicitud.exterior}}" onkeyup="mayus(this);" name="exterior" placeholder="Número Exterio o Poste" 
+      oninput="this.className = ''" required>
+      Código postal <br>
+      <input class="form-control mb-3" value="{{solicitud.codigo}}" onkeyup="mayus(this);" name="cp" placeholder="Código Postal" 
+      oninput="this.className = ''" required>
+      Correo electrónico
       <input class="form-control mb-3" value="{{solicitud.correo}}" id="email" name="email" placeholder="Correo Electrónico" 
       oninput="this.className = ''">
       Teléfono <br>
       <input class="form-control mb-3" value="{{solicitud.telefono}}" id="telefono" name="telefono" minlength="10"  maxlength="10" placeholder="Teléfono"
       oninput="this.className = ''">
+      Observación <br>
+      <textarea class="form-control mb-3" value="{{solicitud.detalles}}" name="observacion" id="observacion" cols="auto" rows="3"></textarea>
 
     
   </div>

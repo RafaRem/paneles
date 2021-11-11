@@ -175,8 +175,12 @@ class EditView(View):
         solicitud.estcivil = request.POST.get('estcivil')
         solicitud.discapacidad = request.POST.get('discapacidad')
         solicitud.domicilio = request.POST.get('domicilio')
+        solicitud.calle = request.POST.get('calle')
+        solicitud.exterior = request.POST.get('exterior')
+        solicitud.codigo = request.POST.get('cp')
         solicitud.correo = request.POST.get('email')
         solicitud.telefono = request.POST.get('telefono')
+        solicitud.detalles = request.POST.get('observacion')
         if request.POST.get('poblacion') != 0:
             poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
             solicitud.poblacion = poblacionO
