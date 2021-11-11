@@ -34,10 +34,20 @@
 
   @media (max-width: 768px) {
     .contenedor{ 
-        width: 80% !important;
+        width: 90% !important;
         margin-top: 85px !important;
     }
 
+    #activacion_registro{
+      font-size: 20px !important;
+    }
+    .negrita{
+      font-size: 20px !important;
+    }
+
+    .activacion{
+      margin-top: 200px !important;
+    }
   }
   .img_content {
     margin: 10px;
@@ -72,7 +82,7 @@ li:hover{
 
 {% block content%}
 
-  <div class="container  contenedor mb-5" style="margin-top: 7%;"> 
+  <div class="container-fluid  contenedor mb-5" style="margin-top: 7%;"> 
     
     {% if configuracion.carga %}
     <form action="" method="post" id="id_form_actividad">
@@ -205,8 +215,8 @@ li:hover{
 
     {% else %}
     
-      <div class="text-justify mb-5">
-        <p style="font-size:40px;"> El registro se abrirá el próximo <b style="font-size:40px;">Sábado {{configuracion.fecha}}</b>,  te esperamos en <b style="font-size:40px;">{{configuracion.zona}}</b>,  estaremos muy contentos en atenderte con nuestro  <b style="font-size:40px;">ESPÍRITU DE TRABAJO.</b>  </p> 
+      <div class="text-justify mb-5 activacion">
+        <p id="activacion_registro" style="font-size:40px;"> El registro se abrirá el próximo <b class="negrita" style="font-size:40px;">Sábado {{configuracion.fecha}}</b>,  te esperamos en <b class="negrita" style="font-size:40px;">{{configuracion.zona}}</b>,  estaremos muy contentos en atenderte con nuestro  <b class="negrita" style="font-size:40px;">ESPÍRITU DE TRABAJO.</b>  </p> 
       </div>
     
     {% endif %}        
