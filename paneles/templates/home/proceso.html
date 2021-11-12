@@ -178,17 +178,22 @@ li:hover{
         {% for servicio in servicios %}
         
         <div class="container" {% if forloop.counter == 3 %}  
-            style="border: solid 2px black; height: 185px"
+            style="border: solid 2px black; height: 175px"
           {% else %}
             style="border: solid 2px black; margin-bottom: 3rem !important; height: 175px"
           {% endif %}>
           
           <div class="row">
-            <div class="col-md-8">
+            <div {% if servicio.seguimiento %}class="col-8" {% else %}class="col-12" {% endif %}>
               <b> <h3> Servicio {{ forloop.counter }} </h3></b>
               <p style="font-size: 25px !important; margin:0%">Dirección: {{servicio.direccion}}</p>
               <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
+            </div> 
+            {% if servicio.seguimiento %}
+            <div class="col-4 text-center">
+                <p  style="font-size: 20px !important; ">Este servicio requiere de un seguimiento por parte de la dependencia </p>
             </div>
+            {% endif %}
           </div>
         </div>
         {% endfor %}

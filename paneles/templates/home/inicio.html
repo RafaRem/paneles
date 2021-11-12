@@ -265,8 +265,9 @@ li:hover{
       }
 
       $(document).ready(function () {
+        var solicitudes = '{{solicitudes|escapejs}}';
+        solicitudes = JSON.parse(solicitudes);
         
-
         $('#direccion').change((event) => {
           const dependencia_id = event.target.value;
           let programasOperativosItems = document.querySelectorAll(
@@ -331,13 +332,30 @@ li:hover{
         });
         $('#id_fecha').attr('readonly',true)
         
-      
-    /*la validación de la composición de la curp esta en el codigo,
-      aqui solo se valida si cumple con 18 caracteres y este compuesta por
-      la estructura de una CURP, se realiza validación para saber si es 
-      mujer
-      
-      */
+        $("#curp").on('blur',function(){ 
+          pass = document.getElementById('curp').value;
+          
+            for(solicitud of solicitudes){
+              if(pass == solicitud){
+                Swal.fire({
+                  title: 'Ya existe una solicitud con la CURP '+pass,
+                  icon: 'warning',
+                  confirmButtonColor: '#3085d6',
+                  confirmButtonText: 'Entiendo'
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    document.getElementById("curp").focus();
+                  }
+                })
+                
+                $('#curp').val('');
+                document.getElementById("curp").focus();
+                break;
+              }
+
+            }
+
+        }); 
       
 
         

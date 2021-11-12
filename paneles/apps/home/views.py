@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponse, redirect
-
+import json
 from django.views.generic import  View
 import datetime
 from datetime import date
@@ -22,18 +22,24 @@ def email(request):
 
 #Registro del formulario
 class InicioView(View):
-   
-
-
+    def curps(self):
+        array=[]
+        solicitudes = Solicitud.objects.filter(estatus=True)
+        for solicitud in solicitudes:
+            array.append([solicitud.curp])
+        return array
     def get(self,request):
-        servicios = ServiciosSolicitud.objects.all()
+        servicios = ServiciosSolicitud.objects.filter(estatus=True)
+        solicitudes = self.curps()
+        solicitudes = json.dumps(solicitudes)
         direcciones = Direccion.objects.all()
         poblaciones = PoblacionObjetivo.objects.all()
         return  render(request,  "home/inicio.html",{'servicios':servicios,
-        'direcciones':direcciones, 'poblaciones': poblaciones, 'carga': True} )
+        'direcciones':direcciones, 'poblaciones': poblaciones, 'solicitudes':solicitudes} )
+    
     def post(self,request):
         verificacion = Solicitud.objects.filter(curp =request.POST.get('curp'), estatus=True) 
-        
+        configuracion = Configuracion.objects.get(pk=1)
         if len(verificacion) == 0:
             solicitud = Solicitud()
             solicitud.nombre = request.POST.get('nombre')
@@ -50,6 +56,7 @@ class InicioView(View):
             solicitud.correo = request.POST.get('email')
             solicitud.telefono = request.POST.get('telefono')
             solicitud.detalles = request.POST.get('observacion')
+            solicitud.zona = configuracion.zona
             if request.POST.get('poblacion') != 0:
                 poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
                 solicitud.poblacion = poblacionO
