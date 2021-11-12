@@ -68,7 +68,7 @@ li:hover{
     {% endif %}
   {% endif %}
   {% if id == "0" %}
-  <div class=" ml-3 mr-3" id="contento">
+  <div class=" ml-3 mr-3" >
     <form action="" method="post" id="id_form_actividad">
       {% csrf_token %}
       <div class="container " style="margin-top: 7%;"> 
@@ -146,6 +146,8 @@ li:hover{
             Soltero
           {% elif solicitud.estcivil == 'c' %} 
             Casado
+          {% elif solicitud.estcivil == 'u' %} 
+            Unión libre
           {% elif solicitud.estcivil == 'd' %} 
             Divorsiado
           {% elif solicitud.estcivil == 'v' %} 
@@ -155,7 +157,7 @@ li:hover{
           Telefono: {{solicitud.telefono}} <br>
           Correo: {{solicitud.correo}} <br>
         </div>
-        <div class="col-6" align="right" style="font-size: 17px;">
+        <div class="col-6" align="right">
           
             Folio: {{folio}} <br>
             Fecha: {{fecha}} <br>
@@ -172,23 +174,28 @@ li:hover{
           <p>{{solicitud.detalles}}</p>
         </div>
       </div>      
-      <div class="mensaje mt-5">
+      <hr>
         {% for servicio in servicios %}
-        <div class="container mt-3" style="border: solid 2px black; margin-bottom: 3rem !important; height: 200px">
+        
+        <div class="container" {% if forloop.counter == 3 %}  
+            style="border: solid 2px black; height: 185px"
+          {% else %}
+            style="border: solid 2px black; margin-bottom: 3rem !important; height: 175px"
+          {% endif %}>
           
           <div class="row">
             <div class="col-md-8">
               <b> <h3> Servicio {{ forloop.counter }} </h3></b>
-              <p style="font-size: 25px !important;">Dirección: {{servicio.direccion}}</p>
+              <p style="font-size: 25px !important; margin:0%">Dirección: {{servicio.direccion}}</p>
               <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
             </div>
           </div>
         </div>
         {% endfor %}
-      </div>
+     
       <br>
-
-      <div class="" id="terminos" align="center" > <label for="" style="border-top:solid 2px black;">Acepto términos y condiciones</label> </div>
+      <br>
+      <div class="mt-3" id="terminos" align="center" > <label for="" style="border-top:solid 2px black;">Acepto términos y condiciones</label> </div>
   </div>
 
   <button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir servicios <i class="fas fa-file-download"></i></button>

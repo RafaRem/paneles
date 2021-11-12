@@ -17,6 +17,7 @@ class ServiciosSolicitud(models.Model):
     nombre = models.CharField(  max_length=200, verbose_name="nombre")
     direccion = models.ForeignKey(Direccion, on_delete=models.PROTECT)
     estatus = models.BooleanField(verbose_name=("Estatus"), default=True)
+    seguimiento = models.BooleanField(verbose_name=("¿Necesita seguimiento?"), default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)    
     class Meta:

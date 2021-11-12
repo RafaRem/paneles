@@ -89,28 +89,28 @@ li:hover{
       {% csrf_token %}
       <div class="row mt-5">
         <div class="container">
-          CURP &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>
+        CURP &nbsp;<samp style="color:#9A0E44">*</samp> &nbsp; &nbsp; &nbsp; &nbsp;<br>
           <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
           oninput="this.className = ''" required="" pattern="^([A-Z&]|[a-z&]{1})([AEIOU]|[aeiou]{1})([A-Z&]|[a-z&]{1})([A-Z&]|[a-z&]{1})([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([HM]|[hm]{1})([AS|as|BC|bc|BS|bs|CC|cc|CS|cs|CH|ch|CL|cl|CM|cm|DF|df|DG|dg|GT|gt|GR|gr|HG|hg|JC|jc|MC|mc|MN|mn|MS|ms|NT|nt|NL|nl|OC|oc|PL|pl|QT|qt|QR|qr|SP|sp|SL|sl|SR|sr|TC|tc|TS|ts|TL|tl|VZ|vz|YN|yn|ZS|zs|NE|ne]{2})([^A|a|E|e|I|i|O|o|U|u]{1})([^A|a|E|e|I|i|O|o|U|u]{1})([^A|a|E|e|I|i|O|o|U|u]{1})([0-9]{2})$">
           <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
         </div>
         <div class="container">
-        Nombre <br>  
+        Nombre <samp style="color:#9A0E44">*</samp><br>  
         <input class="form-control mb-3" onkeyup="mayus(this);" name="nombre" placeholder="Nombre(s)"
         oninput="this.className = ''" required="">
       </div>
       <div class="container">
-        Apellido paterno <br>
+        Apellido paterno <samp style="color:#9A0E44">*</samp> <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="paterno" placeholder="Apellido paterno" 
         oninput="this.className = ''" required="">
       </div>
       <div class="container">
-        Apellido materno <br>
+        Apellido materno<samp style="color:#9A0E44">*</samp> <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="materno" placeholder="Apellido materno" 
         oninput="this.className = ''" required="">
       </div>
       <div class="container">
-      Población objetivo <br>
+      Población objetivo <samp style="color:#9A0E44">*</samp> <br>
       <select name="poblacion" class="select form-control mb-3" required="" id="poblacion"> 
         <option value="" selected="">---------</option> 
         {% for poblacion in poblaciones %}
@@ -119,17 +119,18 @@ li:hover{
       </select> 
     </div>
     <div class="container">
-        Estado civil <br>
+        Estado civil <samp style="color:#9A0E44">*</samp> <br>
         <select name="estcivil" class="select form-control mb-3" required="" id="est_civil"> 
           <option value="x" selected="">---------</option> 
           <option value="s" >Soltero</option> 
+          <option value="u" >Unión libre</option> 
           <option value="c" >Casado</option> 
           <option value="d" >Divorciado</option> 
           <option value="v" >Viudo</option> 
         </select> 
       </div>
       <div class="container">
-        Persona con discapacidad <br>
+        Persona con discapacidad <samp style="color:#9A0E44">*</samp><br>
         <select name="discapacidad" class="select form-control mb-3" required="" id="discapacidad"> 
           <option value="n" selected="">No</option> 
           <option value="o" >Auditiva</option> 
@@ -143,22 +144,22 @@ li:hover{
         </select> 
       </div>
       <div class="container">
-        Calle <br>
+        Calle <samp style="color:#9A0E44">*</samp><br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="calle" placeholder="Calle" 
         oninput="this.className = ''" required>
       </div>
       <div class="container">
-        Número exterior <br>
+        Número exterior <samp style="color:#9A0E44">*</samp><br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="exterior" placeholder="Número Exterio o Poste" 
         oninput="this.className = ''" required>
       </div>
       <div class="container">
-        Localidad / Colonia <br>
+        Localidad / Colonia<samp style="color:#9A0E44">*</samp> <br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="domicilio" placeholder="Localidad / Colonia" 
         oninput="this.className = ''" required>
       </div>
       <div class="container">
-        Código postal <br>
+        Código postal <samp style="color:#9A0E44">*</samp><br>
         <input class="form-control mb-3" onkeyup="mayus(this);" name="cp" placeholder="Código Postal" 
         oninput="this.className = ''" required>
       </div>
@@ -181,7 +182,7 @@ li:hover{
     <div class="text-center mt-5">
       <h3 >Servicios </h3>
       <div class="container" style="border: solid 2px black ; padding: 15px;">
-        <h5>Servicio 1</h5>
+        <h5>Servicio 1 <samp style="color:#9A0E44">*</samp></h5>
         <select name="direccion" class="select form-control"  id="direccion" required> 
           <option value="" selected="">---------</option> 
           {% for direccion in direcciones %}

@@ -3,9 +3,9 @@ from .models import *
 
 # Register your models here.
 class ServiciosAdmin(admin.ModelAdmin):
-    list_display=['id','nombre']
+    list_display=['id','nombre','direccion']
     list_display_links=['id','nombre']
-    search_fields=['nombre']
+    search_fields=['nombre','direccion__nombre']
 
 admin.site.register(ServiciosSolicitud,ServiciosAdmin)
 
@@ -41,6 +41,6 @@ admin.site.register(Configuracion,ConfiguracionAdmin)
 class ZonaAdmin(admin.ModelAdmin):
     list_display=['id','nombre']
     list_display_links=['id','nombre']
-    search_fields=['nombre']
+    search_fields=['nombre',]
 
 admin.site.register(Zona, ZonaAdmin)
