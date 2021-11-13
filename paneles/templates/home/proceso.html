@@ -190,8 +190,10 @@ li:hover{
               <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
             </div> 
             {% if servicio.seguimiento %}
-            <div class="col-4 text-center">
-                <p  style="font-size: 20px !important; ">Este servicio requiere de un seguimiento por parte de la dependencia </p>
+            <div class="col-4" style="display:flex;
+            justify-content: center;
+            align-items: center;">
+                <p  style="font-size: 17px !important; font-weight:bold">Este servicio está sujeto para su aprobación mediante un proceso de verificación y/o disponibilidad. </p>
             </div>
             {% endif %}
           </div>
