@@ -142,7 +142,7 @@ class BeneficiosView(View):
             array = []
             total =0
             for servicio in servicios:
-                query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True, , zona=zona.zona) 
+                query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True,  zona=zona.zona) 
                 
                 array.append({
                     'cantidad': len(query),
