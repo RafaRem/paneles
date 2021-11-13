@@ -119,8 +119,9 @@ class BeneficiosView(View):
     def ObtenerEstadisticaPoblacion(self):
         poblacion = []
         poblacionObjetivo = PoblacionObjetivo.objects.all()
+        zona = Configuracion.objects.get(pk=1)
         for pob in poblacionObjetivo:
-            cantidad = Solicitud.objects.filter(poblacion=pob, estatus=True)
+            cantidad = Solicitud.objects.filter(poblacion=pob, estatus=True, zona=zona.zona)
             poblacion.append({
                'poblacion': pob,
                'cantidad': len(cantidad) 
@@ -141,7 +142,7 @@ class BeneficiosView(View):
             array = []
             total =0
             for servicio in servicios:
-                query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True) 
+                query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True, , zona=zona.zona) 
                 
                 array.append({
                     'cantidad': len(query),
@@ -152,9 +153,9 @@ class BeneficiosView(View):
             arraytotal.append({'direccion':direccion,
             'servicios':array,
             'total': total })
-            solicitudes_total = Solicitud.objects.filter(estatus=True)
-            hombres = Solicitud.objects.filter(sexo='H',estatus=True)
-            mujeres = Solicitud.objects.filter(sexo='M',estatus=True)
+            solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona.zona)
+            hombres = Solicitud.objects.filter(sexo='H',estatus=True, zona=zona.zona)
+            mujeres = Solicitud.objects.filter(sexo='M',estatus=True, zona=zona.zona)
         return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
         'total_solicitudes': len(solicitudes_total),
         'hombres': len(hombres),
