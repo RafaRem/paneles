@@ -131,7 +131,7 @@ class BeneficiosView(View):
         direcciones =Direccion.objects.all()
         poblacionObjetivo = self.ObtenerEstadisticaPoblacion()
         zona = Configuracion.objects.get(pk=1)
-        discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona)
+        discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona.zona)
         total =0
         arraytotal = []
         mujeres = 0
