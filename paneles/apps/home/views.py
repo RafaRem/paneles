@@ -137,12 +137,6 @@ class BeneficiosView(View):
 
     def get(self,request,idz="0"):
         direcciones =Direccion.objects.all()
-        solicitudesParedones = Solicitud.objects.all()
-        for solicitudd in solicitudesParedones:
-            if solicitudd.pk <= 250:
-                paredones = Zona.objects.get(pk=1)
-                solicitudd.zona = paredones 
-                solicitudd.save()
         poblacionObjetivo = self.ObtenerEstadisticaPoblacion(idz=idz)
         if idz == "0":
             zona = Configuracion.objects.get(pk=1)
