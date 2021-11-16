@@ -91,7 +91,8 @@ li:hover{
     <div class="row rowmin justify-content-center" style="width: 45%; border-bottom: 1px solid #691C32" >
    Cambiar de Localidad <samp style="color:#9A0E44"></samp> <br>
    <select name="localidad" class="select form-control mb-3" required="" id="id_zona"> 
-     <option value="0" selected="">Todas</option> 
+     <option value="0" selected="" disabled>Seleccione una Localidad</option> 
+     <option value="0" >TODAS</option> 
      {% for zona in zonas %}
        <option value="{{zona.pk}}" >{{zona.nombre}}</option>
      {% endfor %}

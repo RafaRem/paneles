@@ -180,8 +180,6 @@ class BeneficiosView(View):
                 solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona)
                 hombres = Solicitud.objects.filter(sexo='H',estatus=True, zona=zona)
                 mujeres = Solicitud.objects.filter(sexo='M',estatus=True, zona=zona)
-                
-            
         return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
         'total_solicitudes': len(solicitudes_total),
         'hombres': len(hombres),
