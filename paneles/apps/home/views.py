@@ -116,52 +116,85 @@ class ContratacionView(View):
 
 #Apartedo de estadistica
 class BeneficiosView(View):
-    def ObtenerEstadisticaPoblacion(self):
+    def ObtenerEstadisticaPoblacion(self, idz):
         poblacion = []
         poblacionObjetivo = PoblacionObjetivo.objects.all()
-        zona = Configuracion.objects.get(pk=1)
+        if idz == "0":
+            zona = Configuracion.objects.get(pk=1)
+            zona = zona.zona
+        else:
+            zona = Zona.objects.get(pk=idz)
         for pob in poblacionObjetivo:
-            cantidad = Solicitud.objects.filter(poblacion=pob, estatus=True, zona=zona.zona)
+            if idz == "0":
+                cantidad = Solicitud.objects.filter(poblacion=pob, estatus=True)
+            else:
+                cantidad = Solicitud.objects.filter(poblacion=pob, estatus=True, zona=zona)
             poblacion.append({
                'poblacion': pob,
                'cantidad': len(cantidad) 
             })
         return poblacion
 
-    def get(self,request):
+    def get(self,request,idz="0"):
         direcciones =Direccion.objects.all()
-        poblacionObjetivo = self.ObtenerEstadisticaPoblacion()
-        zona = Configuracion.objects.get(pk=1)
-        discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona.zona)
+        solicitudesParedones = Solicitud.objects.all()
+        for solicitudd in solicitudesParedones:
+            if solicitudd.pk <= 250:
+                paredones = Zona.objects.get(pk=1)
+                solicitudd.zona = paredones 
+                solicitudd.save()
+        poblacionObjetivo = self.ObtenerEstadisticaPoblacion(idz=idz)
+        if idz == "0":
+            zona = Configuracion.objects.get(pk=1)
+            zona = zona.zona
+        else:
+            zona = Zona.objects.get(pk=idz)
+
+        print(zona)
+        discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona)
         total =0
         arraytotal = []
         mujeres = 0
         hombres = 0
+    
+        zonas = Zona.objects.all()
         for direccion in direcciones:
             servicios = ServiciosSolicitud.objects.filter(direccion= direccion)
             array = []
             total =0
+            
             for servicio in servicios:
-                query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True,  zona=zona.zona) 
-                
+                if idz == "0":
+                    query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True) 
+                else:
+                    query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True, zona=zona) 
                 array.append({
                     'cantidad': len(query),
                     'servicio': servicio
                 })
                 total += len(query)
-            
+                print(array)
             arraytotal.append({'direccion':direccion,
             'servicios':array,
             'total': total })
-            solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona.zona)
-            hombres = Solicitud.objects.filter(sexo='H',estatus=True, zona=zona.zona)
-            mujeres = Solicitud.objects.filter(sexo='M',estatus=True, zona=zona.zona)
+
+            if idz == "0":
+                solicitudes_total = Solicitud.objects.filter(estatus=True)
+                hombres = Solicitud.objects.filter(sexo='H',estatus=True)
+                mujeres = Solicitud.objects.filter(sexo='M',estatus=True)
+            else:
+                solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona)
+                hombres = Solicitud.objects.filter(sexo='H',estatus=True, zona=zona)
+                mujeres = Solicitud.objects.filter(sexo='M',estatus=True, zona=zona)
+                
+            
         return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
         'total_solicitudes': len(solicitudes_total),
         'hombres': len(hombres),
         'mujeres': len(mujeres),
         'poblacion': poblacionObjetivo,
-        'discapacidades':len(discapacidades)})
+        'discapacidades':len(discapacidades),
+        'zonas': zonas})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
 

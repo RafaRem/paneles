@@ -30,6 +30,10 @@
       padding-top: 3%;
       margin-bottom: 6%;
     }
+    .cont_row{
+      
+      margin-bottom: 2%;
+    }
   }
 
   @media (max-width: 768px) {
@@ -49,6 +53,11 @@
       margin-left: 5% !important;
       margin-bottom: 6%;
       
+    }
+    .cont_row{
+      width: 100%;
+      margin-left: 5% !important;
+      margin-bottom: 6%;
     }
   }
   .img_content {
@@ -77,7 +86,19 @@ li:hover{
   <div class="mt-5" style="background-color: #ebecec; padding:30px; border-radius:18px;">
    <b> <h2 class="text-center"  style="font-weight: bold;">Estadística de Solicitudes</h2></b>
    <br>
-  
+
+   <div class="container-fluid justify-content-center cont_row" style="align-items: center; margin-left:28%;">
+    <div class="row rowmin justify-content-center" style="width: 45%; border-bottom: 1px solid #691C32" >
+   Cambiar de Localidad <samp style="color:#9A0E44"></samp> <br>
+   <select name="localidad" class="select form-control mb-3" required="" id="id_zona"> 
+     <option value="0" selected="">Todas</option> 
+     {% for zona in zonas %}
+       <option value="{{zona.pk}}" >{{zona.nombre}}</option>
+     {% endfor %}
+   </select> 
+    </div>
+   </div>
+   
   <!--Estadistica general de hombres mujeres y discapacitados-->
   <div class="container-fluid justify-content-center cont_rowmin" style="align-items: center; margin-left:28%;">
    <div class="row rowmin justify-content-center" style="width: 45%; border-bottom: 1px solid #691C32" >
@@ -179,6 +200,16 @@ li:hover{
     <script>
       
       $(document).ready(function () {
+        $( "#id_zona" ).change(function() {
+          var url = window.location.toString()
+          var urlsplit= url.split("/");
+          var localidad = document.getElementById("id_zona").value;
+      
+          var URLactual = "/estadisticas/servicios/"+localidad;
+          window.location.href = URLactual;   
+      }); 
+
+
         tel_mostrar = true
         email_mostrar = true
 
