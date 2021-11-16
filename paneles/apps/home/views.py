@@ -145,7 +145,7 @@ class BeneficiosView(View):
             zona = Zona.objects.get(pk=idz)
 
         print(zona)
-        discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona)
+        
         total =0
         arraytotal = []
         mujeres = 0
@@ -176,7 +176,9 @@ class BeneficiosView(View):
                 solicitudes_total = Solicitud.objects.filter(estatus=True)
                 hombres = Solicitud.objects.filter(sexo='H',estatus=True)
                 mujeres = Solicitud.objects.filter(sexo='M',estatus=True)
+                discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True)
             else:
+                discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona)
                 solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona)
                 hombres = Solicitud.objects.filter(sexo='H',estatus=True, zona=zona)
                 mujeres = Solicitud.objects.filter(sexo='M',estatus=True, zona=zona)
