@@ -189,7 +189,7 @@ class BeneficiosView(View):
                 hombres = Solicitud.objects.filter(sexo='H',estatus=True)
                 mujeres = Solicitud.objects.filter(sexo='M',estatus=True)
                 discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True)
-                localidad = 'TODAS'
+                localidad = 'Todas las Dependencias'
             else:
                 discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona)
                 solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona)
@@ -350,7 +350,7 @@ class ImprimirView(View):
                 hombres = Solicitud.objects.filter(sexo='H',estatus=True)
                 mujeres = Solicitud.objects.filter(sexo='M',estatus=True)
                 discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True)
-                localidad = 'TODAS'
+                localidad = 'Todas las Dependencias'
             else:
                 discapacidades = Solicitud.objects.filter(~Q(discapacidad='n'), estatus=True, zona=zona)
                 solicitudes_total = Solicitud.objects.filter(estatus=True, zona=zona)

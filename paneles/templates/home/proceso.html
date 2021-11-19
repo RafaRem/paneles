@@ -110,56 +110,109 @@ li:hover{
       <div class="col-4" align="center">  <img class="" src="{%static 'images/bienestarlogo.png' %}" alt="Logo" width="250px" height="auto"></div>
       <div class="col-4 " align="right"><img class="" src="{%static 'images/tAhome.png' %}" alt="Logo" width="auto" height="90px"></div>
     </div>  
-    <div class="mb-3 text-center" align="center" >
+    <div class="mb-3 text-center" align="center" style="">
      <b ><h3>Feria del Bienestar</h3></b> 
-     <b><label>{{configuracion.zona}}</label></b>
+     <b><label style="font-weight: bold;">{{configuracion.zona}}</label></b>
     </div>
       <div class="row ml-2 ">
         <div class="col-6">
-          Nombre: {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}} <br>
-          CURP: {{solicitud.curp}} <br>
-          {% if solicitud.sexo == 'H' %}
-            Sexo: Hombre <br>
-          {% elif solicitud.sexo == 'M' %}
-            Sexo: Mujer <br>
-          {% endif %}
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              Nombre
+            </div>
+            <div class="col-7">
+              {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              CURP
+            </div>
+            <div class="col-7">
+              {{solicitud.curp}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;" >
+              Sexo
+            </div>
+            <div class="col-7">
+              {% if solicitud.sexo == 'H' %}
+                Hombre
+              {% elif solicitud.sexo == 'M' %}
+                Mujer
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              Discapacidad
+            </div>
+            <div class="col-7">
+              {% if solicitud.discapacidad == 'n' %}
+              No
+            {% elif solicitud.discapacidad == 'o' %} 
+              Auditiva
+            {% elif solicitud.discapacidad == 'm' %} 
+              Motriz
+            {% elif solicitud.discapacidad == 'v' %} 
+              Vista
+            {% elif solicitud.discapacidad == 'i' %} 
+              Intelectual
+            {% elif solicitud.discapacidad == 'a' %} 
+              Verbal
+            {% elif solicitud.discapacidad == 'c' %} 
+              Autismo
+            {% elif solicitud.discapacidad == 's' %} 
+              Síndrome de Down
+            {% elif solicitud.discapacidad == 'x' %} 
+              Otro
+            {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              Estado Civil
+            </div>
+            <div class="col-7">
+              {% if solicitud.estcivil == 's' %}
+              Soltero
+            {% elif solicitud.estcivil == 'c' %} 
+              Casado
+            {% elif solicitud.estcivil == 'u' %} 
+              Unión libre
+            {% elif solicitud.estcivil == 'd' %} 
+              Divorsiado
+            {% elif solicitud.estcivil == 'v' %} 
+              Viudo
+            {% endif %}  
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              Domicilio
+            </div>
+            <div class="col-7">
+              {{solicitud.domicilio}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              Telefono
+            </div>
+            <div class="col-7">
+              {{solicitud.telefono}} 
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-3" style="font-weight: bold;">
+              Correo
+            </div>
+            <div class="col-7">
+              {{solicitud.correo}}
+            </div>
+          </div>
           
-          Discapacidad: 
-          {% if solicitud.discapacidad == 'n' %}
-            No
-          {% elif solicitud.discapacidad == 'o' %} 
-            Auditiva
-          {% elif solicitud.discapacidad == 'm' %} 
-            Motriz
-          {% elif solicitud.discapacidad == 'v' %} 
-            Vista
-          {% elif solicitud.discapacidad == 'i' %} 
-            Intelectual
-          {% elif solicitud.discapacidad == 'a' %} 
-            Verbal
-          {% elif solicitud.discapacidad == 'c' %} 
-            Autismo
-          {% elif solicitud.discapacidad == 's' %} 
-            Síndrome de Down
-          {% elif solicitud.discapacidad == 'x' %} 
-            Otro
-          {% endif %}  <br>
-          
-          Estado Civil: 
-          {% if solicitud.estcivil == 's' %}
-            Soltero
-          {% elif solicitud.estcivil == 'c' %} 
-            Casado
-          {% elif solicitud.estcivil == 'u' %} 
-            Unión libre
-          {% elif solicitud.estcivil == 'd' %} 
-            Divorsiado
-          {% elif solicitud.estcivil == 'v' %} 
-            Viudo
-          {% endif %}  <br>
-          Domicilio: {{solicitud.domicilio}} <br>
-          Telefono: {{solicitud.telefono}} <br>
-          Correo: {{solicitud.correo}} <br>
         </div>
         <div class="col-6" align="right">
           
@@ -182,16 +235,16 @@ li:hover{
         {% for servicio in servicios %}
         
         <div class="container" {% if forloop.counter == 3 %}  
-            style="border: solid 2px black; height: 175px"
+            style="border: solid 2px black; padding:5px"
           {% else %}
-            style="border: solid 2px black; margin-bottom: 3rem !important; height: 175px"
+            style="border: solid 2px black; margin-bottom: 2rem !important; padding:5px"
           {% endif %}>
           
           <div class="row">
             <div {% if servicio.seguimiento %}class="col-8" {% else %}class="col-12" {% endif %}>
               <b> <h3> Servicio {{ forloop.counter }} </h3></b>
-              <p style="font-size: 25px !important; margin:0%">Dirección: {{servicio.direccion}}</p>
-              <p style="font-size: 25px !important;">Servicio: {{servicio.nombre}} </p>
+              <p style="font-size: 20px !important; margin:0%">Dependencia: {{servicio.direccion}}</p>
+              <p style="font-size: 20px !important;">Servicio: {{servicio.nombre}} </p>
             </div> 
             {% if servicio.seguimiento %}
             <div class="col-4" style="display:flex;
