@@ -1,0 +1,304 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block extracss %}
+<style>
+  * {
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+  a{
+    text-decoration: none !important;
+  }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+    .cont_rowmin{
+      padding-top: 3%;
+      margin-bottom: 6%;
+    }
+    .cont_row{
+      
+      margin-bottom: 2%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #id_tabla {
+      width: 100% !important;
+    }
+
+    .rowmin{
+      width: 100% !important;
+     
+    }
+    .tex-p{
+      font-size: 17px !important;
+    }
+    .cont_rowmin{
+      width: 100%;
+      margin-left: 5% !important;
+      margin-bottom: 6%;
+      
+    }
+    .cont_row{
+      width: 100%;
+      margin-left: 5% !important;
+      margin-bottom: 6%;
+    }
+  }
+  .img_content {
+    margin: 10px;
+    
+    line-height: 115px;
+    text-align: center;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+}
+
+li:hover{
+  border-bottom: 3px solid #691C32;
+  transition: border-color 1s ease;
+  
+}
+
+table.table-bordered > thead > tr > th{
+    border:1px solid black;
+}
+
+table.table-bordered > thead > tr > td{
+    border:1px solid black;
+}
+</style>
+{% endblock extracss %}
+
+{% block content%}</h1>
+<div id="contento" calss="text-center" style="">
+    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light" >
+    <div class="mt-5" style="background-color: #ebecec; padding:30px; border-radius:18px;">
+    <b> <h2 class="text-center"  style="font-weight: bold;">Estadística de Solicitudes</h2></b>
+    <br>
+    <b> <h5 class="text-center"  style="font-weight: bold;">{{localidad}}</h5></b>
+    <!--Estadistica general de hombres mujeres y discapacitados-->
+    <div class="container-fluid justify-content-center cont_rowmin" style="align-items: center; margin-left:28%;">
+    <div class="row rowmin justify-content-center" style="width: 45%; border-bottom: 1px solid #691C32" >
+        <div class="col-sm-10 col-10 ">
+        <i class="far fa-file-alt " style="align-items: center; "></i>&nbsp; Total de Solicitudes
+        </div>
+        <div class="col-2 col-sm-2 text-center">
+        <b style="color: #691C32; font-size:30px; font-weight: bold; ">{{total_solicitudes}}</b>
+        </div>
+    </div>
+
+    <div class="row rowmin justify-content-between" style="width: 45%; border-bottom: 1px solid #691C32" >
+        <div class="col-sm-10 col-10">
+        <i class="fas fa-male"></i>&nbsp; Total de Hombres
+        </div>
+        <div class="col-2 col-sm-2 text-center">
+        <b style="color: #691C32; font-size:30px; font-weight: bold;">{{hombres}}</b>
+        </div>
+    </div>
+        <div class="row rowmin justify-content-between" style="width: 45%; border-bottom: 1px solid #691C32 " >
+        <div class="col-sm-10 col-10">
+            <i class="fas fa-female"></i>&nbsp; Total de Mujeres
+        </div>
+        <div class="col-2 col-sm-2 text-center">
+            <b style="color: #691C32; font-size:30px; font-weight: bold;">{{mujeres}}</b>
+        </div>
+        </div>
+        <div class="row rowmin justify-content-between" style="width: 45%; border-bottom: 1px solid #691C32" >
+        <div class="col-sm-10 col-10">
+            <i class="fas fa-wheelchair" style="align-items: center;"></i></i>&nbsp; Total de personas con discapacidad
+        </div>
+        <div class="col-2 col-sm-2 text-center">
+            <b style="color: #691C32; font-size:30px; font-weight: bold; ">{{discapacidades}}</b>
+        </div>
+        </div>
+    </div>
+
+    <div class=" container-fluid mt-5" >
+        <h3 class="text-center" style="font-weight: bold; margin-bottom:5%">Población Objetivo</h3>
+        <div class="table-responsive" style=" margin-bottom:5%">
+            <table id="id_tabla_actividas" style="border: solid 1px #000000;" class="table table-bordered">
+                <thead class="color-boton" style=" font-weight:bold">
+                    <tr>
+                        <th>Población</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-transparent">
+                    {% for pob in poblacion %}
+                        <tr>
+                            <td scope="row" style="font-weight:bold">  {{pob.poblacion}}</td>
+                            <td style="width: 20%; font-weight:bold; color:#691C32"> <b style="color: #691C32; font-size:30px; font-weight: bold; ">{{pob.cantidad}}</b></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    </div>
+    <div class="container-fluid text-center" style="">
+
+    {% for estadistica in estadisticas %}
+        <h3 class="mt-3" style="font-weight: bold;">{{estadistica.direccion}}</h3>
+        
+        <div  align="right" class="mr-2" style="  ">
+            <div class="row rowmin justify-content-between"  style="width: 50%;">
+            <div class="col-sm-10 col-10" style="font-weight: bold;" style="border: solid 1px black">
+                Total de servicios
+            </div>
+            <div class="col-2 col-sm-2 text-center" >
+                <b style="color: #691C32; font-weight: bold;"> {{estadistica.total}}</b>
+            </div>
+            </div>
+        </div>
+        
+        
+            <div class="table-responsive" style=" margin-bottom:6%; border: solid 1px #000000;" >
+                <table id="id_tabla_actividades" class="table table-bordered">
+                    <thead class="color-boton" style="font-weight:bold">
+                        <tr>
+                            <th>Servicio</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-transparent">
+                        {% for servicio in estadistica.servicios %}
+                            <tr>
+                                <td scope="row" style="font-weight:bold"> {{servicio.servicio}}</td>
+                                <td style="width: 20%; font-weight:bold; color:#691C32">{{servicio.cantidad}}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    {% endfor %}
+    </div>
+    </div>
+</div>
+<button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir servicios <i class="fas fa-file-download"></i></button>
+<div id="carga">
+
+</div>
+{% endblock content %}
+{% block extrascripts %}
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js" integrity="sha256-c30AriwlYd8As+X/SAMm9dKVZ0OSS6V/Ub/krEBQyMk=" crossorigin="anonymous"></script>
+
+    <script>
+      
+      $(document).ready(function () {
+        
+
+        $( "#id_zona" ).change(function() {
+          var url = window.location.toString()
+          var urlsplit= url.split("/");
+          var localidad = document.getElementById("id_zona").value;
+      
+          var URLactual = "/estadisticas/servicios/"+localidad;
+          window.location.href = URLactual;   
+      }); 
+
+      $('#btn_pdf').click((event)=>{
+        
+        $.when( effect() ).done(function() {
+            $("#btn_pdf").prop('disabled',false)
+            console.log("finalizo imprecion")
+            var url = window.location.toString()
+            var urlsplit= url.split("/");
+            var URLactual = "/estadisticas/servicios/" + urlsplit[6]
+            window.location.href = URLactual;
+        });
+
+
+    });
+
+       
+    var effect = function() {
+      $("#btn_pdf").prop('disabled',true)
+      $("#contento").printThis({
+      debug: false,               // show the iframe for debugging
+      importCSS: true,            // import parent page css
+      importStyle: true,         // import style tags
+      printContainer: true,       // print outer container/$.selector
+      loadCSS: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",                // path to additional css file - use an array [] for multiple
+      pageTitle: "",              // add title to print page
+      removeInline: false,        // remove inline styles from print elements
+      removeInlineSelector: "*",  // custom selectors to filter inline styles. removeInline must be true
+      printDelay: 330,            // variable print delay
+      header: null,               // prefix to html
+      footer: true,               // postfix to html
+      base: false,                // preserve the BASE tag or accept a string for the URL
+      formValues: false,           // preserve input/form values
+      canvas: false,              // copy canvas content
+      doctypeString: '...',       // enter a different doctype for older markup
+      removeScripts: false,       // remove script tags from print content
+      copyTagClasses: false,      // copy classes from the html & body tag
+      beforePrintEvent: $('#contento').show(),     // function for printEvent in iframe
+      beforePrint: null,          // function called before iframe is filled
+      afterPrint: null            // function called before iframe is removed
+  });
+
+  return $( "#carga" ).fadeIn( 1000 ).delay( 1200 ).fadeOut();
+
+};
+
+
+
+        tel_mostrar = true
+        email_mostrar = true
+
+        $(".telefonos").hide()
+        $(".correos").hide()
+
+        $(".whatsapp").click(function() {
+          if (tel_mostrar==true){
+            $(".telefonos").show()
+            tel_mostrar=false
+          }else{
+            $(".telefonos").hide()
+            tel_mostrar=true
+          }
+          });
+
+       
+       
+        $(".email").click(function() {
+          if (email_mostrar==true){
+            $(".correos").show()
+            email_mostrar=false
+          }else{
+            $(".correos").hide()
+            email_mostrar=true
+          }
+          });
+        })
+        function impirmir(){
+            console.log("imprimir")
+            $('#btn_pdf').click();
+        }
+
+        $(window).on("load", impirmir);
+
+        
+    </script>
+{% endblock %}

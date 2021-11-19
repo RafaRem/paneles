@@ -77,16 +77,33 @@ li:hover{
   transition: border-color 1s ease;
   
 }
+.color-boton{
+  background-color: #9A0E44 !important;
+  color: white;
+}
 
+.color-boton:hover{
+  background: #c0527c !important;
+  color: white;
+}
 </style>
 {% endblock extracss %}
 
 {% block content%}</h1>
 <div class="position-relative overflow-hidden mt-5 p-3 p-md-5 m-md-3 bg-light" >
+  {% if configuracion.carga %}
+    {% if request.user.is_authenticated %}
+      <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'imprimir' idz=idz%}">Descargar Estadisticas <i class="fas fa-file-download"></i> </a></div>
+    {% else %}
+      <div class="container mt-5" align="right"></div>
+    {% endif %}
+  {% else %}
+    <div class="container mt-5" align="right"></div>
+  {% endif %}
   <div class="mt-5" style="background-color: #ebecec; padding:30px; border-radius:18px;">
    <b> <h2 class="text-center"  style="font-weight: bold;">Estadística de Solicitudes</h2></b>
    <br>
-
+    {% if request.user.is_authenticated %}
    <div class="container-fluid justify-content-center cont_row" style="align-items: center; margin-left:28%;">
     <div class="row rowmin justify-content-center" style="width: 45%; border-bottom: 1px solid #691C32" >
    Cambiar de Localidad <samp style="color:#9A0E44"></samp> <br>
@@ -100,6 +117,7 @@ li:hover{
     </div>
     
    </div>
+   {% endif %}
    <b> <h5 class="text-center"  style="font-weight: bold;">{{localidad}}</h5></b>
   <!--Estadistica general de hombres mujeres y discapacitados-->
   <div class="container-fluid justify-content-center cont_rowmin" style="align-items: center; margin-left:28%;">

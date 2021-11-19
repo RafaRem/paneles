@@ -62,7 +62,11 @@ li:hover{
 <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light " >
   {% if id != "0" %}
     {% if configuracion.carga %}
-      <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'editar' idsolicitud=id%}">Editar <i class="fas fa-edit"></i></a></div>
+      {% if request.user.is_authenticated %}
+        <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'editar' idsolicitud=id%}">Editar <i class="fas fa-edit"></i></a></div>
+      {% else %}
+        <div class="container mt-5" align="right"></div>
+      {% endif %}
     {% else %}
       <div class="container mt-5" align="right"></div>
     {% endif %}

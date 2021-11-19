@@ -25,6 +25,7 @@ from apps.home.views import InicioView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(r'', include('apps.home.urls') ),
+    path(r'', include('apps.usuario.urls') ),
     url(r'.*/$',InicioView.as_view() )
 
 ]
