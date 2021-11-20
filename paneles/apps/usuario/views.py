@@ -30,6 +30,7 @@ class Login(FormView):
             return super(Login,self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
+        print(self.request,form.get_user())
         login(self.request,form.get_user())
         return super(Login,self).form_valid(form)
 
