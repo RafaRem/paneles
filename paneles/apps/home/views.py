@@ -372,27 +372,31 @@ class ImprimirView(View):
 
 class DetallesView(View):
     def get(self,request,idz=""):
-        if idz == "" or idz == "0":
-            localidad = "Todas las Localidades"
-            solicitudes = Solicitud.objects.filter(estatus=True)
+        if request.user.is_authenticated:
+            if idz == "" or idz == "0":
+                localidad = "Todas las Localidades"
+                solicitudes = Solicitud.objects.filter(estatus=True)
+            else:
+                zona = Zona.objects.get(pk=idz)
+                localidad = zona.nombre.upper()
+                solicitudes = Solicitud.objects.filter(zona=zona, estatus=True)
+            arraySolicitudes = []
+            total_servicios = 0
+            total_personas = len(solicitudes)
+            zonas = Zona.objects.all()
+            for solicitud in solicitudes:
+                cantidad= solicitud.servicios.all()
+                total_servicios += len(cantidad)
+                arraySolicitudes.append({'nombre': solicitud.nombre+" "+solicitud.appaterno+" "+solicitud.apmaterno,
+                'poblacion': solicitud.poblacion,
+                'discapacidad': solicitud.discapacidad,
+                'cantidad': len(cantidad),
+                'servicios':cantidad})
+            return  render(request,  "home/detalles_solicitud.html",{'solicitudes':arraySolicitudes, 'localidad': localidad, 
+            'total_servicios': total_servicios, 'total': total_personas, 'zonas': zonas, 'localidad': localidad})
         else:
-            zona = Zona.objects.get(pk=idz)
-            localidad = zona.nombre.upper()
-            solicitudes = Solicitud.objects.filter(zona=zona, estatus=True)
-        arraySolicitudes = []
-        total_servicios = 0
-        total_personas = len(solicitudes)
-        zonas = Zona.objects.all()
-        for solicitud in solicitudes:
-            cantidad= solicitud.servicios.all()
-            total_servicios += len(cantidad)
-            arraySolicitudes.append({'nombre': solicitud.nombre+" "+solicitud.appaterno+" "+solicitud.apmaterno,
-            'poblacion': solicitud.poblacion,
-            'discapacidad': solicitud.discapacidad,
-            'cantidad': len(cantidad),
-            'servicios':cantidad})
-        return  render(request,  "home/detalles_solicitud.html",{'solicitudes':arraySolicitudes, 'localidad': localidad, 
-        'total_servicios': total_servicios, 'total': total_personas, 'zonas': zonas, 'localidad': localidad})
+            url = reverse('inicio')
+            return redirect(url)
 
     def post(self,request):
         return  render(request,  "home/detalles_solicitud.html")
