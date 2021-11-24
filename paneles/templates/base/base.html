@@ -23,6 +23,7 @@
   @media (max-width: 768px) {
   .tex-p{font-size: 17px;}
 }
+
 </style>
 {% block supercontent %}
 
@@ -53,8 +54,17 @@
         <li class="nav-item mr-3 resaltar">
           <a class="nav-link mr-3" href= {% url "beneficios" idz="0" %} style="font-weight: bold; color:black">Estadísticas</a>
         </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item mr-3 resaltar">
+          <a class="nav-link mr-3" href= {% url "detalles" idz="0" %} style="font-weight: bold; color:black">Detalles de Solicitudes</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
+    {% if request.user.is_authenticated %}
+      <a type="btn" class="nav-link mr-3 " align="right" href= {% url "cerrar" %} style="font-weight: bold; color:rgb(192, 62, 95)">Cerrar Sesión</a>
+    {% endif %}
+    
   </nav>
   
    

@@ -23,6 +23,7 @@ urlpatterns = [
     path('imprecion/solicitud/<str:ids>', ContratacionView.as_view(), name="imprimir"),
     path('estadisticas/servicios/<str:idz>', BeneficiosView.as_view(), name="beneficios"),
     path('estadisticas/servicios/imprimir/<str:idz>', ImprimirView.as_view(), name="imprimir"),
+    path('estadisticas/servicios/detalles/<str:idz>', DetallesView.as_view(), name="detalles"),
     path('editar/<str:idsolicitud>', EditView.as_view(), name="editar"),
     path('duplicidad/<str:ids>', DuplicidadView.as_view(), name="duplicidad"),
     path('familiares/<str:ids>', FamiliaresView.as_view(), name="familia"),

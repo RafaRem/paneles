@@ -89,9 +89,9 @@ li:hover{
       {% csrf_token %}
       <div class="row mt-5">
         <div class="container">
-        CURP &nbsp;<samp style="color:#9A0E44">*</samp> &nbsp; &nbsp; &nbsp; &nbsp;<br>
+          CURP &nbsp;<samp style="color:#9A0E44">*</samp> &nbsp; &nbsp; &nbsp; &nbsp;<br>
           <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
-          oninput="this.className = ''" required="" >
+          oninput="this.className = ''" required="" pattern="^([A-Z&]|[a-z&]{1})([AEIOUX]|[aeioux]{1})([A-Z&]|[a-z&]{1})([A-Z&]|[a-z&]{1})([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([HM]|[hm]{1})([A-Z]{2})([A-Z]{1})([A-Z]{1})([A-Z]{1})([A-Z|0-9]{2})$">
           <div class="mb-3 container"> <a href="https://www.gob.mx/curp/" target="_blank" >Obtener CURP</a></div>
         </div>
         <div class="container">

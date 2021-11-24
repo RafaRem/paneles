@@ -1,0 +1,327 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block extracss %}
+<style>
+  * {
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+  a{
+    text-decoration: none !important;
+  }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+    .cont_rowmin{
+      padding-top: 3%;
+      margin-bottom: 6%;
+    }
+    .cont_row{
+      
+      margin-bottom: 2%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #id_tabla {
+      width: 100% !important;
+    }
+
+    .rowmin{
+      width: 100% !important;
+     
+    }
+    .tex-p{
+      font-size: 17px !important;
+    }
+    .cont_rowmin{
+      width: 100%;
+      margin-left: 5% !important;
+      margin-bottom: 6%;
+      
+    }
+    .cont_row{
+      width: 100%;
+      margin-left: 5% !important;
+      margin-bottom: 6%;
+    }
+  }
+  .img_content {
+    margin: 10px;
+    
+    line-height: 115px;
+    text-align: center;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+}
+
+li:hover{
+  border-bottom: 3px solid #691C32;
+  transition: border-color 1s ease;
+  
+}
+
+table.table-bordered > thead > tr > th{
+    border:1px solid black !important;
+}
+
+table.table-bordered > tbody > tr > td{
+    border:1px solid black !important;
+}
+</style>
+{% endblock extracss %}
+
+{% block content%}</h1>
+<div class="container-fluid" style="margin-top: 15%; width:95%">
+
+<div align="right" class="mb-5">
+    
+        <button data-toggle="modal" data-target="#exampleModal"
+        id="filtros" class="btn color-boton mt-5 mr-3" style="background-color: #9A0E44; color:white; ">
+            Filtros &nbsp;<i class="fas fa-filter"></i>
+        </button>
+   
+    <button  id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44; color:white; ">Imprimir detalles <i class="fas fa-file-download"></i></button>
+</div>
+
+<div id="contento" calss="text-center mt-5" style="">
+    <div class="row" id="encabezado" >
+        <div class="col-4"><img class="" src="{%static 'images/Ayuntamiento.jpg' %}" alt="Logo" width="auto" height="90px"></div>
+        <div class="col-4" align="center">  <img class="" src="{%static 'images/bienestarlogo.png' %}" alt="Logo" width="250px" height="auto"></div>
+        <div class="col-4 " align="right"><img class="" src="{%static 'images/tAhome.png' %}" alt="Logo" width="auto" height="90px"></div>
+    </div>  
+   
+    
+    <b> <h2 class="text-center"  style="font-weight: bold;">Feria del Bienestar</h2></b>
+    <br>
+    <b> <h5 class="text-center"  style="font-weight: bold;">{{localidad}}</h5></b>
+    <!--Estadistica general de hombres mujeres y discapacitados-->
+   
+    <div class="container-fluid text-center" style="">
+
+        <div  align="right" class="mr-2" style="  ">
+            <div class="row rowmin justify-content-between"  style="width: 50%;">
+            <div class="col-sm-10 col-10" style="font-weight: bold;" style="border: solid 1px black">
+                Total de personas
+            </div>
+            <div class="col-2 col-sm-2 text-center" >
+                <b style="color: #691C32; font-weight: bold;"> {{total}}</b>
+            </div>
+            </div>
+        </div>
+        <div  align="right" class="mr-2" style="  ">
+            <div class="row rowmin justify-content-between"  style="width: 50%;">
+            <div class="col-sm-10 col-10" style="font-weight: bold;" style="border: solid 1px black">
+                Total de servicios
+            </div>
+            <div class="col-2 col-sm-2 text-center" >
+                <b style="color: #691C32; font-weight: bold;"> {{total_servicios}}</b>
+            </div>
+            </div>
+        </div>
+        
+            <div class="table-responsive table-wrapper-scroll-y my-custom-scrollbar" id="table_res" style=" margin-bottom:6%; border: solid 1px #000000; height:500px" >
+                <table id="id_tabla_actividades" class="table table-bordered">
+                    <thead class="color-boton" style="font-weight:bold">
+                        <tr>
+                            <th class="text-center" style="font-weight:bold; " align="center">Nombre</th>
+                            <th class="text-center" style="font-weight:bold; ">Población Objetivo</th>
+                            <th class="text-center" style="font-weight:bold; ">Discapacidad</th>
+                            <th class="text-center" style="font-weight:bold; ">Cant. de servicios</th>
+                            <th class="text-center" style="font-weight:bold; ">Detalle de servicios</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-transparent">
+                        {% for solicitud in solicitudes %}
+                            <tr>
+                                <td scope="row" style="font-weight:bold; "> {{solicitud.nombre}} </td>
+                                <td style="width: 15%; ">{{solicitud.poblacion}}</td>
+                                <td style="width: 10%; ">
+                                  {% if solicitud.discapacidad == 'n' %}
+                                   
+                                  {% elif solicitud.discapacidad == 'o' %} 
+                                    Auditiva
+                                  {% elif solicitud.discapacidad == 'm' %} 
+                                    Motriz
+                                  {% elif solicitud.discapacidad == 'v' %} 
+                                    Vista
+                                  {% elif solicitud.discapacidad == 'i' %} 
+                                    Intelectual
+                                  {% elif solicitud.discapacidad == 'a' %} 
+                                    Verbal
+                                  {% elif solicitud.discapacidad == 'c' %} 
+                                    Autismo
+                                  {% elif solicitud.discapacidad == 's' %} 
+                                    Síndrome de Down
+                                  {% elif solicitud.discapacidad == 'x' %} 
+                                    Otro
+                                  {% endif %}
+                                </td>
+                                <td style="width: 10%;  ">{{solicitud.cantidad}} </td>
+                                <td style="width: 35%; ">
+                                    {% for servicio in solicitud.servicios %}
+                                    <p  style="font-size: small;"> {{servicio.nombre}}</p>
+                                    {% endfor %}
+                                     </td>
+                                
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+   
+    </div>
+    
+</div>
+</div>
+<div id="carga">
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Filtros</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+  
+            <div class="modal-body">
+                
+                Cambiar de Localidad <samp style="color:#9A0E44"></samp> <br>
+                <select name="localidad" class="select form-control mb-3" required="" id="id_zona"> 
+                  <option value="0" selected="" disabled>Seleccione una Localidad</option> 
+                  <option value="0" >TODAS</option> 
+                  {% for zona in zonas %}
+                    <option value="{{zona.pk}}" >{{zona.nombre}}</option>
+                  {% endfor %}
+                </select> 
+            </div>
+            <div class="modal-footer">
+            
+            
+            </div>
+       
+
+    </div>
+    </div>
+</div>
+{% endblock content %}
+{% block extrascripts %}
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.js" integrity="sha256-c30AriwlYd8As+X/SAMm9dKVZ0OSS6V/Ub/krEBQyMk=" crossorigin="anonymous"></script>
+
+    <script>
+      
+      $(document).ready(function () {
+        
+
+        $( "#id_zona" ).change(function() {
+          var url = window.location.toString()
+          var urlsplit= url.split("/");
+          var localidad = document.getElementById("id_zona").value;
+      
+          var URLactual = "/estadisticas/servicios/detalles/"+localidad;
+          window.location.href = URLactual;   
+      }); 
+
+      $('#btn_pdf').click((event)=>{
+        $("#table_res").css("height", "auto");
+        $.when( effect() ).done(function() {
+            $("#btn_pdf").prop('disabled',false)
+            $("#table_res").css("height", "500px");
+        });
+
+
+    });
+
+       
+    var effect = function() {
+      $("#btn_pdf").prop('disabled',true)
+      $("#contento").printThis({
+      debug: false,               // show the iframe for debugging
+      importCSS: true,            // import parent page css
+      importStyle: true,         // import style tags
+      printContainer: true,       // print outer container/$.selector
+      loadCSS: "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css",                // path to additional css file - use an array [] for multiple
+      pageTitle: "",              // add title to print page
+      removeInline: false,        // remove inline styles from print elements
+      removeInlineSelector: "*",  // custom selectors to filter inline styles. removeInline must be true
+      printDelay: 330,            // variable print delay
+      header: null,               // prefix to html
+      footer: true,               // postfix to html
+      base: false,                // preserve the BASE tag or accept a string for the URL
+      formValues: false,           // preserve input/form values
+      canvas: false,              // copy canvas content
+      doctypeString: '...',       // enter a different doctype for older markup
+      removeScripts: false,       // remove script tags from print content
+      copyTagClasses: false,      // copy classes from the html & body tag
+      beforePrintEvent: $('#contento').show(),     // function for printEvent in iframe
+      beforePrint: null,          // function called before iframe is filled
+      afterPrint: null            // function called before iframe is removed
+  });
+
+  return $( "#carga" ).fadeIn( 1000 ).delay( 1200 ).fadeOut();
+
+};
+
+
+
+        tel_mostrar = true
+        email_mostrar = true
+
+        $(".telefonos").hide()
+        $(".correos").hide()
+
+        $(".whatsapp").click(function() {
+          if (tel_mostrar==true){
+            $(".telefonos").show()
+            tel_mostrar=false
+          }else{
+            $(".telefonos").hide()
+            tel_mostrar=true
+          }
+          });
+
+       
+       
+        $(".email").click(function() {
+          if (email_mostrar==true){
+            $(".correos").show()
+            email_mostrar=false
+          }else{
+            $(".correos").hide()
+            email_mostrar=true
+          }
+          });
+        })
+        function impirmir(){
+            console.log("imprimir")
+            ('#btn_pdf').click();
+        }
+
+        $(window).on("load", impirmir);
+
+        
+    </script>
+{% endblock %}
