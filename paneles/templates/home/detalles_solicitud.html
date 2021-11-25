@@ -108,10 +108,18 @@ table.table-bordered > tbody > tr > td{
         <div class="col-4 " align="right"><img class="" src="{%static 'images/tAhome.png' %}" alt="Logo" width="auto" height="90px"></div>
     </div>  
    
+    <div class="row justify-content-end mt-3 mb-3">
+        <div class="col-4">
+          <div class=" text-center" align="center" style="">
+            <b ><h3>Feria del Bienestar</h3></b> 
+            <b><label style="font-weight: bold;">{{localidad}}</label></b>
+           </div>
+        </div>
+        <div class="col-4" align="right">
+          Usuario: {{request.user.first_name }}
+        </div>
+      </div>
     
-    <b> <h2 class="text-center"  style="font-weight: bold;">Feria del Bienestar</h2></b>
-    <br>
-    <b> <h5 class="text-center"  style="font-weight: bold;">{{localidad}}</h5></b>
     <!--Estadistica general de hombres mujeres y discapacitados-->
    
     <div class="container-fluid text-center" style="">
