@@ -28,6 +28,16 @@ class InicioView(View):
         for solicitud in solicitudes:
             array.append([solicitud.curp])
         return array
+
+    def descontar(self, servicio):
+        if servicio.limite:
+            if int(servicio.cantidad) > 0:
+                servicio.cantidad = int(servicio.cantidad) - 1
+                servicio.save()
+            else:
+                return False
+        return True
+    
     def get(self,request):
         configuracion = Configuracion.objects.get(pk=1)
         if configuracion.carga == True:
@@ -74,12 +84,15 @@ class InicioView(View):
                 
                 if request.POST.get('servicio') != "x":
                     servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
+                    self.descontar(servicio=servicio1)
                     solicitud.servicios.add(servicio1)  
                 if request.POST.get('servicio2') != "x":
                     servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
+                    self.descontar(servicio=servicio2)
                     solicitud.servicios.add(servicio2)
                 if request.POST.get('servicio3') != "x":
                     servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
+                    self.descontar(servicio=servicio3)
                     solicitud.servicios.add(servicio3)
                 '''
                 familiar = FamiliaresView.ValidarFamiliar(paterno=request.POST.get('paterno'),sexo=request.POST.get('curp')[10:11],materno=request.POST.get('materno'),calle=request.POST.get('calle'),codigo=request.POST.get('cp'),exterior=request.POST.get('externo') )

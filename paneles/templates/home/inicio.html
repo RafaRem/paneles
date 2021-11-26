@@ -77,6 +77,7 @@ li:hover{
   background: #c0527c !important;
   color: white;
 }
+
 </style>
 {% endblock extracss %}
 
@@ -193,7 +194,13 @@ li:hover{
         <select name="servicio" class="select form-control"  id="servicio" required> 
           <option value="" selected="">---------</option> 
           {% for servicio in servicios %}
-            <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
+            <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+            {% if servicio.limite %}
+              {% if servicio.cantidad == "0" %}
+              style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
+              {% endif %}
+            {% endif %}
+             >{{servicio}}</option> 
           {% endfor %}
         </select> 
       </div>
@@ -263,7 +270,7 @@ li:hover{
       function mayus(e) {
         e.value = e.value.toUpperCase();
       }
-
+       
       $(document).ready(function () {
         var solicitudes = '{{solicitudes|escapejs}}';
         solicitudes = JSON.parse(solicitudes);
@@ -286,6 +293,8 @@ li:hover{
 
 
       })
+
+      
 
       $('#direccion2').change((event) => {
         const dependencia_id = event.target.value;
