@@ -218,7 +218,13 @@ li:hover{
         <select name="servicio2" class="select form-control" id="servicio2"> 
           <option value="x" selected="">---------</option> 
           {% for servicio in servicios %}
-            <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
+            <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+            {% if servicio.limite %}
+              {% if servicio.cantidad == "0" %}
+              style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
+              {% endif %}
+            {% endif %}
+             >{{servicio}}</option> 
           {% endfor %}
         </select> 
       </div>
@@ -237,8 +243,14 @@ li:hover{
         <select name="servicio3" class="select form-control"  id="servicio3"> 
           <option value="x" selected="">---------</option> 
           {% for servicio in servicios %}
-            <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}">{{servicio}}</option> 
-          {% endfor %}
+          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+          {% if servicio.limite %}
+            {% if servicio.cantidad == "0" %}
+            style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
+            {% endif %}
+          {% endif %}
+           >{{servicio}}</option> 
+        {% endfor %}
         </select> 
       </div>
     </div>
