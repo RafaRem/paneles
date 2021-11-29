@@ -237,7 +237,7 @@ class BeneficiosView(View):
         'discapacidades':len(discapacidades),
         'zonas': zonas,
         'localidad':localidad,
-        'idz':idz})
+        })
     def post(self,request):
         return  render(request,  "home/beneficios.html")
 
