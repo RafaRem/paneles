@@ -93,7 +93,7 @@ li:hover{
 <div class="position-relative overflow-hidden mt-5 p-3 p-md-5 m-md-3 bg-light" >
   {% if configuracion.carga %}
     {% if request.user.is_authenticated %}
-      <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'imprimir' idz=idz%}">Descargar Estadisticas <i class="fas fa-file-download"></i> </a></div>
+      <div class="container mt-5" align="right"><a class="btn  color-boton" href="{%url 'imprimirr' idz=idz%}">Descargar Estadisticas <i class="fas fa-file-download"></i> </a></div>
     {% else %}
       <div class="container mt-5" align="right"></div>
     {% endif %}

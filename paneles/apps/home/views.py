@@ -229,7 +229,8 @@ class BeneficiosView(View):
                 hombres = Solicitud.objects.filter(sexo='H',estatus=True, zona=zona)
                 mujeres = Solicitud.objects.filter(sexo='M',estatus=True, zona=zona)
                 localidad =zona.nombre.upper()
-        return  render(request,  "home/beneficios.html", {'estadisticas': arraytotal,
+        return  render(request,  "home/beneficios.html", {
+        'estadisticas': arraytotal,
         'total_solicitudes': len(solicitudes_total),
         'hombres': len(hombres),
         'mujeres': len(mujeres),
@@ -237,7 +238,7 @@ class BeneficiosView(View):
         'discapacidades':len(discapacidades),
         'zonas': zonas,
         'localidad':localidad,
-        })
+        'idz':idz})
     def post(self,request):
         return  render(request,  "home/beneficios.html")
 
