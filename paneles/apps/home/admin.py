@@ -44,3 +44,10 @@ class ZonaAdmin(admin.ModelAdmin):
     search_fields=['nombre',]
 
 admin.site.register(Zona, ZonaAdmin)
+
+class RegistroAdmin(admin.ModelAdmin):
+    list_display=['id','solcitud', 'usuario']
+    list_display_links=['id','solcitud', 'usuario']
+    search_fields=['solcitud', 'usuario']
+
+admin.site.register(RegistroImpresion, RegistroAdmin)

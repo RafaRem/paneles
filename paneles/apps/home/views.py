@@ -20,6 +20,22 @@ def email(request):
     send_mail( subject, message, email_from, recipient_list )
     return True
 
+def RegistroImpresionHistorial(request, ids):
+    print(ids)
+    solicitud = Solicitud.objects.filter(pk=ids, estatus=True)
+    registro = RegistroImpresion()
+    print("yeah")
+    if len(solicitud)>0:
+        solicitud = solicitud[0]
+        registro.solcitud = solicitud
+        registro.usuario = request.user
+        registro.save()
+        url = reverse('imprimir',  kwargs={'ids':solicitud.pk})
+        return redirect(url)   
+    else: 
+        url = reverse('imprimir',  kwargs={'ids':'0'})
+        return redirect(url)
+
 #Registro del formulario
 class InicioView(View):
     def curps(self):
@@ -30,10 +46,14 @@ class InicioView(View):
         return array
 
     def descontar(self, servicio):
+        configuracion =Configuracion.objects.get(pk=1)
         if servicio.limite:
             if int(servicio.cantidad) > 0:
-                servicio.cantidad = int(servicio.cantidad) - 1
-                servicio.save()
+                solicitudes = Solicitud.objects.filter(zona=configuracion.zona, servicios__in=[servicio])
+                total = len(solicitudes) +1
+                if int(servicio.cantidad) <= total:
+                    servicio.cantidad = 0
+                    servicio.save()
             else:
                 return False
         return True

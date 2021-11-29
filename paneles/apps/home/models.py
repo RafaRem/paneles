@@ -1,5 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User 
 # Create your models here.
 class Direccion(models.Model):
     nombre = models.CharField(  max_length=200, verbose_name="nombre")
@@ -95,3 +96,14 @@ class Configuracion(models.Model):
     def __str__(self):
         return str(self.id)
 
+class RegistroImpresion(models.Model):
+    solcitud = models.ForeignKey(Solicitud, on_delete=models.PROTECT, null=True, blank=True)
+    usuario = models.ForeignKey(User, on_delete= models.PROTECT)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)    
+    class Meta:
+        verbose_name = "Registro de impresiones"
+        verbose_name_plural = "Registro de impresiones"
+
+    def __str__(self):
+        return str(self.id)

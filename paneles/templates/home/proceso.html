@@ -261,9 +261,9 @@ li:hover{
       <br>
       <div class="mt-3" id="terminos" align="center" > <label for="" style="border-top:solid 2px black;">Acepto términos y condiciones</label> </div>
   </div>
-
-  <button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir servicios <i class="fas fa-file-download"></i></button>
-  
+  {% if request.user.is_authenticated %}
+    <button id="btn_pdf" type="button" class="btn color-boton mt-5" style="background-color: #9A0E44;">Imprimir servicios <i class="fas fa-file-download"></i></button>
+  {% endif %}
 
   {% endif %}
   
@@ -273,6 +273,9 @@ li:hover{
 
 </div>
 
+<form action="" id="id_registro">
+
+</form>
 </div>
 
 {% endblock content %}
@@ -283,7 +286,7 @@ li:hover{
       function mayus(e) {
         e.value = e.value.toUpperCase();
       }
-
+      var id_solicitud = '{{id}}';
       $(document).ready(function () {
         tel_mostrar = true
         email_mostrar = true
@@ -322,6 +325,9 @@ li:hover{
               $("#btn_pdf").prop('disabled',false)
               $("#terminos").hide()
               $("#encabezado").hide()
+            
+              var URLactual = "/imprecion/registro/"+id_solicitud ;
+              window.location.href = URLactual; 
           });
 
       });
