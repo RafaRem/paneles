@@ -90,6 +90,16 @@ li:hover{
       {% csrf_token %}
       <div class="row mt-5">
         <div class="container">
+         <b>Localidad ó Colonia de Atención</b>  <samp style="color:#9A0E44">*</samp> <br>
+          <select name="zona" class="select form-control mb-3" required="" id="zona"> 
+            <option value="0" disabled>Seleccione una localidad</option> 
+            {% for zona in zonas %}
+              <option value="{{zona.pk}}" {% if configuracion.zona.pk == zona.pk %}selected{% endif %}>
+                {{zona.nombre}}</option> 
+            {% endfor %}
+          </select> 
+        </div>
+        <div class="container">
           CURP &nbsp;<samp style="color:#9A0E44">*</samp> &nbsp; &nbsp; &nbsp; &nbsp;<br>
           <input class="form-control mb-3" id="curp" onkeyup="mayus(this);" name="curp"  minlength="18"  maxlength="18" placeholder="CURP:(AAAA971231ABCDEF00) " 
           oninput="this.className = ''" required="" pattern="^([A-Z&]|[a-z&]{1})([AEIOUX]|[aeioux]{1})([A-Z&]|[a-z&]{1})([A-Z&]|[a-z&]{1})([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])([HM]|[hm]{1})([A-Z]{2})([A-Z]{1})([A-Z]{1})([A-Z]{1})([A-Z|0-9]{2})$">

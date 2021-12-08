@@ -4,13 +4,21 @@ from django.views.generic import  View
 import datetime
 from datetime import date
 from django.urls import reverse
+#from rest_framework import permissions
 from .models import *
 from django.db.models import Q
+#from apps.utils.result_querys import filterSolicitudes
+
 #import Email
 from django.core.mail import send_mail 
 from django.conf import settings
-# Create your views here.
-
+# Rest Framework
+#from rest_framework.decorators import api_view
+#from rest_framework.permissions import IsAuthenticated
+#from rest_framework.response import Response
+#from rest_framework import viewsets, status
+#Serializers
+#from .serializers import ServicioSerializers, SolicitantesSerializers
 def email(request):
 
     subject = 'Bienvenido a la Junta de Reclutamiento'
@@ -36,8 +44,32 @@ def RegistroImpresionHistorial(request, ids):
         url = reverse('imprimir',  kwargs={'ids':'0'})
         return redirect(url)
 
-#Registro del formulario
+#api prueba de rest framework
+#@api_view(['GET'])
+#def getFilterSolicitud(request, ec="",dis="",sexo="",pob="",zona="" ):
+#    data= []
+#    solicitudes = filterSolicitudes(ec,dis,sexo.upper(),pob,zona)
+#    for solicitud in solicitudes:
+#        servicios = solicitud.servicios.all()
+#    
+#        servicioserializers = []
+#        serializer = SolicitantesSerializers(solicitud)
+#        for servicio in servicios:
+#            s_serializers = ServicioSerializers(servicio)
+#            servicioserializers.append(s_serializers.data)
+#        data.append({
+ #           'solicitud':serializer.data,
+ #           'servicios': servicioserializers
+ #       })
+        
+  #  return Response(data)
+
+#'''@api_view(['POST'])
+#def createSolicitud(request):
+#'''
+
 class InicioView(View):
+    
     def curps(self):
         array=[]
         solicitudes = Solicitud.objects.filter(estatus=True)
@@ -62,13 +94,14 @@ class InicioView(View):
         configuracion = Configuracion.objects.get(pk=1)
         if configuracion.carga == True:
             if request.user.is_authenticated:
+                zonas = Zona.objects.filter(estatus=True)
                 servicios = ServiciosSolicitud.objects.filter(estatus=True)
                 solicitudes = self.curps()
                 solicitudes = json.dumps(solicitudes)
                 direcciones = Direccion.objects.all()
                 poblaciones = PoblacionObjetivo.objects.all()
                 return  render(request,  "home/inicio.html",{'servicios':servicios,
-                'direcciones':direcciones, 'poblaciones': poblaciones, 'solicitudes':solicitudes} )
+                'direcciones':direcciones, 'poblaciones': poblaciones, 'solicitudes':solicitudes,'zonas': zonas} )
             else:
                 url = reverse('login')
                 return redirect(url)
@@ -95,7 +128,8 @@ class InicioView(View):
                 solicitud.correo = request.POST.get('email')
                 solicitud.telefono = request.POST.get('telefono')
                 solicitud.detalles = request.POST.get('observacion')
-                solicitud.zona = configuracion.zona
+                zona = Zona.objects.get(pk= request.POST.get('zona'))
+                solicitud.zona = zona
                 if request.POST.get('poblacion') != 0:
                     poblacionO = PoblacionObjetivo.objects.get(pk=request.POST.get('poblacion'))
                     solicitud.poblacion = poblacionO
