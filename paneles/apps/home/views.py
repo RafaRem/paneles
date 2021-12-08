@@ -19,14 +19,7 @@ from django.conf import settings
 #from rest_framework import viewsets, status
 #Serializers
 #from .serializers import ServicioSerializers, SolicitantesSerializers
-def email(request):
 
-    subject = 'Bienvenido a la Junta de Reclutamiento'
-    message = 'su cita ha sido registrada en nuestro citio presentarse mañana porfis'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['rrembao00@gmail.com',]
-    send_mail( subject, message, email_from, recipient_list )
-    return True
 
 def RegistroImpresionHistorial(request, ids):
     print(ids)
