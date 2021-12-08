@@ -22,7 +22,10 @@ from apps.home import urls
 
 from django.contrib.auth.decorators import login_required
 from apps.home.views import InicioView 
+from rest_framework_simplejwt.views import (TokenObtainPairView, TokenRefreshView)
 urlpatterns = [
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
     path(r'', include('apps.home.urls') ),
     path(r'', include('apps.usuario.urls') ),

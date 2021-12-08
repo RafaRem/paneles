@@ -20,6 +20,7 @@ from .views import *
 
 urlpatterns = [
     path('', InicioView.as_view(), name="inicio"),
+    path('solicituedes/filter/<str:ec>/<str:dis>/<str:sexo>/<str:pob>/<str:zona>',getFilterSolicitud, name="prueba"),
     path('imprecion/registro/<str:ids>', RegistroImpresionHistorial, name="registroimpresion"),
     path('imprecion/solicitud/<str:ids>', ContratacionView.as_view(), name="imprimir"),
     path('estadisticas/servicios/<str:idz>', BeneficiosView.as_view(), name="beneficios"),

@@ -4,29 +4,20 @@ from django.views.generic import  View
 import datetime
 from datetime import date
 from django.urls import reverse
-#from rest_framework import permissions
+from rest_framework import permissions
 from .models import *
 from django.db.models import Q
-#from apps.utils.result_querys import filterSolicitudes
+from apps.utils.result_querys import filterSolicitudes
 
-#import Email
 from django.core.mail import send_mail 
 from django.conf import settings
 # Rest Framework
-#from rest_framework.decorators import api_view
-#from rest_framework.permissions import IsAuthenticated
-#from rest_framework.response import Response
-#from rest_framework import viewsets, status
+from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import viewsets, status
 #Serializers
-#from .serializers import ServicioSerializers, SolicitantesSerializers
-def email(request):
-
-    subject = 'Bienvenido a la Junta de Reclutamiento'
-    message = 'su cita ha sido registrada en nuestro citio presentarse mañana porfis'
-    email_from = settings.EMAIL_HOST_USER
-    recipient_list = ['rrembao00@gmail.com',]
-    send_mail( subject, message, email_from, recipient_list )
-    return True
+from .serializers import ServicioSerializers, SolicitantesSerializers
 
 def RegistroImpresionHistorial(request, ids):
     print(ids)
@@ -45,28 +36,26 @@ def RegistroImpresionHistorial(request, ids):
         return redirect(url)
 
 #api prueba de rest framework
-#@api_view(['GET'])
-#def getFilterSolicitud(request, ec="",dis="",sexo="",pob="",zona="" ):
-#    data= []
-#    solicitudes = filterSolicitudes(ec,dis,sexo.upper(),pob,zona)
-#    for solicitud in solicitudes:
-#        servicios = solicitud.servicios.all()
-#    
-#        servicioserializers = []
-#        serializer = SolicitantesSerializers(solicitud)
-#        for servicio in servicios:
-#            s_serializers = ServicioSerializers(servicio)
-#            servicioserializers.append(s_serializers.data)
-#        data.append({
- #           'solicitud':serializer.data,
- #           'servicios': servicioserializers
- #       })
+@api_view(['GET'])
+def getFilterSolicitud(request, ec="",dis="",sexo="",pob="",zona="" ):
+    data= []
+    solicitudes = filterSolicitudes(ec,dis,sexo.upper(),pob,zona)
+    for solicitud in solicitudes:
+        servicios = solicitud.servicios.all()
+    
+        servicioserializers = []
+        serializer = SolicitantesSerializers(solicitud)
+        for servicio in servicios:
+            s_serializers = ServicioSerializers(servicio)
+            servicioserializers.append(s_serializers.data)
+        data.append({
+            'solicitud':serializer.data,
+            'servicios': servicioserializers
+        })
         
-  #  return Response(data)
+    return Response(data)
 
-#'''@api_view(['POST'])
-#def createSolicitud(request):
-#'''
+
 
 class InicioView(View):
     
