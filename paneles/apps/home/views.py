@@ -7,7 +7,7 @@ from django.urls import reverse
 from rest_framework import permissions
 from .models import *
 from django.db.models import Q
-from apps.utils.result_querys import filterSolicitudes
+from apps.utils.result_querys import filterSolicitudes, CreateNewSolicitud
 
 from django.core.mail import send_mail 
 from django.conf import settings
@@ -20,7 +20,6 @@ from rest_framework import viewsets, status
 from .serializers import ServicioSerializers, SolicitantesSerializers
 
 def RegistroImpresionHistorial(request, ids):
-    print(ids)
     solicitud = Solicitud.objects.filter(pk=ids, estatus=True)
     registro = RegistroImpresion()
     print("yeah")
@@ -52,10 +51,21 @@ def getFilterSolicitud(request, ec="",dis="",sexo="",pob="",zona="" ):
             'solicitud':serializer.data,
             'servicios': servicioserializers
         })
-        
-    return Response(data)
+    rest_data = {
+        'data':data,
+        'status':'true'
+    }    
+    return Response(rest_data)
 
-
+@api_view(['POST'])
+def CreateSolicitud(request):
+    solicitud =request.data['solicitud']
+    servicios =request.data['servicios']
+    res = CreateNewSolicitud(solicitud=solicitud, servicios=servicios)
+    if res == False:
+        return Response({'status':'false',
+        'message':'error de registro'})
+    return Response(solicitud)
 
 class InicioView(View):
     

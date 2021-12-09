@@ -17,9 +17,9 @@ class SolicitantesSerializers(serializers.Serializer):
     poblacion = serializers.CharField(max_length=140)
     zona = serializers.CharField(max_length=140)
     detalles = serializers.CharField()
-    estatus = serializers.BooleanField()
-    created = serializers.DateTimeField()
-    updated = serializers.DateTimeField()      
+    estatus = serializers.BooleanField(required=False)
+    created = serializers.DateTimeField(required=False)
+    updated = serializers.DateTimeField(required=False)      
 
 #serializers Servicios
 class ServicioSerializers(serializers.Serializer):
