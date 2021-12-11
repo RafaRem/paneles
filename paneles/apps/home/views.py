@@ -6,6 +6,7 @@ from datetime import date
 from django.urls import reverse
 from rest_framework import permissions
 from .models import *
+from apps.recursos.models import *
 from django.db.models import Q
 from apps.utils.result_querys import filterSolicitudes, CreateNewSolicitud
 
@@ -91,6 +92,8 @@ class InicioView(View):
     
     def get(self,request):
         configuracion = Configuracion.objects.get(pk=1)
+        productos = Productos.objects.all().using('productos_db')
+        print(productos)
         if configuracion.carga == True:
             if request.user.is_authenticated:
                 zonas = Zona.objects.filter(estatus=True)
@@ -237,7 +240,7 @@ class BeneficiosView(View):
             
             for servicio in servicios:
                 if idz == "0":
-                    query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True) 
+                    query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True)
                 else:
                     query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True, zona=zona) 
                 array.append({
@@ -399,7 +402,7 @@ class ImprimirView(View):
             
             for servicio in servicios:
                 if idz == "0":
-                    query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True) 
+                    query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True)
                 else:
                     query = Solicitud.objects.filter(servicios__id =servicio.pk, estatus=True, zona=zona) 
                 array.append({
