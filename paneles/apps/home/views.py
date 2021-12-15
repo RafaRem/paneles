@@ -4,21 +4,11 @@ from django.views.generic import  View
 import datetime
 from datetime import date
 from django.urls import reverse
-#from rest_framework import permissions
 from .models import *
 from django.db.models import Q
-#from apps.utils.result_querys import filterSolicitudes
 
-#import Email
 from django.core.mail import send_mail 
 from django.conf import settings
-# Rest Framework
-#from rest_framework.decorators import api_view
-#from rest_framework.permissions import IsAuthenticated
-#from rest_framework.response import Response
-#from rest_framework import viewsets, status
-#Serializers
-#from .serializers import ServicioSerializers, SolicitantesSerializers
 
 
 def RegistroImpresionHistorial(request, ids):
@@ -36,30 +26,6 @@ def RegistroImpresionHistorial(request, ids):
     else: 
         url = reverse('imprimir',  kwargs={'ids':'0'})
         return redirect(url)
-
-#api prueba de rest framework
-#@api_view(['GET'])
-#def getFilterSolicitud(request, ec="",dis="",sexo="",pob="",zona="" ):
-#    data= []
-#    solicitudes = filterSolicitudes(ec,dis,sexo.upper(),pob,zona)
-#    for solicitud in solicitudes:
-#        servicios = solicitud.servicios.all()
-#    
-#        servicioserializers = []
-#        serializer = SolicitantesSerializers(solicitud)
-#        for servicio in servicios:
-#            s_serializers = ServicioSerializers(servicio)
-#            servicioserializers.append(s_serializers.data)
-#        data.append({
- #           'solicitud':serializer.data,
- #           'servicios': servicioserializers
- #       })
-        
-  #  return Response(data)
-
-#'''@api_view(['POST'])
-#def createSolicitud(request):
-#'''
 
 class InicioView(View):
     
@@ -104,7 +70,7 @@ class InicioView(View):
     def post(self,request):
         if request.user.is_authenticated:
             verificacion = Solicitud.objects.filter(curp =request.POST.get('curp'), estatus=True) 
-            configuracion = Configuracion.objects.get(pk=1)
+            
             if len(verificacion) == 0:
                 solicitud = Solicitud()
                 solicitud.nombre = request.POST.get('nombre')

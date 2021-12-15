@@ -17,9 +17,9 @@ class DireccionAdmin(admin.ModelAdmin):
 admin.site.register(Direccion,DireccionAdmin)
 
 class SolicitudAdmin(admin.ModelAdmin):
-    list_display=['id','nombre']
+    list_display=['id','nombre', 'created', 'zona']
     list_display_links=['id','nombre']
-    search_fields=['nombre', 'id']
+    search_fields=['nombre', 'id', 'zona__nombre']
     filter_horizontal = ('servicios',)
 
 admin.site.register(Solicitud,SolicitudAdmin)
