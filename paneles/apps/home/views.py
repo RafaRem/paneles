@@ -12,10 +12,10 @@ from django.conf import settings
 
 
 def RegistroImpresionHistorial(request, ids):
-    print(ids)
+  
     solicitud = Solicitud.objects.filter(pk=ids, estatus=True)
     registro = RegistroImpresion()
-    print("yeah")
+  
     if len(solicitud)>0:
         solicitud = solicitud[0]
         registro.solcitud = solicitud
@@ -58,7 +58,7 @@ class InicioView(View):
                 solicitudes = self.curps()
                 solicitudes = json.dumps(solicitudes)
                 direcciones = Direccion.objects.all()
-                poblaciones = PoblacionObjetivo.objects.all()
+                poblaciones = PoblacionObjetivo.objects.filter(estatus=True)
                 return  render(request,  "home/inicio.html",{'servicios':servicios,
                 'direcciones':direcciones, 'poblaciones': poblaciones, 'solicitudes':solicitudes,'zonas': zonas} )
             else:
@@ -116,12 +116,10 @@ class InicioView(View):
                     return redirect(url)
                 else:'''
                 url = reverse('imprimir', kwargs={'ids':solicitud.pk})
-                print(url)
                 return redirect(url)
             else:
                 idVerificacion = verificacion[0]
                 url = reverse('duplicidad', kwargs={'ids':idVerificacion.pk})
-                print(url)
                 return redirect(url)
         else:
             url = reverse('login')
@@ -141,7 +139,6 @@ class ContratacionView(View):
     def post(self,request, ids=""):
         curp = request.POST.get('curp')
         solicitud = Solicitud.objects.filter(curp=curp, estatus=True)
-        print(solicitud)
         if len(solicitud)>0:
             solicitud = solicitud[0]
             servicios = solicitud.servicios.all()
@@ -156,7 +153,7 @@ class ContratacionView(View):
 class BeneficiosView(View):
     def ObtenerEstadisticaPoblacion(self, idz):
         poblacion = []
-        poblacionObjetivo = PoblacionObjetivo.objects.all()
+        poblacionObjetivo = PoblacionObjetivo.objects.filter(estatus=True)
         if idz == "0":
             zona = Configuracion.objects.get(pk=1)
             zona = zona.zona
@@ -181,8 +178,6 @@ class BeneficiosView(View):
             zona = zona.zona
         else:
             zona = Zona.objects.get(pk=idz)
-
-        print(zona)
         
         total =0
         arraytotal = []
@@ -205,7 +200,6 @@ class BeneficiosView(View):
                     'servicio': servicio
                 })
                 total += len(query)
-                print(array)
             arraytotal.append({'direccion':direccion,
             'servicios':array,
             'total': total })
@@ -240,7 +234,6 @@ class EditView(View):
     def get(self,request,idsolicitud=""):
         if idsolicitud == "0":
             url = reverse('imprimir', kwargs={'ids':"0"})
-            print(url)
             return redirect(url)
         solicitud = Solicitud.objects.get(pk=idsolicitud)
         poblaciones = PoblacionObjetivo.objects.all()
@@ -266,7 +259,6 @@ class EditView(View):
         solicitud.save()
         #Servicios
         url = reverse('imprimir', kwargs={'ids':solicitud.pk})
-        print(url)
         return redirect(url)
 
 class DuplicidadView(View):
@@ -299,7 +291,6 @@ class FamiliaresView(View):
             if solicitud.appaterno == paterno:
                 vapellido = True
                 verificacion += 1
-            print(verificacion)
             if verificacion >= 3:
                 familiares.append({'solicitud':solicitud,'apellido':vapellido, 'codigo':vcodigo, 'calle':vcalle, 'exterior':vexterno})
         
@@ -343,8 +334,6 @@ class ImprimirView(View):
             zona = zona.zona
         else:
             zona = Zona.objects.get(pk=idz)
-
-        print(zona)
         
         total =0
         arraytotal = []
@@ -367,7 +356,6 @@ class ImprimirView(View):
                     'servicio': servicio
                 })
                 total += len(query)
-                print(array)
             arraytotal.append({'direccion':direccion,
             'servicios':array,
             'total': total })
