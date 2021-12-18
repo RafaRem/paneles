@@ -103,11 +103,11 @@ class InicioView(View):
                     servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
                     self.descontar(servicio=servicio2)
                     solicitud.servicios.add(servicio2)
-                if request.POST.get('servicio3') != "x":
+                ''' if request.POST.get('servicio3') != "x":
                     servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
                     self.descontar(servicio=servicio3)
                     solicitud.servicios.add(servicio3)
-                '''
+                
                 familiar = FamiliaresView.ValidarFamiliar(paterno=request.POST.get('paterno'),sexo=request.POST.get('curp')[10:11],materno=request.POST.get('materno'),calle=request.POST.get('calle'),codigo=request.POST.get('cp'),exterior=request.POST.get('externo') )
                 print("familiar", len(familiar))
                 if len(familiar) > 0:

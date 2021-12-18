@@ -238,31 +238,6 @@ li:hover{
           {% endfor %}
         </select> 
       </div>
-
-
-      <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
-        <h5>Servicio 3</h5>
-        <select name="direccion3" class="select form-control"  id="direccion3"> 
-          <option value="x" selected="">---------</option> 
-          {% for direccion in direcciones %}
-          <option value="{{direccion.id}}">{{direccion}}</option> 
-          {% endfor %}
-          
-        </select> 
-        <p>Seleccione un servicio</p>
-        <select name="servicio3" class="select form-control"  id="servicio3"> 
-          <option value="x" selected="">---------</option> 
-          {% for servicio in servicios %}
-          <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
-          {% if servicio.limite %}
-            {% if servicio.cantidad == "0" %}
-            style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
-            {% endif %}
-          {% endif %}
-           >{{servicio}}</option> 
-        {% endfor %}
-        </select> 
-      </div>
     </div>
 
     <div class="d-flex justify-content-center mt-5">
