@@ -25,7 +25,7 @@ class SolicitudAdmin(admin.ModelAdmin):
 admin.site.register(Solicitud,SolicitudAdmin)
 
 class PoblacionAdmin(admin.ModelAdmin):
-    list_display=['id','nombre']
+    list_display=['id','nombre','estatus']
     list_display_links=['id','nombre']
     search_fields=['nombre']
 
