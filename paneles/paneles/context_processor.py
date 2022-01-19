@@ -14,3 +14,4 @@ def add_variable_context(request):
             
             'settings': settings
         }
+        
