@@ -48,16 +48,16 @@
         <li class="nav-item mr-3 resaltar">
           <a class="nav-link" href="{% url 'inicio' %}" style="font-weight: bold; color:black">Registro <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item mr-3 resaltar">
-          <a class="nav-link mr-3"  href= {% url "imprimir" ids="0" %} style="font-weight: bold; color:black">Imprimir Solicitud</a>
-        </li>
-        <li class="nav-item mr-3 resaltar">
-          <a class="nav-link mr-3" href= {% url "beneficios" idz="0" %} style="font-weight: bold; color:black">Estadísticas</a>
-        </li>
         {% if request.user.is_authenticated %}
-        <li class="nav-item mr-3 resaltar">
-          <a class="nav-link mr-3" href= {% url "detalles" idz="0" %} style="font-weight: bold; color:black">Detalles de Solicitudes</a>
-        </li>
+          <li class="nav-item mr-3 resaltar">
+            <a class="nav-link mr-3"  href= {% url "imprimir" ids="0" %} style="font-weight: bold; color:black">Imprimir Solicitud</a>
+          </li>
+          <li class="nav-item mr-3 resaltar">
+            <a class="nav-link mr-3" href= {% url "beneficios" idz="0" %} style="font-weight: bold; color:black">Estadísticas</a>
+          </li>
+          <li class="nav-item mr-3 resaltar">
+            <a class="nav-link mr-3" href= {% url "detalles" idz="0" %} style="font-weight: bold; color:black">Detalles de Solicitudes</a>
+          </li>
         {% endif %}
       </ul>
     </div>
