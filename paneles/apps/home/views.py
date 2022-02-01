@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from django.shortcuts import render, HttpResponseRedirect, redirect
 import json
 from django.views.generic import  View
@@ -415,3 +416,34 @@ class DetallesView(View):
 
     def post(self,request):
         return  render(request,  "home/detalles_solicitud.html")
+
+
+
+class InfoBienestarView(View):
+    def get(self,request,idsolicitud=""):
+        if idsolicitud == "0":
+            url = reverse('imprimir', kwargs={'ids':"0"})
+            return redirect(url)
+        solicitud = Solicitud.objects.get(pk=idsolicitud)
+        
+        return  render(request,  "home/informacion.html",{'solicitud':solicitud} )
+    def post(self,request,idsolicitud=""):
+        
+        data = {
+        'folio': request.POST.get('folio'),
+        'name_attended': request.POST.get('name_attended'),
+        'total_people': request.POST.get('total'),
+        'disability': request.POST.get('disability'),
+        'mom': request.POST.get('mom'),
+        'adult': request.POST.get('adult'),
+        'younger': request.POST.get('younger'),
+        'house': request.POST.get('house'),
+        'ceiling': request.POST.get('ceiling'),
+        'floor': request.POST.get('floor'),
+        'bath': request.POST.get('bath'),
+        }
+        
+        print(data)
+        #Servicios
+        url = reverse('imprimir', kwargs={'ids':idsolicitud})
+        return redirect(url)

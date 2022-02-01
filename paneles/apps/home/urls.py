@@ -26,6 +26,7 @@ urlpatterns = [
     path('estadisticas/servicios/imprimir/<str:idz>', ImprimirView.as_view(), name="imprimirr"),
     path('estadisticas/servicios/detalles/<str:idz>', DetallesView.as_view(), name="detalles"),
     path('editar/<str:idsolicitud>', EditView.as_view(), name="editar"),
+    path('solicitud/add/inf/<str:idsolicitud>', InfoBienestarView.as_view(), name="info"),
     path('duplicidad/<str:ids>', DuplicidadView.as_view(), name="duplicidad"),
     path('familiares/<str:ids>', FamiliaresView.as_view(), name="familia"),
 ]
