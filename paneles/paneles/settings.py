@@ -78,16 +78,24 @@ WSGI_APPLICATION = 'paneles.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'default':{
+        'ENGINE':'django.db.backends.postgresql', #'django.db.backends.postgresql_psycopg2',
         'NAME': 'paneles',
         'USER': 'postgres',
         'PASSWORD': 'wi8h51u1',
-        'PORT': ''
-
-    }
+        'PORT': '',
+    },
+    'productos_db':{
+        'ENGINE':'django.db.backends.postgresql', #'django.db.backends.postgresql_psycopg2',
+        'NAME': 'feria',
+        'USER': 'postgres',
+        'PASSWORD': 'wi8h51u1',
+        'PORT': '',
+        
+    } 
 }
 
+DATABASES_ROUTERS = ['routers.auth_router.AuthRouter', 'routers.recursos_router.RecursosRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
