@@ -95,7 +95,7 @@ DATABASES = {
     } 
 }
 
-DATABASES_ROUTERS = ['routers.bienestar_router.BienestarRouter']
+DATABASES_ROUTERS = ['routers.auth_router.AuthRouter', 'routers.bienestar_router.BienestarRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
