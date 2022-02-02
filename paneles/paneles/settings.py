@@ -85,7 +85,7 @@ DATABASES = {
         'PASSWORD': 'wi8h51u1',
         'PORT': '',
     },
-    'productos_db':{
+    'bienestar':{
         'ENGINE':'django.db.backends.postgresql', #'django.db.backends.postgresql_psycopg2',
         'NAME': 'feria',
         'USER': 'postgres',
@@ -95,7 +95,7 @@ DATABASES = {
     } 
 }
 
-DATABASES_ROUTERS = ['routers.auth_router.AuthRouter', 'routers.recursos_router.RecursosRouter']
+DATABASES_ROUTERS = ['routers.bienestar_router.BienestarRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
