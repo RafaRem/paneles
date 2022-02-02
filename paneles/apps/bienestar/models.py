@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 class Adicional(models.Model):
     folio = models.CharField(  max_length=200, verbose_name="Folio")
-    solicitud = models.ForeignKey(max_length=200, verbose_name="Id Solicitud")
+    solicitud = models.CharField(max_length=200, verbose_name="Id Solicitud")
     name_attended = models.CharField(  max_length=200, verbose_name="Nombre")
     total_people = models.CharField(  max_length=200, verbose_name="Habitantes")
     disability = models.CharField(  max_length=200, verbose_name="personas con discapacidad")

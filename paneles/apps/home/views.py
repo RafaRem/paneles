@@ -8,6 +8,8 @@ from django.urls import reverse
 from .models import *
 from django.db.models import Q
 
+from apps.bienestar.models import *
+
 from django.core.mail import send_mail 
 from django.conf import settings
 
@@ -116,7 +118,7 @@ class InicioView(View):
                     print(url)
                     return redirect(url)
                 else:'''
-                url = reverse('imprimir', kwargs={'ids':solicitud.pk})
+                url = reverse('info', kwargs={'idsolicitud':solicitud.pk})
                 return redirect(url)
             else:
                 idVerificacion = verificacion[0]
@@ -427,23 +429,24 @@ class InfoBienestarView(View):
         solicitud = Solicitud.objects.get(pk=idsolicitud)
         
         return  render(request,  "home/informacion.html",{'solicitud':solicitud} )
+
     def post(self,request,idsolicitud=""):
+        adicional = Adicional()
         
-        data = {
-        'folio': request.POST.get('folio'),
-        'name_attended': request.POST.get('name_attended'),
-        'total_people': request.POST.get('total'),
-        'disability': request.POST.get('disability'),
-        'mom': request.POST.get('mom'),
-        'adult': request.POST.get('adult'),
-        'younger': request.POST.get('younger'),
-        'house': request.POST.get('house'),
-        'ceiling': request.POST.get('ceiling'),
-        'floor': request.POST.get('floor'),
-        'bath': request.POST.get('bath'),
-        }
-        
-        print(data)
+        adicional.folio = request.POST.get('folio')
+        adicional.solicitud = idsolicitud
+        adicional.name_attended = request.POST.get('name_attended')
+        adicional.total_people = request.POST.get('total')
+        adicional.disability =  request.POST.get('disability')
+        adicional.mom = request.POST.get('mom')
+        adicional.adult = request.POST.get('adult')
+        adicional.younger = request.POST.get('younger')
+        adicional.house = request.POST.get('house')
+        adicional.ceiling = request.POST.get('ceiling')
+        adicional.floor = request.POST.get('floor')
+        adicional.bath = request.POST.get('bath')
+
+        adicional.save(using='feria')
         #Servicios
         url = reverse('imprimir', kwargs={'ids':idsolicitud})
         return redirect(url)

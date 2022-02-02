@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.home'
+    'apps.home',
+    'apps.bienestar'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -85,7 +86,7 @@ DATABASES = {
         'PASSWORD': 'wi8h51u1',
         'PORT': '',
     },
-    'bienestar':{
+    'feria':{
         'ENGINE':'django.db.backends.postgresql', #'django.db.backends.postgresql_psycopg2',
         'NAME': 'feria',
         'USER': 'postgres',
