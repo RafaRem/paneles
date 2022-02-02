@@ -1,4 +1,3 @@
-from dataclasses import dataclass
 from django.shortcuts import render, HttpResponseRedirect, redirect
 import json
 from django.views.generic import  View
