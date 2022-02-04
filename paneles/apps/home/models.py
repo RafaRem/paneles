@@ -63,7 +63,7 @@ class Solicitud(models.Model):
     estcivil = models.CharField(  max_length=50, verbose_name="estcivil")
     discapacidad = models.CharField(  max_length=50, verbose_name="discapacidad")
     domicilio = models.CharField(  max_length=100, verbose_name="domicilio")
-    calle = models.CharField(  max_length=50, verbose_name="calle", null=True, blank=True)
+    calle = models.CharField(  max_length=256, verbose_name="calle", null=True, blank=True)
     exterior = models.CharField(  max_length=50, verbose_name="exterior", null=True, blank=True)
     codigo = models.CharField(  max_length=50, verbose_name="código postal", null=True, blank=True)
     correo = models.CharField(  max_length=200, verbose_name="correo", blank=True)
