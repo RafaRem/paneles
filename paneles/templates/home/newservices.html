@@ -133,7 +133,7 @@ li:hover{
             </select> 
             <p>Seleccione un servicio</p>
             <select name="servicio" class="select form-control"  id="servicio" required> 
-              <option value="" selected="" direccion="x">---------</option> 
+              <option value="x" selected="" direccion="x">---------</option> 
               {% for servicio in servicios %}
                 <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
                 {% if serv_1.id == servicio.id %}
@@ -252,76 +252,97 @@ li:hover{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
     <script>
-      function mayus(e) {
-        e.value = e.value.toUpperCase();
-      }
-       
-      $(document).ready(function () {
-        
-        
-        $('#direccion').change((event) => {
-          const dependencia_id = event.target.value;
-          let programasOperativosItems = document.querySelectorAll(
-              'select[name=servicio] >  option'
-          )
-          programasOperativosItems.forEach((po) => {
-              if (dependencia_id === '0') {
-                  po.hidden = false;
-              } else{
-                  dependencia_item = po.getAttribute('direccion');
-                  po.hidden = dependencia_id === dependencia_item ?
-                              false:
-                              true;
-              }
-          });
-
-
-      })
-
-      
-
-      $('#direccion2').change((event) => {
-        const dependencia_id = event.target.value;
-        let programasOperativosItems = document.querySelectorAll(
-            'select[name=servicio2] >  option'
-        )
-        programasOperativosItems.forEach((po) => {
-
-            if (dependencia_id === '0') {
-                po.hidden = false;
-            } else{
-                dependencia_item = po.getAttribute('direccion');
-                po.hidden = dependencia_id === dependencia_item ?
-                            false:
-                            true;
+            function mayus(e) {
+              e.value = e.value.toUpperCase();
             }
-        });
-    })
+            
+            $(document).ready(function () {
+              
+              
+              $('#direccion').change((event) => {
+                const dependencia_id = event.target.value;
+                let programasOperativosItems = document.querySelectorAll(
+                    'select[name=servicio] >  option'
+                )
+                programasOperativosItems.forEach((po) => {
+                    if (dependencia_id === '0') {
+                        po.hidden = false;
+                    } else{
+                        dependencia_item = po.getAttribute('direccion');
+                        po.hidden = dependencia_id === dependencia_item ?
+                                    false:
+                                    true;
+                        if(po.hidden == false){
+                          if(po.value=='x'){
+                            $("#servicio > option[value='x']").attr("selected",true);
+                          }else{
+                            $("#servicio > option[value="+po.value+"]").attr("selected",false);
+                          }
+                        }else{
+                          $("#servicio > option[value="+po.value+"]").attr("selected",false);
+                        }
+                    }
+                });
+              });
+            
 
-    $('#direccion3').change((event) => {
-      const dependencia_id = event.target.value;
-      let programasOperativosItems = document.querySelectorAll(
-          'select[name=servicio3] >  option'
-      )
-      programasOperativosItems.forEach((po) => {
-          if (dependencia_id === '0') {
-              po.hidden = false;
-          } else{
-              dependencia_item = po.getAttribute('direccion');
-              po.hidden = dependencia_id === dependencia_item ?
-                          false:
-                          true;
-          }
-      });
+              $('#direccion2').change((event) => {
+                const dependencia_id = event.target.value;
+                let programasOperativosItems = document.querySelectorAll(
+                    'select[name=servicio2] >  option'
+                )
+                programasOperativosItems.forEach((po) => {
 
+                    if (dependencia_id === '0') {
+                        po.hidden = false;
+                    } else{
+                        dependencia_item = po.getAttribute('direccion');
+                        
+                        po.hidden = dependencia_id === dependencia_item ?
+                                    false:
+                                    true;
+                        if(po.hidden == false){
+                          if(po.value=='x'){
+                            $("#servicio2 > option[value='x']").attr("selected",true);
+                          }else{
+                            $("#servicio2 > option[value="+po.value+"]").attr("selected",false);
+                          }
+                        }else{
+                          $("#servicio2 > option[value="+po.value+"]").attr("selected",false);
+                        }
+                    }
+                });
+              });
+          
 
-  })
+              $('#direccion3').change((event) => {
+                const dependencia_id = event.target.value;
+                let programasOperativosItems = document.querySelectorAll(
+                    'select[name=servicio3] >  option'
+                )
+                programasOperativosItems.forEach((po) => {
+                    if (dependencia_id === '0') {
+                        po.hidden = false;
+                    } else{
+                        dependencia_item = po.getAttribute('direccion');
+                        po.hidden = dependencia_id === dependencia_item ?
+                                    false:
+                                    true;
+                        if(po.hidden == false){
+                          if(po.value=='x'){
+                            $("#servicio3 > option[value='x']").attr("selected",true);
+                          }else{
+                            $("#servicio3 > option[value="+po.value+"]").attr("selected",false);
+                          }
+                        }else{
+                          $("#servicio3 > option[value="+po.value+"]").attr("selected",false);
+                        }
+                        
+                    }
+                });
+              })
+            })
 
-    
-        })
-      
-
-        
     </script>
 
     <script>
