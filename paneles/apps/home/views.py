@@ -51,20 +51,24 @@ class InicioView(View):
         return True
     
     def get(self,request):
-        configuracion = Configuracion.objects.get(pk=1)
-        if configuracion.carga == True:
-            if request.user.is_authenticated:
-                zonas = Zona.objects.filter(estatus=True)
-                servicios = ServiciosSolicitud.objects.filter(estatus=True)
-                solicitudes = self.curps()
-                solicitudes = json.dumps(solicitudes)
-                direcciones = Direccion.objects.all()
-                poblaciones = PoblacionObjetivo.objects.filter(estatus=True)
-                return  render(request,  "home/inicio.html",{'servicios':servicios,
-                'direcciones':direcciones, 'poblaciones': poblaciones, 'solicitudes':solicitudes,'zonas': zonas} )
+        configuracion = Configuracion.objects.filter(pk=1)
+        if len(configuracion) > 0:
+            configuracion = configuracion[0]
+            if configuracion.carga == True:
+                if request.user.is_authenticated:
+                    zonas = Zona.objects.filter(estatus=True)
+                    servicios = ServiciosSolicitud.objects.filter(estatus=True)
+                    solicitudes = self.curps()
+                    solicitudes = json.dumps(solicitudes)
+                    direcciones = Direccion.objects.all()
+                    poblaciones = PoblacionObjetivo.objects.filter(estatus=True)
+                    return  render(request,  "home/inicio.html",{'servicios':servicios,
+                    'direcciones':direcciones, 'poblaciones': poblaciones, 'solicitudes':solicitudes,'zonas': zonas} )
+                else:
+                    url = reverse('login')
+                    return redirect(url)
             else:
-                url = reverse('login')
-                return redirect(url)
+                return  render(request,  "home/inicio.html" )
         else:
             return  render(request,  "home/inicio.html" )
 
