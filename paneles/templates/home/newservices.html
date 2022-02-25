@@ -1,0 +1,316 @@
+{% extends "base/base.html" %}
+{% load staticfiles %}
+
+{% block extracss %}
+<style>
+  * {
+    font-family: sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+  }
+
+  a{
+    text-decoration: none !important;
+  }
+
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+    .contenedor{ 
+      width: 80% !important;
+      margin-top: 250px !important;
+  }
+  }
+
+  @media (max-width: 768px) {
+    .contenedor{ 
+        width: 90% !important;
+        margin-top: 85px !important;
+    }
+
+    #activacion_registro{
+      font-size: 20px !important;
+    }
+    .negrita{
+      font-size: 20px !important;
+    }
+
+    .activacion{
+      margin-top: 200px !important;
+    }
+  }
+  .img_content {
+    margin: 10px;
+    
+    line-height: 115px;
+    text-align: center;
+    
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+}
+
+strong, b {  font-weight: 900; }
+li:hover{
+  border-bottom: 3px solid #691C32;
+  transition: border-color 1s ease;
+  
+}
+
+.color-boton{
+  background-color: #9A0E44 !important;
+  color: white;
+}
+
+.color-boton:hover{
+  background: #c0527c !important;
+  color: white;
+}
+
+</style>
+{% endblock extracss %}
+
+{% block content%}
+
+<div class="container " style="margin-top: 20%;"> 
+    <div class="row ml-2 ">
+        <div class="col-7">
+          <div class="row">
+            <div class="col-2" style="font-weight: bold;">
+              Nombre
+            </div>
+            <div class="col-7">
+              {{solicitud.nombre}} {{solicitud.appaterno}} {{solicitud.apmaterno}}
+            </div>
+          </div>
+        
+            <div class="row mt-3 ">
+                <div class="col-12" style="font-weight: bold;">
+                 Servicios solicitados anteriormente
+
+                 <div class="row">
+                    <div>
+                        <button type="button" class="btn color-boton mt-2 mr-2 ml-2" data-toggle="modal" data-target="#exampleModal">
+                        Ver <i class="fas fa-file-signature"></i>   </button>
+                    </div>
+                    <div>
+                        <a type="button"class="btn color-boton mt-2 ml-2" href= {% url "imprimir" ids=solicitud.id %}>imprimir <i class="fas fa-external-link-square-alt"></i></a>
+                    </div>
+                 </div>
+                 
+              
+                </div>
+            </div>
+     
+    </div>
+    <form action="" method="post" id="id_form_actividad"  style="margin-top: 5%;">
+        {% csrf_token %}
+     
+      <div class="container-fluid   mb-5" >     
+        <div class="text-center">
+          <h3 >Nuevos Servicios </h3>
+          <div class="container" style="border: solid 2px black ; padding: 15px;">
+            <h5>Servicio 1 <samp style="color:#9A0E44">*</samp></h5>
+            <select name="direccion" class="select form-control"  id="direccion" required> 
+              <option value="" selected="">---------</option> 
+              {% for direccion in direcciones %}
+              <option value="{{direccion.id}}">{{direccion}}</option> 
+              {% endfor %}
+            </select> 
+            <p>Seleccione un servicio</p>
+            <select name="servicio" class="select form-control"  id="servicio" required> 
+              <option value="" selected="">---------</option> 
+              {% for servicio in servicios %}
+                <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+                {% if servicio.limite %}
+                  {% if servicio.cantidad == "0" %}
+                  style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
+                  {% endif %}
+                {% endif %}
+                 >{{servicio}}</option> 
+              {% endfor %}
+            </select> 
+          </div>
+          
+          <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
+            <h5>Servicio 2</h5>
+            <select name="direccion2" class="select form-control" id="direccion2"> 
+              <option value="x" selected="">---------</option> 
+              {% for direccion in direcciones %}
+              <option value="{{direccion.id}}">{{direccion}}</option> 
+              {% endfor %}
+              
+            </select> 
+            <p>Seleccione un servicio</p>
+            <select name="servicio2" class="select form-control" id="servicio2"> 
+              <option value="x" selected="">---------</option> 
+              {% for servicio in servicios %}
+                <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+                {% if servicio.limite %}
+                  {% if servicio.cantidad == "0" %}
+                  style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
+                  {% endif %}
+                {% endif %}
+                 >{{servicio}}</option> 
+              {% endfor %}
+            </select> 
+          </div>
+          <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
+            <h5>Servicio 3</h5>
+            <select name="direccion3" class="select form-control" id="direccion3"> 
+              <option value="x" selected="">---------</option> 
+              {% for direccion in direcciones %}
+              <option value="{{direccion.id}}">{{direccion}}</option> 
+              {% endfor %}
+              
+            </select> 
+            <p>Seleccione un servicio</p>
+            <select name="servicio3" class="select form-control" id="servicio3"> 
+              <option value="x" selected="">---------</option> 
+              {% for servicio in servicios %}
+                <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+                {% if servicio.limite %}
+                  {% if servicio.cantidad == "0" %}
+                  style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
+                  {% endif %}
+                {% endif %}
+                 >{{servicio}}</option> 
+              {% endfor %}
+            </select> 
+          </div>
+        </div>
+    
+        <div class="d-flex justify-content-center mt-5">
+          <button class="btn color-boton" id="id_btn_segunda_parte" type="submit">
+            Actualizar &nbsp;<i class="fas fa-check"></i>
+          </button>
+        </div> 
+      </div>
+      </form>   
+
+</div>
+</div>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Servicios solicitados</h5>
+          <a type="button"class="btn color-boton" href= {% url "imprimir" ids=solicitud.id %}>imprimir <i class="fas fa-external-link-square-alt"></i></a>
+        </div>
+        <div class="modal-body">
+        
+            {% for servicio in before_services %}
+            <p >
+                {{servicio}}
+            </p>
+            <hr>
+            {% endfor %}
+            
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  data-dismiss="modal">ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock content %}
+{% block extrascripts %}
+<script src="{%static 'js/gijgo.min.js'%}" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css">
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <script>
+      function mayus(e) {
+        e.value = e.value.toUpperCase();
+      }
+       
+      $(document).ready(function () {
+        
+        
+        $('#direccion').change((event) => {
+          const dependencia_id = event.target.value;
+          let programasOperativosItems = document.querySelectorAll(
+              'select[name=servicio] >  option'
+          )
+          programasOperativosItems.forEach((po) => {
+              if (dependencia_id === '0') {
+                  po.hidden = false;
+              } else{
+                  dependencia_item = po.getAttribute('direccion');
+                  po.hidden = dependencia_id === dependencia_item ?
+                              false:
+                              true;
+              }
+          });
+
+
+      })
+
+      
+
+      $('#direccion2').change((event) => {
+        const dependencia_id = event.target.value;
+        let programasOperativosItems = document.querySelectorAll(
+            'select[name=servicio2] >  option'
+        )
+        programasOperativosItems.forEach((po) => {
+            if (dependencia_id === '0') {
+                po.hidden = false;
+            } else{
+                dependencia_item = po.getAttribute('direccion');
+                po.hidden = dependencia_id === dependencia_item ?
+                            false:
+                            true;
+            }
+        });
+
+
+    })
+
+    $('#direccion3').change((event) => {
+      const dependencia_id = event.target.value;
+      let programasOperativosItems = document.querySelectorAll(
+          'select[name=servicio3] >  option'
+      )
+      programasOperativosItems.forEach((po) => {
+          if (dependencia_id === '0') {
+              po.hidden = false;
+          } else{
+              dependencia_item = po.getAttribute('direccion');
+              po.hidden = dependencia_id === dependencia_item ?
+                          false:
+                          true;
+          }
+      });
+
+
+  })
+
+    
+        })
+      
+
+        
+    </script>
+
+    <script>
+      $(document).ready(function(){
+        //var altoVentana = $('#Ventana').css('height').replace("px","");//usa este para que desaparezca despues de pasar el alto del div
+        
+      });
+      </script>
+{% endblock %}

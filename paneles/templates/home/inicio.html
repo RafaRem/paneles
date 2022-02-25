@@ -373,13 +373,15 @@ li:hover{
                   confirmButtonText: 'Entiendo'
                 }).then((result) => {
                   if (result.isConfirmed) {
+                    var URLactual = "solicitud/cambio/servicios/"+pass;
+                    window.location.href = URLactual; 
                     document.getElementById("curp").focus();
                   }
                 })
                 
-                $('#curp').val('');
+                /*$('#curp').val('');
                 document.getElementById("curp").focus();
-                break;
+                break;*/
               }
 
             }

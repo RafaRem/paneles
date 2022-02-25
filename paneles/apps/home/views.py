@@ -1,3 +1,4 @@
+from re import S
 from django.shortcuts import render, HttpResponseRedirect, redirect
 import json
 from django.views.generic import  View
@@ -415,3 +416,40 @@ class DetallesView(View):
 
     def post(self,request):
         return  render(request,  "home/detalles_solicitud.html")
+
+
+class NewServicesView(View):
+    def get(self,request,ids=""):
+        solicitud = Solicitud.objects.get(curp=ids)
+        servicios = ServiciosSolicitud.objects.filter(estatus=True)
+        direcciones = Direccion.objects.all()
+        before_services = solicitud.servicios.all()
+        return  render(request,  "home/newservices.html",{'servicios':servicios,
+        'direcciones':direcciones, 'before_services': before_services, 'solicitud':solicitud} )
+
+
+
+    def post(self,request,ids=""):
+        solicitud = Solicitud.objects.get(curp=ids)
+        servicios = solicitud.servicios.all()
+        if len(servicios) > 0:
+            for servicio in servicios:
+                solicitud.servicios.remove(servicio.pk)
+        '''ya se han eliminado los antiguos servicios
+            se añadiran los nuevos servicos
+        '''
+        inicio = InicioView()
+        if request.POST.get('servicio') != "x":
+            servicio1 = ServiciosSolicitud.objects.get(pk=request.POST.get('servicio'))
+            inicio.descontar(servicio=servicio1)
+            solicitud.servicios.add(servicio1)  
+        if request.POST.get('servicio2') != "x":
+            servicio2= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio2'))
+            inicio.descontar(servicio=servicio2)
+            solicitud.servicios.add(servicio2)
+        if request.POST.get('servicio3') != "x":
+            servicio3= ServiciosSolicitud.objects.get(pk=request.POST.get('servicio3'))
+            inicio.descontar(servicio=servicio3)
+            solicitud.servicios.add(servicio3)
+        url = reverse('imprimir', kwargs={'ids':solicitud.pk})
+        return redirect(url)
