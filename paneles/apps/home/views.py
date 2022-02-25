@@ -428,8 +428,24 @@ class NewServicesView(View):
         servicios = ServiciosSolicitud.objects.filter(estatus=True)
         direcciones = Direccion.objects.all()
         before_services = solicitud.servicios.all()
+        servicio1 = {'direccion': '', 'id': ''}
+        servicio2 = {'direccion': '', 'id': ''}
+        servicio3 = {'direccion': '', 'id': ''}
+        for idx, val in enumerate(before_services):
+            print(val.direccion.id)
+            if idx == 0:
+                servicio1['id'] = val.id
+                servicio1['direccion'] = val.direccion.id
+            if idx == 1:
+                servicio2['id'] = val.id
+                servicio2['direccion'] = val.direccion.id
+            if idx == 2:
+                servicio3['id'] = val.id
+                servicio3['direccion'] = val.direccion.id
+
         return  render(request,  "home/newservices.html",{'servicios':servicios,
-        'direcciones':direcciones, 'before_services': before_services, 'solicitud':solicitud} )
+        'direcciones':direcciones, 'before_services': before_services, 'solicitud':solicitud, 
+        'serv_1':servicio1, 'serv_2':servicio2, 'serv_3':servicio3} )
 
 
 

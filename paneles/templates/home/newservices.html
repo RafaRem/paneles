@@ -116,23 +116,29 @@ li:hover{
     </div>
     <form action="" method="post" id="id_form_actividad"  style="margin-top: 5%;">
         {% csrf_token %}
-     
       <div class="container-fluid   mb-5" >     
         <div class="text-center">
           <h3 >Nuevos Servicios </h3>
           <div class="container" style="border: solid 2px black ; padding: 15px;">
             <h5>Servicio 1 <samp style="color:#9A0E44">*</samp></h5>
             <select name="direccion" class="select form-control"  id="direccion" required> 
-              <option value="" selected="">---------</option> 
+              <option value="x" selected="">---------</option> 
               {% for direccion in direcciones %}
-              <option value="{{direccion.id}}">{{direccion}}</option> 
+              <option value="{{direccion.id}}"  
+              {% if serv_1.direccion == direccion.id %}
+                  selected=""
+                {% endif %} 
+              >{{direccion}}</option> 
               {% endfor %}
             </select> 
             <p>Seleccione un servicio</p>
             <select name="servicio" class="select form-control"  id="servicio" required> 
-              <option value="" selected="">---------</option> 
+              <option value="" selected="" direccion="x">---------</option> 
               {% for servicio in servicios %}
                 <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+                {% if serv_1.id == servicio.id %}
+                  selected=""
+                {% endif %}
                 {% if servicio.limite %}
                   {% if servicio.cantidad == "0" %}
                   style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
@@ -148,15 +154,21 @@ li:hover{
             <select name="direccion2" class="select form-control" id="direccion2"> 
               <option value="x" selected="">---------</option> 
               {% for direccion in direcciones %}
-              <option value="{{direccion.id}}">{{direccion}}</option> 
+              <option value="{{direccion.id}}"
+              {% if serv_2.direccion == direccion.id %}
+                  selected=""
+                {% endif %} >{{direccion}}</option> 
               {% endfor %}
               
             </select> 
             <p>Seleccione un servicio</p>
             <select name="servicio2" class="select form-control" id="servicio2"> 
-              <option value="x" selected="">---------</option> 
+              <option value="x" selected="" direccion="x">---------</option> 
               {% for servicio in servicios %}
                 <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+                {% if serv_2.id == servicio.id %}
+                  selected=""
+                {% endif %}
                 {% if servicio.limite %}
                   {% if servicio.cantidad == "0" %}
                   style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
@@ -169,17 +181,23 @@ li:hover{
           <div class="container mt-3" style="border: solid 2px black; padding: 15px;">
             <h5>Servicio 3</h5>
             <select name="direccion3" class="select form-control" id="direccion3"> 
-              <option value="x" selected="">---------</option> 
+              <option value="x" selected="" >---------</option> 
               {% for direccion in direcciones %}
-              <option value="{{direccion.id}}">{{direccion}}</option> 
+              <option value="{{direccion.id}}"
+              {% if serv_3.direccion == direccion.id %}
+                  selected=""
+                {% endif %} >{{direccion}}</option> 
               {% endfor %}
               
             </select> 
             <p>Seleccione un servicio</p>
             <select name="servicio3" class="select form-control" id="servicio3"> 
-              <option value="x" selected="">---------</option> 
+              <option value="x" selected="" direccion="x" >---------</option> 
               {% for servicio in servicios %}
                 <option value="{{servicio.id}}" direccion="{{servicio.direccion.id}}"
+                {% if serv_3.id == servicio.id %}
+                  selected=""
+                {% endif %}
                 {% if servicio.limite %}
                   {% if servicio.cantidad == "0" %}
                   style="background-color: #bebebe; color: black; " disabled data-toggle="tooltip" title="La existencia de este servicio se ha terminado"
@@ -268,6 +286,7 @@ li:hover{
             'select[name=servicio2] >  option'
         )
         programasOperativosItems.forEach((po) => {
+
             if (dependencia_id === '0') {
                 po.hidden = false;
             } else{
@@ -277,8 +296,6 @@ li:hover{
                             true;
             }
         });
-
-
     })
 
     $('#direccion3').change((event) => {
