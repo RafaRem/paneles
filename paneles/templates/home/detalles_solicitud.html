@@ -151,7 +151,7 @@ table.table-bordered > tbody > tr > td{
                         <tr>
                             <th class="text-center" style="font-weight:bold; " align="center">Nombre</th>
                             <th class="text-center" style="font-weight:bold; ">Población Objetivo</th>
-                            <th class="text-center" style="font-weight:bold; ">Discapacidad</th>
+                            <th class="text-center" style="font-weight:bold; ">Teléfono</th>
                             <th class="text-center" style="font-weight:bold; ">Cant. de servicios</th>
                             <th class="text-center" style="font-weight:bold; ">Detalle de servicios</th>
                         </tr>
@@ -159,10 +159,11 @@ table.table-bordered > tbody > tr > td{
                     <tbody class="bg-transparent">
                         {% for solicitud in solicitudes %}
                             <tr>
-                                <td scope="row" style="font-weight:bold; "> {{solicitud.nombre}} </td>
-                                <td style="width: 15%; ">{{solicitud.poblacion}}</td>
-                                <td style="width: 10%; ">
-                                  {% if solicitud.discapacidad == 'n' %}
+                                <td scope="row" style="width: 23%; font-weight:bold; font-size:15px; "> {{solicitud.nombre}} </td>
+                                <td style="width: 12% ; font-size:15px;">{{solicitud.poblacion}}</td>
+                                <td style="width: 10%; font-size:15px;">
+                                  {{solicitud.telefono}}
+                                  <!--{% if solicitud.discapacidad == 'n' %}
                                    
                                   {% elif solicitud.discapacidad == 'o' %} 
                                     Auditiva
@@ -180,12 +181,18 @@ table.table-bordered > tbody > tr > td{
                                     Síndrome de Down
                                   {% elif solicitud.discapacidad == 'x' %} 
                                     Otro
-                                  {% endif %}
+                                  {% endif %}-->
                                 </td>
-                                <td style="width: 10%;  ">{{solicitud.cantidad}} </td>
-                                <td style="width: 35%; ">
+                                <td style="width: 25%;  "> 
+                                  {% for servicio in solicitud.servicios %}
+                                    <p  style="font-size: small;"> {{servicio.direccion}}</p>
+                                    <hr>
+                                  {% endfor %}
+                                   </td> </td>
+                                <td style="width: 31%; font-size: small; ">
                                     {% for servicio in solicitud.servicios %}
-                                    <p  style="font-size: small;"> {{servicio.nombre}}</p>
+                                       {{servicio.nombre}}
+                                      <hr>
                                     {% endfor %}
                                      </td>
                                 

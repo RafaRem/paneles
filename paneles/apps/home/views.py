@@ -411,7 +411,9 @@ class DetallesView(View):
                 'poblacion': solicitud.poblacion,
                 'discapacidad': solicitud.discapacidad,
                 'cantidad': len(cantidad),
-                'servicios':cantidad})
+                'servicios':cantidad,
+                'telefono': solicitud.telefono,
+                })
             return  render(request,  "home/detalles_solicitud.html",{'solicitudes':arraySolicitudes, 'localidad': localidad, 
             'total_servicios': total_servicios, 'total': total_personas, 'zonas': zonas, 'localidad': localidad})
         else:
