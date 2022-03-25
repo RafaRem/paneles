@@ -153,7 +153,8 @@ table.table-bordered > tbody > tr > td{
                             <th class="text-center" style="font-weight:bold; ">Población Objetivo</th>
                             <th class="text-center" style="font-weight:bold; ">Teléfono</th>
                             <th class="text-center" style="font-weight:bold; ">Detalle de servicios</th>
-                            <th class="text-center" style="font-weight:bold; ">Observación</th>
+                            <th class="text-center" style="font-weight:bold; ">Observación</th> 
+                            <th class="text-center" style="font-weight:bold; ">Domicilio</th>
                         </tr>
                     </thead>
                     <tbody class="bg-transparent">
@@ -183,18 +184,18 @@ table.table-bordered > tbody > tr > td{
                                     Otro
                                   {% endif %}-->
                                 </td>
-                                <td style="width: 31%; font-size: small; ">
+                                <td style="width: 25%; font-size: small; ">
                                   {% for servicio in solicitud.servicios %}
                                      {{servicio.nombre}}
                                     <hr>
                                   {% endfor %}
                               </td>
-                              <td style="width: 25%;  "> 
-                                
+                              <td style="width: 16%;  "> 
                                   <p style="font-size: small;"> {% if solicitud.detalles  %} {{solicitud.detalles}} {% endif %}</p>
-                                  
-                                 
                               </td> 
+                              <td style="width: 15%;  "> 
+                                <p style="font-size: small;">{{solicitud.direccion}}</p>
+                            </td> 
                             </tr>
                             {% endfor %}
                     </tbody>

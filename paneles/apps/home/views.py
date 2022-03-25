@@ -405,6 +405,23 @@ class DetallesView(View):
             total_personas = len(solicitudes)
             zonas = Zona.objects.all()
             for solicitud in solicitudes:
+                direcc = ''
+                if solicitud.calle != None:
+                    direcc += solicitud.calle+','
+                else:
+                    direcc += ''
+                
+                if solicitud.exterior != None:
+                    direcc += ' Número '+ str(solicitud.exterior)+','
+                else:
+                    direcc += '  '   
+                
+                direcc += solicitud.domicilio+',' 
+                if solicitud.codigo != None:
+                    direcc += ' C.P. '+ solicitud.codigo
+                else:
+                    direcc += ' Sin c.p. '  
+                print(direcc) 
                 cantidad= solicitud.servicios.all()
                 total_servicios += len(cantidad)
                 arraySolicitudes.append({'nombre': solicitud.nombre+" "+solicitud.appaterno+" "+solicitud.apmaterno,
@@ -413,7 +430,8 @@ class DetallesView(View):
                 'cantidad': len(cantidad),
                 'servicios':cantidad,
                 'telefono': solicitud.telefono,
-                'detalles':solicitud.detalles
+                'detalles':solicitud.detalles, 
+                'direccion': direcc
                 })
             return  render(request,  "home/detalles_solicitud.html",{'solicitudes':arraySolicitudes, 'localidad': localidad, 
             'total_servicios': total_servicios, 'total': total_personas, 'zonas': zonas, 'localidad': localidad})
