@@ -152,8 +152,8 @@ table.table-bordered > tbody > tr > td{
                             <th class="text-center" style="font-weight:bold; " align="center">Nombre</th>
                             <th class="text-center" style="font-weight:bold; ">Población Objetivo</th>
                             <th class="text-center" style="font-weight:bold; ">Teléfono</th>
-                            <th class="text-center" style="font-weight:bold; ">Area</th>
                             <th class="text-center" style="font-weight:bold; ">Detalle de servicios</th>
+                            <th class="text-center" style="font-weight:bold; ">Observación</th>
                         </tr>
                     </thead>
                     <tbody class="bg-transparent">
@@ -183,19 +183,18 @@ table.table-bordered > tbody > tr > td{
                                     Otro
                                   {% endif %}-->
                                 </td>
-                                <td style="width: 25%;  "> 
+                                <td style="width: 31%; font-size: small; ">
                                   {% for servicio in solicitud.servicios %}
-                                    <p  style="font-size: small;"> {{servicio.direccion}}</p>
+                                     {{servicio.nombre}}
                                     <hr>
                                   {% endfor %}
-                                   </td> </td>
-                                <td style="width: 31%; font-size: small; ">
-                                    {% for servicio in solicitud.servicios %}
-                                       {{servicio.nombre}}
-                                      <hr>
-                                    {% endfor %}
-                                     </td>
+                              </td>
+                              <td style="width: 25%;  "> 
                                 
+                                  <p style="font-size: small;"> {% if solicitud.detalles  %} {{solicitud.detalles}} {% endif %}</p>
+                                  
+                                 
+                              </td> 
                             </tr>
                             {% endfor %}
                     </tbody>

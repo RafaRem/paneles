@@ -413,6 +413,7 @@ class DetallesView(View):
                 'cantidad': len(cantidad),
                 'servicios':cantidad,
                 'telefono': solicitud.telefono,
+                'detalles':solicitud.detalles
                 })
             return  render(request,  "home/detalles_solicitud.html",{'solicitudes':arraySolicitudes, 'localidad': localidad, 
             'total_servicios': total_servicios, 'total': total_personas, 'zonas': zonas, 'localidad': localidad})
